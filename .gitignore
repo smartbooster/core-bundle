@@ -1,0 +1,15 @@
+/bin/
+/vendor/
+/composer.lock
+/symfony.lock
+/var/
+/build/
+
+###> smartbooster/standard-bundle ###
+/.phpcs-cache
+###< smartbooster/standard-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
