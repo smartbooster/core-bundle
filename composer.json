@@ -18,7 +18,9 @@
   "require-dev": {
     "smartbooster/standard-bundle": "^0.4",
     "symfony/flex": "^2",
-    "symfony/phpunit-bridge": "^7.0"
+    "symfony/phpunit-bridge": "^5.4|^6.2",
+    "symfony/runtime": "^5.4|^6.2",
+    "symfony/twig-bundle": "^5.4|^6.2"
   },
   "autoload": {
     "psr-4": {
@@ -45,8 +47,7 @@
     "symfony": {
       "allow-contrib": false,
       "endpoint": [
-        "https://api.github.com/repos/smartbooster/standard-bundle/contents/recipes.json",
-        "flex://defaults"
+        "https://api.github.com/repos/smartbooster/standard-bundle/contents/recipes.json"
       ]
     }
   },

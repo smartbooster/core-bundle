@@ -1,0 +1,3 @@
+# Required for the QA lint-twig to work
+framework:
+    secret: 'dummy'
