@@ -40,6 +40,28 @@ class MonitoringController extends AbstractController
         return new JsonResponse($data);
     }
 
+    /**
+     * This route help us to detect that the date.timezone ini options is well set on CleverCloud
+     */
+    public function dateFormatting(): Response
+    {
+        $format = 'd/m/Y H:i:s';
+        $datetime = new \DateTime();
+        $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::SHORT, \IntlDateFormatter::LONG);
+
+        $content = "CURRENT TIME\n\n";
+        $content .= "default date function : \n" . date($format) . "\n";
+        $content .= "Datetime format : \n" . $datetime->format($format) . "\n";
+        $content .= "date_format function : \n" . date_format($datetime, ($format)) . "\n";
+        $content .= "IntlDateFormatter format : \n" . $formatter->format($datetime) . "\n";
+        $content .= "Timezone name : \n" . $datetime->getTimezone()->getName() . "\n";
+
+        $response = new Response($content, 200);
+        $response->headers->set('Content-Type', 'text/plain');
+
+        return $response;
+    }
+
     public function setEntityManager(EntityManagerInterface $entityManager): void
     {
         $this->entityManager = $entityManager;

@@ -36,7 +36,7 @@ final class RouteLoader extends Loader
             // MDT the path ^/anonymous must have PUBLIC_ACCESS in the project security.yaml config for the probe route to be accessible without user
             new Route('/anonymous' . $routePathPrefix . 'uptime', ['_controller' => $controller . 'uptime'])
         );
-        foreach (['phpinfo', 'simulateIniOverride'] as $action) {
+        foreach (['phpinfo', 'simulateIniOverride', 'dateFormatting'] as $action) {
             $collection->add(
                 $routeNamePrefix . u($action)->snake()->toString(),
                 new Route($routePathPrefix . u($action)->snake()->replace('_', '-')->toString(), ['_controller' => $controller . $action])
