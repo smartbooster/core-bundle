@@ -3,3 +3,13 @@ services:
     Smart\CoreBundle\Config\IniOverrideConfig:
         arguments:
             - '%env(default::SMART_CORE_BATCH_MEMORY)%'
+    # Controller
+    Smart\CoreBundle\Controller\MonitoringController:
+        calls:
+            -   setContainer: [ '@service_container' ]
+            -   setEntityManager: [ '@Doctrine\ORM\EntityManagerInterface' ]
+        tags: [ 'controller.service_arguments' ]
+    # Route
+    Smart\CoreBundle\Route\RouteLoader:
+        tags:
+            - { name: routing.loader }

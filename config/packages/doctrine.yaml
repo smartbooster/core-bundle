@@ -1,0 +1,7 @@
+# Necessary for Doctrine services to be available via DI if we use the make qa command
+doctrine:
+  dbal:
+    driver:   pdo_sqlite
+  orm:
+    auto_generate_proxy_classes: true
+    auto_mapping: true
