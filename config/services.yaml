@@ -1,0 +1,5 @@
+services:
+    # Config
+    Smart\CoreBundle\Config\IniOverrideConfig:
+        arguments:
+            - '%env(default::SMART_CORE_BATCH_MEMORY)%'
