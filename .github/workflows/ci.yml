@@ -1,4 +1,4 @@
-name: Run ci
+name: Coverage and QA
 
 on: [ pull_request ]
 

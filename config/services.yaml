@@ -13,3 +13,5 @@ services:
     Smart\CoreBundle\Route\RouteLoader:
         tags:
             - { name: routing.loader }
+    # Sentry
+    Smart\CoreBundle\Sentry\SentryCallback:
