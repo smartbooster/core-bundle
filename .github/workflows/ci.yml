@@ -1,0 +1,25 @@
+name: Run ci
+
+on: [ pull_request ]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        container:
+            image: ghcr.io/${{ github.repository_owner }}/symfony-docker:php8.2
+            credentials:
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+            -   name: Validate composer.json
+                run: composer validate
+            -   name: Composer install
+                run: composer install
+            -   name: Run coverage
+                run: make coverage
+            -   name: Clear cache
+                run: php bin/console c:c
+            -   name: Run qualimetry
+                run: make qa

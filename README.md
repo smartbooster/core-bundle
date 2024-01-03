@@ -2,6 +2,8 @@
 
 Bundle grouping all vendor, generic utils and services that we use on each project
 
+[![CI](https://github.com/smartbooster/core-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/smartbooster/core-bundle/actions/workflows/ci.yml)
+
 ## Installation
 
 ```bash
