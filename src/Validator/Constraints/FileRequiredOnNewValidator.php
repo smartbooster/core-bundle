@@ -19,6 +19,7 @@ class FileRequiredOnNewValidator extends ConstraintValidator
         }
 
         $object = $this->context->getObject();
+        // Need symfony/form dependency
         if ($object instanceof FormInterface) { // MDT adjust if use the contraints from collection
             $object = $object->getParent()->getData();
         }

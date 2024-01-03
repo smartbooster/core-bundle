@@ -27,6 +27,7 @@ class EmailChainValidator extends ConstraintValidator
         $validator = Validation::createValidator();
         foreach ($emailToValidate as $email) {
             // MDT add strict mode https://github.com/symfony/symfony/issues/35307
+            // Need egulias/email-validator dependency for use in strict mode
             $violations = $validator->validate(trim($email), [new Email(['mode' => Email::VALIDATION_MODE_STRICT])]);
             if ($violations->count() > 0 || trim($email) === '') {
                 $this->context->buildViolation($constraint->message)->addViolation();
