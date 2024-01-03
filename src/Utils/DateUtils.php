@@ -41,7 +41,7 @@ class DateUtils
 
     public static function getMonthChoices(string $locale = 'fr_FR'): array
     {
-        $formatter = new \IntlDateFormatter(locale: $locale, pattern: 'MMMM');
+        $formatter = new \IntlDateFormatter(locale: $locale, dateType: \IntlDateFormatter::FULL, timeType: \IntlDateFormatter::FULL, pattern: 'MMMM');
         for ($i = 1; $i <= 12; $i++) {
             $month = $formatter->format(strtotime("2000-$i")); // @phpstan-ignore-line MDT the year is arbitrary and does not impact the month
             $toReturn[ucfirst((string) $month)] = $i;
@@ -52,7 +52,7 @@ class DateUtils
 
     public static function monthYearToString(?int $month = null, ?int $year = null, string $locale = 'fr_FR'): ?string
     {
-        $formatter = new \IntlDateFormatter(locale: $locale, pattern: 'MMMM');
+        $formatter = new \IntlDateFormatter(locale: $locale, dateType: \IntlDateFormatter::FULL, timeType: \IntlDateFormatter::FULL, pattern: 'MMMM');
         if ($month !== null && $year !== null) {
             $month = $formatter->format(strtotime("$year-$month")); // @phpstan-ignore-line
             return ucfirst((string) $month) . ' ' . $year;
