@@ -35,7 +35,7 @@ class EmailChainValidatorTest extends AbstractValidatorTest
         return [
             'extension missing' => ["missing@extension"],
             'at missing' => ["missing_arobase.fr"],
-            'first error and second fail' => ["first@ok.fr,second@fail"],
+            'first valid and second fail' => ["first@ok.fr,second@fail"],
         ];
     }
 
