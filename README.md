@@ -9,6 +9,7 @@ Bundle grouping all vendor, generic utils and services that we use on each proje
 - Config IniOverrideConfig service to easily override php.ini options 
 - Monitoring routes for uptime tracking, phpinfo debugging and more
 - DataFixtures abstract helper
+- Query functions to extends Doctrine DQL capacity
 - SentryCallback with special CleverCloud dedicated behavior
 - Utils for Array, Date, Math, Regex and String
 
@@ -30,9 +31,23 @@ _smart_core:
     host: "admin.%domain%"
 ```
 
+### Extra DQL functions
+
+Add the following code to your `config/packages/doctrine.yaml` according to your missing functions needs:
+
+```yaml
+doctrine:
+    # ...
+    orm:
+        # ...
+        dql:
+            string_functions:
+                group_concat: Smart\CoreBundle\Query\MySQL\GroupConcat
+```
+
 ### Sentry configuration
 
-To use our SentryCallback add the following to your `config/package/sentry.yaml` :
+To use our SentryCallback add the following to your `config/packages/sentry.yaml` :
 
 ```yaml
 when@prod:
