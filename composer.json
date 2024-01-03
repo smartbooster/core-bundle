@@ -44,7 +44,9 @@
       "symfony/runtime": true,
       "php-http/discovery": true
     },
-    "sort-packages": true
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "prepend-autoloader": false
   },
   "extra": {
     "branch-alias": {
