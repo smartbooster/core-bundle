@@ -13,13 +13,9 @@ jobs:
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
-            -   name: Validate composer.json
-                run: composer validate
-            -   name: Composer install
-                run: composer install
+            -   name: "Install: vendor & clear cache"
+                run: make install
             -   name: Run coverage
                 run: make coverage
-            -   name: Clear cache
-                run: php bin/console c:c
             -   name: Run qualimetry
-                run: make qa
+                run: make qualimetry
