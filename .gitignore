@@ -3,6 +3,7 @@
 /symfony.lock
 /config/packages/test/dama_doctrine_test_bundle.yaml
 /config/packages/test/liip_test_fixtures.yaml
+/make/dev.mk
 /make/qualimetry.mk
 /make/test.mk
 
