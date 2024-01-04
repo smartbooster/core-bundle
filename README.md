@@ -12,6 +12,7 @@ Bundle grouping all vendor, generic utils and services that we use on each proje
 - Query functions to extends Doctrine DQL capacity
 - SentryCallback with special CleverCloud dedicated behavior
 - Utils for Array, Date, Math, Regex and String
+- Validator constraints for EmailChain, Modulo, Password and more
 
 ## Installation
 
