@@ -32,6 +32,14 @@ _smart_core:
     host: "admin.%domain%"
 ```
 
+The path `^/anonymous` must have `PUBLIC_ACCESS` in the project `security.yaml` config for the probe route to be accessible without user
+
+```yaml
+# security.yaml
+access_control:
+    - { path: ^/anonymous, roles: PUBLIC_ACCESS }
+```
+
 ### Extra DQL functions
 
 Add the following code to your `config/packages/doctrine.yaml` according to your missing functions needs:
