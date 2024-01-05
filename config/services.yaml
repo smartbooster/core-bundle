@@ -15,3 +15,6 @@ services:
             - { name: routing.loader }
     # Sentry
     Smart\CoreBundle\Sentry\SentryCallback:
+    # Alice
+    # Service Fidry\AliceDataFixtures\Loader\PurgerLoader not exist, and it must be aliased. AbstractFixtures need it.
+    Fidry\AliceDataFixtures\Loader\PurgerLoader: '@fidry_alice_data_fixtures.doctrine.purger_loader'
