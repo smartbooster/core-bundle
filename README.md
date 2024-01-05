@@ -103,7 +103,7 @@ nelmio_security:
 
 Pull requests are welcome.
 
-Thanks to [everyone who has contributed](https://github.com/smartbooster/standard-bundle/contributors) already.
+Thanks to [everyone who has contributed](https://github.com/smartbooster/core-bundle/contributors) already.
 
 ---
 
