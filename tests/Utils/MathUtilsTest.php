@@ -38,4 +38,34 @@ class MathUtilsTest extends TestCase
             'safe_calc_percent_divided_by_zero' => [0, 10, 0, 1],
         ];
     }
+
+    /**
+     * @dataProvider formatBytesProvider
+     */
+    public function testFormatBytes(string $expected, float $size, ?int $roundPrecision = null): void
+    {
+        if ($roundPrecision === null) {
+            $this->assertEquals($expected, MathUtils::formatBytes($size));
+        } else {
+            $this->assertEquals($expected, MathUtils::formatBytes($size, $roundPrecision));
+        }
+    }
+
+    public function formatBytesProvider(): array
+    {
+        return [
+            '999 B' => [
+                // expected
+                '999 B',
+                // size
+                999,
+                // precision
+                null,
+            ],
+            '1.26 KB' => ['1.26 KB', 1290, null],
+            '536.918 MB' => ['536.918 MB', 562999000, 3],
+            '880 GB' => ['880 GB', 945000000000, 0],
+            '382.86 TB' => ['382.86 TB', 420956000000000, 2],
+        ];
+    }
 }
