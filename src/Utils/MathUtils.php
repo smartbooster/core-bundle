@@ -24,10 +24,10 @@ class MathUtils
      */
     public static function formatBytes(float $size, int $precision = 2): string
     {
-        $base = log($size, 1024);
+        $base = log($size, 1000);
         $suffixes = ['B', 'KB', 'MB', 'GB', 'TB'];
 
         $floor = floor($base);
-        return round(pow(1024, $base - $floor), $precision) . ' ' . $suffixes[$floor];
+        return round(pow(1000, $base - $floor), $precision) . ' ' . $suffixes[$floor];
     }
 }
