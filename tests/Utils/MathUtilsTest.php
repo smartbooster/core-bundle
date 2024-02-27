@@ -2,6 +2,7 @@
 
 namespace Smart\CoreBundle\Tests\Utils;
 
+use App\Utils\NumberUtils;
 use Smart\CoreBundle\Utils\MathUtils;
 use PHPUnit\Framework\TestCase;
 
@@ -66,6 +67,22 @@ class MathUtilsTest extends TestCase
             '562.999 MB' => ['562.999 MB', 562999000, 3],
             '945 GB' => ['945 GB', 945000000000, 0],
             '420.96 TB' => ['420.96 TB', 420956000000000, 2],
+        ];
+    }
+
+    /** @dataProvider convertCentsToEuroProvider */
+    public function testConvertCentsToEuro(float $expected, float $price): void
+    {
+        $this->assertSame($expected, MathUtils::convertCentsToEuro($price));
+    }
+
+    public function convertCentsToEuroProvider(): array
+    {
+        return [
+            'simple' => [5, 500],
+            'float' => [5.54, 554],
+            'little' => [0.01, 1],
+            'price_float' => [5.893121, 589.3121],
         ];
     }
 }
