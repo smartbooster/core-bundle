@@ -30,4 +30,12 @@ class MathUtils
         $floor = floor($base);
         return round(pow(1000, $base - $floor), $precision) . ' ' . $suffixes[$floor];
     }
+
+    public static function convertCentsToEuro(?float $price): float
+    {
+        if (null === $price) {
+            return 0.0;
+        }
+        return $price / 100;
+    }
 }

@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.0.4 - (2024-02-27)
+
+### Added
+
+- `MathUtils::convertCentsToEuro` : Convert cents to euro
+
 ## v1.0.3 - (2024-01-11)
 
 ### Fix
