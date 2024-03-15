@@ -53,9 +53,9 @@ class StringUtils
      * input : App\Entity\User\Administrator
      * output : admin_user_administrator_
      */
-    public static function getEntityRoutePrefix(string $entityClassName): string
+    public static function getEntityRoutePrefix(string $entityClassName, string $context = 'admin'): string
     {
-        return 'admin_' . self::getEntitySnakeName($entityClassName) . '_';
+        return $context . '_' . self::getEntitySnakeName($entityClassName) . '_';
     }
 
     /**

@@ -35,6 +35,9 @@ class StringUtilsTest extends TestCase
         $this->assertEquals('admin_context_foo_', StringUtils::getEntityRoutePrefix('App\Entity\Context\Foo'));
         $this->assertEquals('admin_context_foo_bar_', StringUtils::getEntityRoutePrefix('App\Entity\Context\FooBar'));
         $this->assertEquals('admin_context_ca_range_', StringUtils::getEntityRoutePrefix('App\Entity\Context\CARange'));
+        // Test case with other context
+        $this->assertEquals('app_dummy_', StringUtils::getEntityRoutePrefix('App\Entity\Dummy', 'app'));
+        $this->assertEquals('extranet_dummy_', StringUtils::getEntityRoutePrefix('App\Entity\Dummy', 'extranet'));
     }
 
     /**

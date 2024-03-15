@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.0.5 - (2024-03-15)
+### Added
+- `StringUtils::getEntityRoutePrefix` Add optional $context param to be more generic and being used on other domain/context.
+
 ## v1.0.4 - (2024-02-27)
 
 ### Added
