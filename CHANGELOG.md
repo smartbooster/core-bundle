@@ -4,6 +4,7 @@ CHANGELOG for 1.x
 ### Added
 - new `ArrayUtils` methods : `checkIssetKeys`, `trimExplode`, `removeEmpty`, `filterByPattern`, `flatToMap`
 - new `MathUtils` methods : `calculateAverage`, `calculateDivision`
+- new `DateUtils` methods : `getFirstDayYearFromDatetime`, `getLastDayMonthFromDatetime`, `getMonthsBetweenDates`, `getDateTimeMonth`, `getDateTimeYear`, `getNbOfWorkingDaysBetweenDatetime`
 
 ## v1.0.5 - (2024-03-15)
 ### Added

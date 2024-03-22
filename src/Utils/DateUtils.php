@@ -211,4 +211,114 @@ class DateUtils
     {
         return self::getFirstDayOfMonthYear($month, $year)->modify('last day of this month')->setTime(23, 59, 59);
     }
+
+    public static function getFirstDayYearFromDatetime(?\DateTime $datetime = null): \DateTime
+    {
+        if ($datetime == null) {
+            $datetime = new \DateTime();
+        }
+
+        return new \DateTime($datetime->format('Y') . '-01-01');
+    }
+
+    public static function getLastDayMonthFromDatetime(?\DateTime $datetime = null): \DateTime
+    {
+        if ($datetime == null) {
+            $datetime = new \DateTime();
+        }
+
+        return new \DateTime($datetime->format('Y-m-t 23:59:59'));
+    }
+
+    /**
+     * Get array of year month between 2 Datetime
+     * It's work if end is before start
+     *
+     * <pre>
+     * <?php
+     * getMonthsBetweenDates(new \DateTime('2015-05-14'), new \DateTime('2015-09-02'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * ['2015-05', '2015-06', '2015-07', '2015-08', '2015-09']
+     * </pre>
+     */
+    public static function getMonthsBetweenDates(\DateTime $start, \DateTime $end): array
+    {
+        if ($start > $end) {
+            return self::getMonthsBetweenDates($end, $start);
+        }
+
+        $startDate = clone $start;
+        $endDate = clone $end;
+
+        $startDate = $startDate->modify('first day of this month');
+        $endDate = $endDate->modify('first day of next month');
+        // set to 00:00:00 to be sure the period don't include additional month on hour end > hour start
+        // start_after_end example on DateUtilsTest
+        $endDate->setTime(0, 0);
+        $interval = \DateInterval::createFromDateString('1 month');
+        $period = new \DatePeriod($startDate, $interval, $endDate);
+
+        $months = [];
+        foreach ($period as $datetime) {
+            $months[] = $datetime->format('Y-m');
+        }
+
+        return $months;
+    }
+
+    public static function getDateTimeMonth(\DateTime $dateTime): string
+    {
+        return $dateTime->format('m');
+    }
+
+    public static function getDateTimeYear(\DateTime $dateTime): string
+    {
+        return $dateTime->format('Y');
+    }
+
+    /**
+     * Get number of Working days between Datetime
+     * The duration is calculated by 24-hour period. the time can influence the result. Every 24 hour started is counted
+     * Inspiration : https://stackoverflow.com/questions/336127/calculate-business-days
+     *
+     * <pre>
+     * <?php
+     * getNbOfWorkingDaysBetweenDatetime(new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 4
+     * </pre>
+     * <pre>
+     * <?php
+     * getNbOfWorkingDaysBetweenDatetime(new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 5
+     * </pre>
+     */
+    public static function getNbOfWorkingDaysBetweenDatetime(\DateTime $dateFrom, \DateTime $dateTo): int
+    {
+        $workingDays = [1, 2, 3, 4, 5];
+
+        $dateTo = clone $dateTo;
+        $interval = new \DateInterval('P1D');
+        $periods = new \DatePeriod($dateFrom, $interval, $dateTo);
+
+        $days = 0;
+        foreach ($periods as $period) {
+            if (!in_array($period->format('N'), $workingDays)) {
+                continue;
+            }
+            $days++;
+        }
+
+        return $days;
+    }
 }
