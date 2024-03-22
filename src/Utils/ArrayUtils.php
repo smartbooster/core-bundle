@@ -11,6 +11,16 @@ class ArrayUtils
 {
     /**
      * Convert and clean data from textarea to array
+     *
+     * <pre>
+     * <?php
+     * getArrayFromTextarea("some\ntext");
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * ["some","text"]
+     * </pre>
      */
     public static function getArrayFromTextarea(?string $string): array
     {
@@ -105,16 +115,23 @@ class ArrayUtils
 
     /**
      * @param array $input
-     *  [
+     * @return array
+     * <pre>
+     * <?php
+     * flattenArrayValues([
      *      0 => "boo,bar",
      *      1 => "dummy",
-     *  ]
-     * @return array
-     *  [
+     *  ]);
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * [
      *      0 => "boo",
      *      1 => "bar",
      *      2 => "dummy",
      *  ]
+     * </pre>
      */
     public static function flattenArrayValues(array $input, string $separator = ','): array
     {
@@ -132,5 +149,112 @@ class ArrayUtils
         }
 
         return $toReturn;
+    }
+
+    /**
+     * Check if all keys are in array
+     *
+     * @param array $array array to compare
+     * @param array $keys keys to check
+     */
+    public static function checkIssetKeys(array $array, array $keys): bool
+    {
+        return empty(array_diff(array_keys($array), $keys));
+    }
+
+    /**
+     * Explode and trim an array with separator
+     *
+     * <pre>
+     * <?php
+     * trimExplode("value_1 , value_2");
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * ['value_1', 'value_2']
+     * </pre>
+     */
+    public static function trimExplode(string $string, string $separator = ','): array
+    {
+        if ($separator === '') {
+            throw new \RuntimeException("separator must not be empty");
+        }
+
+        return array_map(function (string $element) {
+            return trim($element);
+        }, explode($separator, $string));
+    }
+
+    /**
+     * Remove null and empty string from array
+     */
+    public static function removeEmpty(array $array): array
+    {
+        return array_filter($array, function ($value) {
+            if (!is_object($value) && ($value === null || strlen($value) === 0)) {
+                return false;
+            }
+
+            return true;
+        });
+    }
+
+    /**
+     * Filter array by search pattern
+     * if pattern is malformed, PHPUnit\Framework\Error\Warning exception is thrown
+     */
+    public static function filterByPattern(array $array, string $pattern, bool $negate = false): array
+    {
+        return array_filter($array, function ($value) use ($pattern, $negate) {
+            if ($negate) {
+                return !preg_match($pattern, $value);
+            }
+
+            return (bool) preg_match($pattern, $value);
+        });
+    }
+
+    /**
+     * Transform an array into an associative array with key and value callback
+     * Inspiration : https://szymonkrajewski.pl/building-the-associative-array-ideas/
+     *
+     * <pre>
+     * <?php
+     * flatToMap(
+     * [1, 2],
+     * function (int $e) {
+     *    return $e * 3;
+     * },
+     * function (int $e) {
+     *    return $e * 3;
+     * }
+     * );
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * [2 => 3, 4 => 6]
+     * </pre>
+     */
+    public static function flatToMap(?array $array, ?\Closure $fnKey, ?\Closure $fnValue = null): array
+    {
+        if (is_null($array)) {
+            return [];
+        }
+
+        if (!is_null($fnKey)) {
+            $keys = array_map($fnKey, $array);
+        } else {
+            $keys = $array;
+        }
+
+        if (!is_null($fnValue)) {
+            $values = array_map($fnValue, $array);
+        } else {
+            $values = $array;
+        }
+
+        return array_combine($keys, $values);
     }
 }
