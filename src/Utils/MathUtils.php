@@ -38,4 +38,32 @@ class MathUtils
         }
         return $price / 100;
     }
+
+    /**
+     * Calculate the average score of an array of values as float
+     *
+     * <pre>
+     * <?php
+     * calculateAverage([25, 50, 75]);
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 50
+     * </pre>
+     */
+    public static function calculateAverage(array $values, int $roundPrecision = 0): float
+    {
+        return empty($values) ? 0 : round(array_sum($values) / count($values), $roundPrecision);
+    }
+
+    public static function calculateDivision(int $nbDividend, int $nbDivider): float
+    {
+        $toReturn = 0;
+        if ($nbDivider > 0) {
+            $toReturn = round($nbDividend / $nbDivider, 2);
+        }
+
+        return $toReturn;
+    }
 }
