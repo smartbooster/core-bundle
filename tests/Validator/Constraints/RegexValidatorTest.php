@@ -37,7 +37,7 @@ class RegexValidatorTest extends AbstractValidatorTest
     {
         return [
             'concatenated number ' => ["0601020304"],
-            'number with dial code without space' => ["+330601020304"],
+            'number with dial code without space' => ["+33601020304"],
         ];
     }
 
@@ -62,7 +62,7 @@ class RegexValidatorTest extends AbstractValidatorTest
             'number with point' => ["06.01.02.03.04"],
             'number with separator combination' => ["0601 02-03.04"],
             'grouping of digits other than 2' => ["060 102 0304"],
-            'missing + for dialing code' => ["330601020304"],
+            'missing + for dialing code' => ["33601020304"],
             'number with dial code with space' => ["+33 06 01 02 03 04"],
         ];
     }
