@@ -865,14 +865,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getGetFirstDayYearFromDatetimeProvider
+     * @dataProvider getGetFirstDayYearFromDateTimeProvider
      */
-    public function testGetFirstDayYearFromDatetime(\DateTime $expected, \DateTime $datetime): void
+    public function testGetFirstDayYearFromDateTime(\DateTime $expected, \DateTime $datetime): void
     {
-        $this->assertEquals($expected, DateUtils::getFirstDayYearFromDatetime($datetime));
+        $this->assertEquals($expected, DateUtils::getFirstDayYearFromDateTime($datetime));
     }
 
-    public function getGetFirstDayYearFromDatetimeProvider(): array
+    public function getGetFirstDayYearFromDateTimeProvider(): array
     {
         return [
             'septembre_2020' => [
@@ -887,14 +887,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getGetLastDayMonthFromDatetimeProvider
+     * @dataProvider getGetLastDayMonthFromDateTimeProvider
      */
-    public function testGetLastDayMonthFromDatetime(\DateTime $expected, \DateTime $datetime): void
+    public function testGetLastDayMonthFromDateTime(\DateTime $expected, \DateTime $datetime): void
     {
-        $this->assertEquals($expected, DateUtils::getLastDayMonthFromDatetime($datetime));
+        $this->assertEquals($expected, DateUtils::getLastDayMonthFromDateTime($datetime));
     }
 
-    public function getGetLastDayMonthFromDatetimeProvider(): array
+    public function getGetLastDayMonthFromDateTimeProvider(): array
     {
         return [
             'september_2020' => [
@@ -917,14 +917,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getMonthsBetweenDatesProvider
+     * @dataProvider getMonthsBetweenDateTimesProvider
      */
-    public function testGetMonthsBetweenDates(array $expected, \DateTime $start, \DateTime $end): void
+    public function testGetMonthsBetweenDateTimes(array $expected, \DateTime $start, \DateTime $end): void
     {
-        $this->assertEquals($expected, DateUtils::getMonthsBetweenDates($start, $end));
+        $this->assertEquals($expected, DateUtils::getMonthsBetweenDateTimes($start, $end));
     }
 
-    public function getMonthsBetweenDatesProvider(): array
+    public function getMonthsBetweenDateTimesProvider(): array
     {
         return [
             'one_month' => [
@@ -1003,14 +1003,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getGetNbOfWorkingDaysBetweenDatetimeProvider
+     * @dataProvider getGetNbOfWorkingDaysBetweenDateTimesProvider
      */
-    public function testGetNbOfWorkingDaysBetweenDatetime(int $expected, \DateTime $start, \DateTime $end): void
+    public function testGetNbOfWorkingDaysBetweenDateTimes(int $expected, \DateTime $start, \DateTime $end): void
     {
-        $this->assertEquals($expected, DateUtils::getNbOfWorkingDaysBetweenDatetime($start, $end));
+        $this->assertEquals($expected, DateUtils::getNbOfWorkingDaysBetweenDateTimes($start, $end));
     }
 
-    public function getGetNbOfWorkingDaysBetweenDatetimeProvider(): array
+    public function getGetNbOfWorkingDaysBetweenDateTimesProvider(): array
     {
         return [
             'less than 24 hours' => [
@@ -1200,14 +1200,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getNextBirthdayDatetimeProvider
+     * @dataProvider getNextBirthdayDateTimeProvider
      */
-    public function testGetNextBirthdayDatetime(string $expected, \DateTime $birthday, \DateTime $currentDay): void
+    public function testGetNextBirthdayDateTime(string $expected, \DateTime $birthday, \DateTime $currentDay): void
     {
-        $this->assertSame($expected, DateUtils::getNextBirthdayDatetime($birthday, $currentDay)->format('Y-m-d'));
+        $this->assertSame($expected, DateUtils::getNextBirthdayDateTime($birthday, $currentDay)->format('Y-m-d'));
     }
 
-    public function getNextBirthdayDatetimeProvider(): array
+    public function getNextBirthdayDateTimeProvider(): array
     {
         return [
             'case plus one year' => [

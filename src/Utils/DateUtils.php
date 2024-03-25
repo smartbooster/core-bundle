@@ -263,7 +263,7 @@ class DateUtils
      *
      * <pre>
      * <?php
-     * getMonthsBetweenDates(new \DateTime('2015-05-14'), new \DateTime('2015-09-02'));
+     * getMonthsBetweenDateTimes(new \DateTime('2015-05-14'), new \DateTime('2015-09-02'));
      * ?>
      * </pre>
      * The above example will output:
@@ -271,10 +271,10 @@ class DateUtils
      * ['2015-05', '2015-06', '2015-07', '2015-08', '2015-09']
      * </pre>
      */
-    public static function getMonthsBetweenDates(\DateTime $start, \DateTime $end): array
+    public static function getMonthsBetweenDateTimes(\DateTime $start, \DateTime $end): array
     {
         if ($start > $end) {
-            return self::getMonthsBetweenDates($end, $start);
+            return self::getMonthsBetweenDateTimes($end, $start);
         }
 
         $startDate = clone $start;
@@ -313,7 +313,7 @@ class DateUtils
      *
      * <pre>
      * <?php
-     * getNbOfWorkingDaysBetweenDateTime(new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00'));
+     * getNbOfWorkingDaysBetweenDateTimes(new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00'));
      * ?>
      * </pre>
      * The above example will output:
@@ -322,7 +322,7 @@ class DateUtils
      * </pre>
      * <pre>
      * <?php
-     * getNbOfWorkingDaysBetweenDateTime(new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59'));
+     * getNbOfWorkingDaysBetweenDateTimes(new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59'));
      * ?>
      * </pre>
      * The above example will output:
@@ -330,13 +330,13 @@ class DateUtils
      * 5
      * </pre>
      */
-    public static function getNbOfWorkingDaysBetweenDateTime(\DateTime $dateFrom, \DateTime $dateTo): int
+    public static function getNbOfWorkingDaysBetweenDateTimes(\DateTime $start, \DateTime $end): int
     {
         $workingDays = [1, 2, 3, 4, 5];
 
-        $dateTo = clone $dateTo;
+        $end = clone $end;
         $interval = new \DateInterval('P1D');
-        $periods = new \DatePeriod($dateFrom, $interval, $dateTo);
+        $periods = new \DatePeriod($start, $interval, $end);
 
         $days = 0;
         foreach ($periods as $period) {
