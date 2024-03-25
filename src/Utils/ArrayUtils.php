@@ -224,7 +224,7 @@ class ArrayUtils
      * flatToMap(
      * [1, 2],
      * function (int $e) {
-     *    return $e * 3;
+     *    return $e * 2;
      * },
      * function (int $e) {
      *    return $e * 3;
