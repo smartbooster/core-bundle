@@ -57,13 +57,12 @@ class MathUtils
         return empty($values) ? 0 : round(array_sum($values) / count($values), $roundPrecision);
     }
 
-    public static function calculateDivision(int $nbDividend, int $nbDivider): float
+    public static function calculateDivision(int|float|null $dividend, int|float $divider, int $roundPrecision = 2): float
     {
-        $toReturn = 0;
-        if ($nbDivider > 0) {
-            $toReturn = round($nbDividend / $nbDivider, 2);
+        if (0 == $divider || null === $dividend) {
+            return 0;
         }
 
-        return $toReturn;
+        return round($dividend / $divider, $roundPrecision);
     }
 }

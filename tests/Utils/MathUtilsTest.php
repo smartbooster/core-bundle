@@ -113,20 +113,33 @@ class MathUtilsTest extends TestCase
     /**
      * @dataProvider getCalculateDivisionProvider
      */
-    public function testCalculateDivision(float $expected, int $dividend, int $divider): void
+    public function testCalculateDivision(float $expected, ?int $dividend, int $divider, int $roundPrecision): void
     {
-        $this->assertEquals($expected, MathUtils::calculateDivision($dividend, $divider));
+        $this->assertEquals($expected, MathUtils::calculateDivision($dividend, $divider, $roundPrecision));
     }
 
     public function getCalculateDivisionProvider(): array
     {
         return [
             'simple' => [
+                // expected
                 2,
                 // dividend
                 10,
                 // divider
-                5
+                5,
+                // round precision
+                2
+            ],
+            'dividend null' => [
+                // expected
+                0,
+                // dividend
+                null,
+                // divider
+                10,
+                // round precision
+                2
             ],
             'zero' => [
                 // expected
@@ -134,14 +147,18 @@ class MathUtilsTest extends TestCase
                 // dividend
                 10,
                 // divider
-                0
+                0,
+                // round precision
+                2
             ],
             'float' => [
                 // expected
-                3.33,
+                3.333,
                 // dividend
                 10,
                 // divider
+                3,
+                // round precision
                 3
             ],
         ];
