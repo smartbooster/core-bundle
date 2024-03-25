@@ -4,7 +4,7 @@ CHANGELOG for 1.x
 ### Added
 - new `ArrayUtils` methods : `checkIssetKeys`, `trimExplode`, `removeEmpty`, `filterByPattern`, `flatToMap`
 - new `MathUtils` methods : `calculateAverage`, `calculateDivision`
-- new `DateUtils` methods : `getFirstDayYearFromDateTime`, `getLastDayMonthFromDateTime`, `getMonthsBetweenDateTimes`, `getDateTimeMonth`, `getDateTimeYear`, `getNbOfWorkingDaysBetweenDateTimes`, `getDateTimeFromMonthYear`, `getNbDayBetweenDateTimes`, `isNighttime`, `getLastDayMonth`, `getLastDayPreviousMonthFromDateTime`, `getFirstDayNextMonthFromDateTime`, `getFirstDayMonth`, `getNextBirthdayDateTime`, `getFormattedLongMonth`, `getFormattedLongMonthYears`, `getFormattedShortMonthYears`, `addDays`, `subDays`, `addMonths`, `subMonths`, `addYears`, `subYears`
+- new `DateUtils` methods : `getFirstDayYearFromDateTime`, `getLastDayMonthFromDateTime`, `getMonthsBetweenDateTimes`, `getDateTimeMonth`, `getDateTimeYear`, `getNbOfWorkingDaysBetweenDateTimes`, `getDateTimeFromMonthYear`, `getNbDayBetweenDateTimes`, `isNighttime`, `getLastDayPreviousMonthFromDateTime`, `getFirstDayNextMonthFromDateTime`, `getFirstDayMonth`, `getNextBirthdayDateTime`, `getFormattedLongMonth`, `getFormattedLongMonthYears`, `getFormattedShortMonthYears`, `addDays`, `subDays`, `addMonths`, `subMonths`, `addYears`, `subYears`
 
 ## v1.0.5 - (2024-03-15)
 ### Added
