@@ -85,4 +85,82 @@ class MathUtilsTest extends TestCase
             'price_float' => [5.893121, 589.3121],
         ];
     }
+
+    /**
+     * @dataProvider calculateAverageProvider
+     */
+    public function testCalculateAverage(float $expected, array $values, ?int $roundPrecision): void
+    {
+        if (null === $roundPrecision) {
+            $result = MathUtils::calculateAverage($values);
+        } else {
+            $result = MathUtils::calculateAverage($values, $roundPrecision);
+        }
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function calculateAverageProvider(): array
+    {
+        return [
+            'empty values' => [0, [], null],
+            'simple 1' => [50, [25, 50, 75], null],
+            'simple 2' => [19, [10, 10, 20, 35], null],
+            'float result' => [3.33, [5, 4, 1], 2]
+        ];
+    }
+
+    /**
+     * @dataProvider getCalculateDivisionProvider
+     */
+    public function testCalculateDivision(float $expected, ?int $dividend, int $divider, int $roundPrecision): void
+    {
+        $this->assertEquals($expected, MathUtils::calculateDivision($dividend, $divider, $roundPrecision));
+    }
+
+    public function getCalculateDivisionProvider(): array
+    {
+        return [
+            'simple' => [
+                // expected
+                2,
+                // dividend
+                10,
+                // divider
+                5,
+                // round precision
+                2
+            ],
+            'dividend null' => [
+                // expected
+                0,
+                // dividend
+                null,
+                // divider
+                10,
+                // round precision
+                2
+            ],
+            'zero' => [
+                // expected
+                0,
+                // dividend
+                10,
+                // divider
+                0,
+                // round precision
+                2
+            ],
+            'float' => [
+                // expected
+                3.333,
+                // dividend
+                10,
+                // divider
+                3,
+                // round precision
+                3
+            ],
+        ];
+    }
 }

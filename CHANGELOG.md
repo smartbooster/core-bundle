@@ -3,6 +3,7 @@ CHANGELOG for 1.x
 ## v1.0.6
 ### Added
 - new `ArrayUtils` methods : `checkIssetKeys`, `trimExplode`, `removeEmpty`, `filterByPattern`, `flatToMap`
+- new `MathUtils` methods : `calculateAverage`, `calculateDivision`
 
 ## v1.0.5 - (2024-03-15)
 ### Added
