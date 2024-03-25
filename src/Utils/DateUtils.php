@@ -390,24 +390,15 @@ class DateUtils
     }
 
     /**
-     * Return last time of last day of month of datetime
-     */
-    public static function getLastDayMonth(\DateTime $datetime): \DateTime
-    {
-        $clonedDateTime = clone $datetime;
-        return $clonedDateTime->modify('last day of this month')->setTime(23, 59, 59);
-    }
-
-    /**
      * Return last time of last day of last month of datetime
      */
-    public static function getLastDayPreviousMonth(\DateTime $datetime): \DateTime
+    public static function getLastDayPreviousMonthFromDateTime(\DateTime $datetime): \DateTime
     {
         $clonedDateTime = clone $datetime;
         return $clonedDateTime->modify('last day of previous month')->setTime(23, 59, 59);
     }
 
-    public static function getFirstDayNextMonth(\DateTime $datetime): \DateTime
+    public static function getFirstDayNextMonthFromDateTime(\DateTime $datetime): \DateTime
     {
         $clonedDateTime = clone $datetime;
         return $clonedDateTime->modify('first day of next month');
@@ -444,7 +435,7 @@ class DateUtils
     }
 
     /**
-     * Return full month french format
+     * Return full month in locale format
      *
      * <pre>
      * <?php
@@ -456,16 +447,16 @@ class DateUtils
      * Janvier
      * </pre>
      */
-    public static function getFormattedLongMonth(\DateTime $date): string
+    public static function getFormattedLongMonth(\DateTime $date, string $locale = 'fr_FR'): string
     {
-        $dateFormatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $dateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
         $dateFormatter->setPattern('MMMM');
 
         return ucfirst((string) $dateFormatter->format($date));
     }
 
     /**
-     * Return full month year french format
+     * Return full month year locale format
      *
      * <pre>
      * <?php
@@ -477,9 +468,9 @@ class DateUtils
      * Janvier 2022
      * </pre>
      */
-    public static function getFormattedLongMonthYears(\DateTime $date): string
+    public static function getFormattedLongMonthYears(\DateTime $date, string $locale = 'fr_FR'): string
     {
-        $dateFormatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $dateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
         $dateFormatter->setPattern('MMMM yyyy');
 
         return ucfirst((string) $dateFormatter->format($date));

@@ -1084,44 +1084,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getGetLastDayMonthProvider
+     * @dataProvider getGetLastDayPreviousMonthFromDateTimeProvider
      */
-    public function testGetLastDayMonth(string $expected, \DateTime $dateTime): void
+    public function testGetLastDayPreviousMonthFromDateTime(string $expected, \DateTime $dateTime): void
     {
-        $this->assertEquals($expected, DateUtils::getLastDayMonth($dateTime)->format('d/m/Y H:i:s'));
+        $this->assertEquals($expected, DateUtils::getLastDayPreviousMonthFromDateTime($dateTime)->format('Y-m-d H:i:s'));
     }
 
-    public function getGetLastDayMonthProvider(): array
-    {
-        return [
-            '30_month_days' => [
-                '30/06/2021 23:59:59',
-                new \DateTime('2021-06-06')
-            ],
-            '31_month_days' => [
-                '31/08/2021 23:59:59',
-                new \DateTime('2021-08-20')
-            ],
-            'february_no_bissextile' => [
-                '28/02/2021 23:59:59',
-                new \DateTime('2021-02-01')
-            ],
-            'february_bissextile' => [
-                '29/02/2024 23:59:59',
-                new \DateTime('2024-02-01')
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider getGetLastDayPreviousMonthProvider
-     */
-    public function testGetLastDayPreviousMonth(string $expected, \DateTime $dateTime): void
-    {
-        $this->assertEquals($expected, DateUtils::getLastDayPreviousMonth($dateTime)->format('Y-m-d H:i:s'));
-    }
-
-    public function getGetLastDayPreviousMonthProvider(): array
+    public function getGetLastDayPreviousMonthFromDateTimeProvider(): array
     {
         return [
             'case 30 days from first day' => [
@@ -1156,14 +1126,14 @@ class DateUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getGetFirstDayNextMonthProvider
+     * @dataProvider getGetFirstDayNextMonthFromDateTimeProvider
      */
-    public function testGetFirstDayNextMonth(string $expected, \DateTime $dateTime): void
+    public function testGetFirstDayNextMonthFromDateTime(string $expected, \DateTime $dateTime): void
     {
-        $this->assertEquals($expected, DateUtils::getFirstDayNextMonth($dateTime)->format('Y-m-d'));
+        $this->assertEquals($expected, DateUtils::getFirstDayNextMonthFromDateTime($dateTime)->format('Y-m-d'));
     }
 
-    public function getGetFirstDayNextMonthProvider(): array
+    public function getGetFirstDayNextMonthFromDateTimeProvider(): array
     {
         return [
             '01/01' => [
@@ -1236,32 +1206,34 @@ class DateUtilsTest extends TestCase
     /**
      * @dataProvider getGetFormattedLongMonthProvider
      */
-    public function testGetFormattedLongMonth(string $expected, string $date): void
+    public function testGetFormattedLongMonth(string $expected, string $date, string $locale): void
     {
-        $this->assertEquals($expected, DateUtils::getFormattedLongMonth(new \DateTime($date)));
+        $this->assertEquals($expected, DateUtils::getFormattedLongMonth(new \DateTime($date), $locale));
     }
 
     public function getGetFormattedLongMonthProvider(): array
     {
         return [
-            'Janvier' => ['Janvier', '2022-01-15'],
-            'Octobre' => ['Octobre', '2020-10-01'],
+            'Janvier' => ['Janvier', '2022-01-15', 'fr_FR'],
+            'Octobre' => ['Octobre', '2020-10-01', 'fr_FR'],
+            'January' => ['January', '2020-01-01', 'en_EN'],
         ];
     }
 
     /**
      * @dataProvider getGetFormattedLongMonthYearsProvider
      */
-    public function testGetFormattedLongMonthYears(string $expected, string $date): void
+    public function testGetFormattedLongMonthYears(string $expected, string $date, string $locale): void
     {
-        $this->assertEquals($expected, DateUtils::getFormattedLongMonthYears(new \DateTime($date)));
+        $this->assertEquals($expected, DateUtils::getFormattedLongMonthYears(new \DateTime($date), $locale));
     }
 
     public function getGetFormattedLongMonthYearsProvider(): array
     {
         return [
-            'Janvier 2022' => ['Janvier 2022', '2022-01-15'],
-            'Octobre 2020' => ['Octobre 2020', '2020-10-01'],
+            'Janvier 2022' => ['Janvier 2022', '2022-01-15', 'fr_FR'],
+            'Octobre 2020' => ['Octobre 2020', '2020-10-01', 'fr_FR'],
+            'January 2020' => ['January 2020', '2020-01-01', 'en_EN'],
         ];
     }
 
