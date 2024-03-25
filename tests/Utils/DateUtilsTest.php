@@ -863,4 +863,443 @@ class DateUtilsTest extends TestCase
             '30_days' => ['2024-04-30 23:59:59', 4, 2024],
         ];
     }
+
+    /**
+     * @dataProvider getGetFirstDayYearFromDateTimeProvider
+     */
+    public function testGetFirstDayYearFromDateTime(\DateTime $expected, \DateTime $datetime): void
+    {
+        $this->assertEquals($expected, DateUtils::getFirstDayYearFromDateTime($datetime));
+    }
+
+    public function getGetFirstDayYearFromDateTimeProvider(): array
+    {
+        return [
+            'septembre_2020' => [
+                new \DateTime("2020-01-01"),
+                new \DateTime("2020-09-18")
+            ],
+            'juillet_2019' => [
+                new \DateTime("2019-01-01"),
+                new \DateTime("2019-07-24")
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetLastDayMonthFromDateTimeProvider
+     */
+    public function testGetLastDayMonthFromDateTime(\DateTime $expected, \DateTime $datetime): void
+    {
+        $this->assertEquals($expected, DateUtils::getLastDayMonthFromDateTime($datetime));
+    }
+
+    public function getGetLastDayMonthFromDateTimeProvider(): array
+    {
+        return [
+            'september_2020' => [
+                new \DateTime("2020-09-30 23:59:59"),
+                new \DateTime("2020-09-18")
+            ],
+            'october_2020' => [
+                new \DateTime("2020-10-31 23:59:59"),
+                new \DateTime("2020-10-07 10:42:30")
+            ],
+            'leap_february_2020' => [
+                new \DateTime("2020-02-29 23:59:59"),
+                new \DateTime("2020-02-12")
+            ],
+            'february_2019' => [
+                new \DateTime("2019-02-28 23:59:59"),
+                new \DateTime("2019-02-12")
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getMonthsBetweenDateTimesProvider
+     */
+    public function testGetMonthsBetweenDateTimes(array $expected, \DateTime $start, \DateTime $end): void
+    {
+        $this->assertEquals($expected, DateUtils::getMonthsBetweenDateTimes($start, $end));
+    }
+
+    public function getMonthsBetweenDateTimesProvider(): array
+    {
+        return [
+            'one_month' => [
+                ['2015-05'],
+                new \DateTime('2015-05-14'),
+                new \DateTime('2015-05-14'),
+            ],
+            'may_sept_2015' => [
+                ['2015-05', '2015-06', '2015-07', '2015-08', '2015-09'],
+                new \DateTime('2015-05-14'),
+                new \DateTime('2015-09-02'),
+            ],
+            'dec_2019_may_2020' => [
+                ['2019-12', '2020-01', '2020-02', '2020-03', '2020-04', '2020-05'],
+                new \DateTime('2019-12-25'),
+                new \DateTime('2020-05-10'),
+            ],
+            'start_after_end' => [
+                ['2015-05', '2015-06', '2015-07', '2015-08', '2015-09'],
+                new \DateTime('2015-09-30 23:59:59'),
+                new \DateTime('2015-05-01 00:00:00'),
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider getDateTimeMonthProvider
+     */
+    public function testGetDateTimeMonth(string $expected, \DateTime $value): void
+    {
+        $this->assertEquals($expected, DateUtils::getDateTimeMonth($value));
+    }
+
+    public function getDateTimeMonthProvider(): array
+    {
+        return [
+            '02' => [
+                // expected
+                '02',
+                // value
+                new \DateTime('2022-02-05')
+            ],
+            '10' => [
+                // expected
+                '10',
+                // value
+                new \DateTime('2021-10-10')
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getDateTimeYearProvider
+     */
+    public function testGetDateTimeYear(string $expected, \DateTime $value): void
+    {
+        $this->assertEquals($expected, DateUtils::getDateTimeYear($value));
+    }
+
+    public function getDateTimeYearProvider(): array
+    {
+        return [
+            '2022' => [
+                // expected
+                '2022',
+                // value
+                new \DateTime('2022-02-05')
+            ],
+            '1990' => [
+                // expected
+                '1990',
+                // value
+                new \DateTime('1990-10-10')
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetNbOfWorkingDaysBetweenDateTimesProvider
+     */
+    public function testGetNbOfWorkingDaysBetweenDateTimes(int $expected, \DateTime $start, \DateTime $end): void
+    {
+        $this->assertEquals($expected, DateUtils::getNbOfWorkingDaysBetweenDateTimes($start, $end));
+    }
+
+    public function getGetNbOfWorkingDaysBetweenDateTimesProvider(): array
+    {
+        return [
+            'less than 24 hours' => [
+                // expected
+                1,
+                // start
+                new \DateTime('2022-07-18 08:00:00'),
+                // end
+                new \DateTime('2022-07-18 09:00:00'),
+            ],
+            'week same hour' => [
+                // expected
+                4,
+                // start
+                new \DateTime('2022-07-18'),
+                // end
+                new \DateTime('2022-07-22'),
+            ],
+            'week end after start' => [
+                // expected
+                5,
+                // start
+                new \DateTime('2022-07-18 00:00:00'),
+                // end
+                new \DateTime('2022-07-22 23:59:59'),
+            ],
+            'end_in_week_end' => [
+                // expected
+                1,
+                // start
+                new \DateTime('2022-07-22'),
+                // end
+                new \DateTime('2022-07-24'),
+            ],
+            'end_out_week_end' => [
+                // expected
+                7,
+                // start
+                new \DateTime('2022-07-20'),
+                // end
+                new \DateTime('2022-07-29'),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetDateTimeFromMonthYearProvider
+     */
+    public function testGetDateTimeFromMonthYear(string $string): void
+    {
+        $this->assertEquals($string, DateUtils::getDateTimeFromMonthYear($string)->format('m/Y'));
+    }
+
+    public function getGetDateTimeFromMonthYearProvider(): array
+    {
+        return [
+            'simple' => [
+                '10/2022'
+            ],
+            'month_with_zero' => [
+                '01/2021'
+            ],
+        ];
+    }
+
+    public function testGetDateTimeFromMonthYearMalformated(): void
+    {
+        $this->expectException(\RuntimeException::class);
+
+        DateUtils::getDateTimeFromMonthYear('');
+    }
+
+    /**
+     * @dataProvider getGetLastDayPreviousMonthFromDateTimeProvider
+     */
+    public function testGetLastDayPreviousMonthFromDateTime(string $expected, \DateTime $dateTime): void
+    {
+        $this->assertEquals($expected, DateUtils::getLastDayPreviousMonthFromDateTime($dateTime)->format('Y-m-d H:i:s'));
+    }
+
+    public function getGetLastDayPreviousMonthFromDateTimeProvider(): array
+    {
+        return [
+            'case 30 days from first day' => [
+                '2021-09-30 23:59:59',
+                new \DateTime('2021-10-01')
+            ],
+            'case 31 days from first day' => [
+                '2021-08-31 23:59:59',
+                new \DateTime('2021-09-01')
+            ],
+            'case 30 days from last day' => [
+                '2021-09-30 23:59:59',
+                new \DateTime('2021-10-31')
+            ],
+            'case 31 days from last day' => [
+                '2021-08-31 23:59:59',
+                new \DateTime('2021-09-30')
+            ],
+            'case first day year' => [
+                '2020-12-31 23:59:59',
+                new \DateTime('2021-01-01')
+            ],
+            'case april first' => [
+                '2021-03-31 23:59:59',
+                new \DateTime('2021-04-01')
+            ],
+            'case july first' => [
+                '2021-06-30 23:59:59',
+                new \DateTime('2021-07-01')
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetFirstDayNextMonthFromDateTimeProvider
+     */
+    public function testGetFirstDayNextMonthFromDateTime(string $expected, \DateTime $dateTime): void
+    {
+        $this->assertEquals($expected, DateUtils::getFirstDayNextMonthFromDateTime($dateTime)->format('Y-m-d'));
+    }
+
+    public function getGetFirstDayNextMonthFromDateTimeProvider(): array
+    {
+        return [
+            '01/01' => [
+                '2022-02-01',
+                new \DateTime('2022-01-01')
+            ],
+            '31/07' => [
+                '2022-08-01',
+                new \DateTime('2022-07-31')
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider getGetFirstDayMonthProvider
+     */
+    public function testGetFirstDayMonth(string $expected, \DateTime $dateTime): void
+    {
+        $this->assertEquals($expected, DateUtils::getFirstDayMonth($dateTime)->format('d/m/Y H:i:s'));
+    }
+
+    public function getGetFirstDayMonthProvider(): array
+    {
+        return [
+            'simple' => [
+                '01/06/2021 00:00:00',
+                new \DateTime('2021-06-06')
+            ],
+            'end_month' => [
+                '01/08/2021 00:00:00',
+                new \DateTime('2021-08-31')
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getNextBirthdayDateTimeProvider
+     */
+    public function testGetNextBirthdayDateTime(string $expected, \DateTime $birthday, \DateTime $currentDay): void
+    {
+        $this->assertSame($expected, DateUtils::getNextBirthdayDateTime($birthday, $currentDay)->format('Y-m-d'));
+    }
+
+    public function getNextBirthdayDateTimeProvider(): array
+    {
+        return [
+            'case plus one year' => [
+                '2022-10-27',
+                new \DateTime('2000-10-27'),
+                new \DateTime('2021-12-08')
+            ],
+            'case same year' => [
+                '2021-12-01',
+                new \DateTime('2018-12-01'),
+                new \DateTime('2021-05-13')
+            ],
+            'case plus one year same day' => [
+                '2022-10-27',
+                (new \DateTime('2000-10-27'))->setTime(8, 0),
+                (new \DateTime('2021-10-27'))->setTime(9, 0),
+            ],
+            'case same date' => [
+                '2022-10-27',
+                (new \DateTime('2021-10-27'))->setTime(8, 0),
+                (new \DateTime('2021-10-27'))->setTime(8, 0),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetFormattedLongMonthProvider
+     */
+    public function testGetFormattedLongMonth(string $expected, string $date, string $locale): void
+    {
+        $this->assertEquals($expected, DateUtils::getFormattedLongMonth(new \DateTime($date), $locale));
+    }
+
+    public function getGetFormattedLongMonthProvider(): array
+    {
+        return [
+            'Janvier' => ['Janvier', '2022-01-15', 'fr_FR'],
+            'Octobre' => ['Octobre', '2020-10-01', 'fr_FR'],
+            'January' => ['January', '2020-01-01', 'en_EN'],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetFormattedLongMonthYearsProvider
+     */
+    public function testGetFormattedLongMonthYears(string $expected, string $date, string $locale): void
+    {
+        $this->assertEquals($expected, DateUtils::getFormattedLongMonthYears(new \DateTime($date), $locale));
+    }
+
+    public function getGetFormattedLongMonthYearsProvider(): array
+    {
+        return [
+            'Janvier 2022' => ['Janvier 2022', '2022-01-15', 'fr_FR'],
+            'Octobre 2020' => ['Octobre 2020', '2020-10-01', 'fr_FR'],
+            'January 2020' => ['January 2020', '2020-01-01', 'en_EN'],
+        ];
+    }
+
+    /**
+     * @dataProvider getFormattedShortMonthYearsProvider
+     */
+    public function testGetFormattedShortMonthYears(string $expected, string $date): void
+    {
+        $this->assertEquals($expected, DateUtils::getFormattedShortMonthYears(new \DateTime($date)));
+    }
+
+    public function getFormattedShortMonthYearsProvider(): array
+    {
+        return [
+            'Janvier 2022' => ['Jan. 22', '2022-01-15'],
+            'Octobre 2020' => ['Oct. 20', '2020-10-01'],
+            'Juin 2020' => ['Juin. 20', '2020-06-01'],
+            'Juillet 2020' => ['Jui. 20', '2020-07-01'],
+        ];
+    }
+
+    /**
+     * @dataProvider getGetNbDayBetweenDateTimesProvider
+     */
+    public function testGetNbDayBetweenDateTimes(int $expected, \DateTime $start, \DateTime $end): void
+    {
+        $this->assertEquals($expected, DateUtils::getNbDayBetweenDateTimes($start, $end));
+    }
+
+    public function getGetNbDayBetweenDateTimesProvider(): array
+    {
+        return [
+            'lass than 24 hours' => [0, new \DateTime('2022-07-18 08:00:00'), new \DateTime('2022-07-18 15:00:00')],
+            '3 day' => [3, new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00')],
+            '4 day same date 3 day with large hours' => [4, new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59')],
+            'long' => [139, new \DateTime('2022-01-01 10:00:00'), new \DateTime('2022-05-20 10:00:00')],
+        ];
+    }
+
+    public function testAddDays(): void
+    {
+        $this->assertEquals(new \DateTime('2024-10-15 08:00:00'), DateUtils::addDays(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
+
+    public function testSubDays(): void
+    {
+        $this->assertEquals(new \DateTime('2024-10-05 08:00:00'), DateUtils::subDays(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
+
+    public function testAddMonths(): void
+    {
+        $this->assertEquals(new \DateTime('2025-03-10 08:00:00'), DateUtils::addMonths(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
+
+    public function testSubMonths(): void
+    {
+        $this->assertEquals(new \DateTime('2024-05-10 08:00:00'), DateUtils::subMonths(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
+
+    public function testAddYears(): void
+    {
+        $this->assertEquals(new \DateTime('2029-10-10 08:00:00'), DateUtils::addYears(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
+
+    public function testSubYears(): void
+    {
+        $this->assertEquals(new \DateTime('2019-10-10 08:00:00'), DateUtils::subYears(new \DateTime('2024-10-10 08:00:00'), 5));
+    }
 }

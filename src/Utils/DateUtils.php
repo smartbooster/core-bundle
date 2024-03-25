@@ -62,6 +62,33 @@ class DateUtils
     }
 
     /**
+     * get DateTime from month/year string
+     *
+     * <pre>
+     * <?php
+     * getDateTimeFromMonthYear('10/2022');
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * new DateTime('2022-10-01')
+     * </pre>
+     */
+    public static function getDateTimeFromMonthYear(string $string): \DateTime
+    {
+        $endDateElements = explode('/', $string);
+
+        if (count($endDateElements) <= 1) {
+            throw new \RuntimeException('string must have mm/yyyy format');
+        }
+
+        $toReturn = new \DateTime();
+        $toReturn->setDate((int) $endDateElements[1], (int) $endDateElements[0], 1);
+
+        return $toReturn;
+    }
+
+    /**
      * @param array $options structure : [
      *      'start_hour' => int // Allows you to set a start time
      *      'end_hour' => int // Allows you to set an end time
@@ -210,5 +237,323 @@ class DateUtils
     public static function getLastDayOfMonthYear(int $month, int $year): \DateTime
     {
         return self::getFirstDayOfMonthYear($month, $year)->modify('last day of this month')->setTime(23, 59, 59);
+    }
+
+    public static function getFirstDayYearFromDateTime(?\DateTime $datetime = null): \DateTime
+    {
+        if ($datetime == null) {
+            $datetime = new \DateTime();
+        }
+
+        return new \DateTime($datetime->format('Y') . '-01-01');
+    }
+
+    public static function getLastDayMonthFromDateTime(?\DateTime $datetime = null): \DateTime
+    {
+        if ($datetime == null) {
+            $datetime = new \DateTime();
+        }
+
+        return new \DateTime($datetime->format('Y-m-t 23:59:59'));
+    }
+
+    /**
+     * Get array of year month between 2 DateTime
+     * It's work if end is before start
+     *
+     * <pre>
+     * <?php
+     * getMonthsBetweenDateTimes(new \DateTime('2015-05-14'), new \DateTime('2015-09-02'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * ['2015-05', '2015-06', '2015-07', '2015-08', '2015-09']
+     * </pre>
+     */
+    public static function getMonthsBetweenDateTimes(\DateTime $start, \DateTime $end): array
+    {
+        if ($start > $end) {
+            return self::getMonthsBetweenDateTimes($end, $start);
+        }
+
+        $startDate = clone $start;
+        $endDate = clone $end;
+
+        $startDate = $startDate->modify('first day of this month');
+        $endDate = $endDate->modify('first day of next month');
+        // set to 00:00:00 to be sure the period don't include additional month on hour end > hour start
+        // start_after_end example on DateUtilsTest
+        $endDate->setTime(0, 0);
+        $interval = \DateInterval::createFromDateString('1 month');
+        $period = new \DatePeriod($startDate, $interval, $endDate);
+
+        $months = [];
+        foreach ($period as $datetime) {
+            $months[] = $datetime->format('Y-m');
+        }
+
+        return $months;
+    }
+
+    public static function getDateTimeMonth(\DateTime $dateTime): string
+    {
+        return $dateTime->format('m');
+    }
+
+    public static function getDateTimeYear(\DateTime $dateTime): string
+    {
+        return $dateTime->format('Y');
+    }
+
+    /**
+     * Get number of Working days between DateTime
+     * The duration is calculated by 24-hour period. the time can influence the result. Every 24 hour started is counted
+     * Inspiration : https://stackoverflow.com/questions/336127/calculate-business-days
+     *
+     * <pre>
+     * <?php
+     * getNbOfWorkingDaysBetweenDateTimes(new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 4
+     * </pre>
+     * <pre>
+     * <?php
+     * getNbOfWorkingDaysBetweenDateTimes(new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 5
+     * </pre>
+     */
+    public static function getNbOfWorkingDaysBetweenDateTimes(\DateTime $start, \DateTime $end): int
+    {
+        $workingDays = [1, 2, 3, 4, 5];
+
+        $end = clone $end;
+        $interval = new \DateInterval('P1D');
+        $periods = new \DatePeriod($start, $interval, $end);
+
+        $days = 0;
+        foreach ($periods as $period) {
+            if (!in_array($period->format('N'), $workingDays)) {
+                continue;
+            }
+            $days++;
+        }
+
+        return $days;
+    }
+
+    /**
+     * Get number of days between DateTime
+     * The duration is calculated by 24-hour period. the time can influence the result. Every 24 hour started is counted. The first 24h not count
+     *
+     * <pre>
+     * <?php
+     * getNbDayBetweenDateTimes(new \DateTime('2022-07-18 23:59:59'), new \DateTime('2022-07-22 00:00:00'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 3
+     * </pre>
+     * <pre>
+     * <?php
+     * getNbDayBetweenDateTimes(new \DateTime('2022-07-18 00:00:00'), new \DateTime('2022-07-22 23:59:59'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * 4
+     * </pre>
+     */
+    public static function getNbDayBetweenDateTimes(?\DateTimeInterface $start, ?\DateTimeInterface $end): ?int
+    {
+        if (!$start instanceof \DateTimeInterface || !$end instanceof \DateTimeInterface) {
+            return null;
+        }
+
+        return (int) date_diff($start, $end)->days;
+    }
+
+    public static function isNighttime(string $timezone = 'Europe/Paris'): bool
+    {
+        $dateTime = new \DateTime($timezone);
+        $currentHour = intval($dateTime->format('H'));
+
+        return $currentHour >= 18;
+    }
+
+    /**
+     * Return last time of last day of last month of datetime
+     */
+    public static function getLastDayPreviousMonthFromDateTime(\DateTime $datetime): \DateTime
+    {
+        $clonedDateTime = clone $datetime;
+        return $clonedDateTime->modify('last day of previous month')->setTime(23, 59, 59);
+    }
+
+    public static function getFirstDayNextMonthFromDateTime(\DateTime $datetime): \DateTime
+    {
+        $clonedDateTime = clone $datetime;
+        return $clonedDateTime->modify('first day of next month');
+    }
+
+    /**
+     * Return first time of first day of month of datetime
+     */
+    public static function getFirstDayMonth(\DateTime $datetime): \DateTime
+    {
+        $clonedDateTime = clone $datetime;
+        return $clonedDateTime->modify('first day of this month')->setTime(0, 0);
+    }
+
+    /**
+     * Return next birthday of a DateTime
+     * If birthday > currentDay, it returns birthday
+     *
+     * @param \DateTime|null $currentDay if null it's use current date
+     */
+    public static function getNextBirthdayDateTime(\DateTimeInterface $birthday, ?\DateTime $currentDay = null): \DateTimeInterface
+    {
+        /** @var \DateTime $nextBirthday */
+        $nextBirthday = clone $birthday;
+        if (!$currentDay instanceof \DateTime) {
+            $currentDay = new \DateTime();
+        }
+        $nextBirthday->setDate((int)$currentDay->format('Y'), (int)$birthday->format('m'), (int)$birthday->format('d'));
+        if ($nextBirthday <= $currentDay) {
+            $nextBirthday->modify('next year');
+        }
+
+        return $nextBirthday;
+    }
+
+    /**
+     * Return full month in locale format
+     *
+     * <pre>
+     * <?php
+     * getFormattedLongMonth(new \DateTime('2022-01-15'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * Janvier
+     * </pre>
+     */
+    public static function getFormattedLongMonth(\DateTime $date, string $locale = 'fr_FR'): string
+    {
+        $dateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $dateFormatter->setPattern('MMMM');
+
+        return ucfirst((string) $dateFormatter->format($date));
+    }
+
+    /**
+     * Return full month year locale format
+     *
+     * <pre>
+     * <?php
+     * getFormattedLongMonth(new \DateTime('2022-01-15'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * Janvier 2022
+     * </pre>
+     */
+    public static function getFormattedLongMonthYears(\DateTime $date, string $locale = 'fr_FR'): string
+    {
+        $dateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $dateFormatter->setPattern('MMMM yyyy');
+
+        return ucfirst((string) $dateFormatter->format($date));
+    }
+
+    /**
+     * Return short month year french format
+     *
+     * <pre>
+     * <?php
+     * getFormattedLongMonth(new \DateTime('2022-01-15'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * Jan. 2022
+     * </pre>
+     */
+    public static function getFormattedShortMonthYears(\DateTime $date): string
+    {
+        $monthDateFormatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $yearDateFormatter = clone $monthDateFormatter;
+        // pattern : https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+        $monthDateFormatter->setPattern('MMMM');
+        $month = $monthDateFormatter->format($date);
+        $yearDateFormatter->setPattern('yy');
+        $year = $yearDateFormatter->format($date);
+
+        // It must be "juin" in full otherwise there be multiple "jui." key with "juillet"
+        if ($month === 'juin') {
+            $mbSubMonth = $month;
+        } else {
+            $mbSubMonth = mb_substr((string) $month, 0, 3);
+        }
+
+        return ucfirst($mbSubMonth) . '. ' . $year;
+    }
+
+    public static function addDays(\DateTime $dateTime, int $daysNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->add(new \DateInterval("P{$daysNb}D"));
+
+        return $clonedDateTime;
+    }
+
+    public static function subDays(\DateTime $dateTime, int $daysNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->sub(new \DateInterval("P{$daysNb}D"));
+
+        return $clonedDateTime;
+    }
+
+    public static function addMonths(\DateTime $dateTime, int $monthsNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->add(new \DateInterval("P{$monthsNb}M"));
+
+        return $clonedDateTime;
+    }
+
+    public static function subMonths(\DateTime $dateTime, int $monthsNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->sub(new \DateInterval("P{$monthsNb}M"));
+
+        return $clonedDateTime;
+    }
+
+    public static function addYears(\DateTime $dateTime, int $yearsNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->add(new \DateInterval("P{$yearsNb}Y"));
+
+        return $clonedDateTime;
+    }
+
+    public static function subYears(\DateTime $dateTime, int $yearsNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->sub(new \DateInterval("P{$yearsNb}Y"));
+
+        return $clonedDateTime;
     }
 }
