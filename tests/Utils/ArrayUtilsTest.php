@@ -333,4 +333,248 @@ name', "value" => 2],
             ],
         ];
     }
+
+    /**
+     * @dataProvider checkIssetKeysProvider
+     */
+    public function testCheckIssetKeys(bool $expected, array $array, array $keys): void
+    {
+        $this->assertEquals($expected, ArrayUtils::checkIssetKeys($array, $keys));
+    }
+
+    public function checkIssetKeysProvider(): array
+    {
+        return [
+            'all present' => [
+                // expected
+                true,
+                // array
+                [
+                    0 => "000",
+                    1 => "111",
+                    5 => "555",
+                ],
+                // $keys
+                [0, 1, 5],
+            ],
+            'last missing' => [
+                // expected
+                false,
+                // array
+                [
+                    0 => "000",
+                    1 => "111",
+                    5 => "555",
+                ],
+                // $keys
+                [0, 1],
+            ],
+            'first missing' => [
+                // expected
+                false,
+                // array
+                [
+                    'dummy' => "dummy",
+                    'foo' => "foo",
+                    'bar' => "bar",
+                ],
+                // $keys
+                ['foo', 'bar'],
+            ],
+            'empty array' => [
+                // expected
+                true,
+                // array
+                [],
+                // $keys
+                [],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getTrimExplodeProvider
+     */
+    public function testTrimExplode(array $expected, string $string, ?string $separator): void
+    {
+        if ($separator === null) {
+            $this->assertEquals($expected, ArrayUtils::trimExplode($string));
+        } else {
+            $this->assertEquals($expected, ArrayUtils::trimExplode($string, $separator));
+        }
+    }
+
+    public function getTrimExplodeProvider(): array
+    {
+        return [
+            'empty string' => [
+                [''],
+                '',
+                null
+            ],
+            'one_value' => [
+                ['value'],
+                ' value ',
+                null
+            ],
+            'multiple_value' => [
+                ['value', 'dummy@email.fr', '8'],
+                ' value , dummy@email.fr        , 8',
+                null
+            ],
+            '| separator' => [
+                ['value', 'dummy@email.fr'],
+                ' value | dummy@email.fr',
+                '|'
+            ],
+        ];
+    }
+
+    public function testTrimExplodeEmptySeparator(): void
+    {
+        $this->expectException(\RuntimeException::class);
+
+        ArrayUtils::trimExplode('', '');
+    }
+
+    /**
+     * @dataProvider getRemoveEmptyProvider
+     */
+    public function testRemoveEmpty(array $expected, array $values): void
+    {
+        $this->assertEquals($expected, ArrayUtils::removeEmpty($values));
+    }
+
+    public function getRemoveEmptyProvider(): array
+    {
+        return [
+            'empty array' => [
+                [],
+                []
+            ],
+            'remove empty' => [
+                [
+                    1 => "some",
+                    2 => "exemple",
+                    4 => "text"
+                ],
+                ["", "some","exemple", "", "text", null, ""]
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getFilterByPatternProvider
+     */
+    public function testFilterByPattern(array $expected, array $values, string $pattern, bool $negate): void
+    {
+        $this->assertEquals($expected, ArrayUtils::filterByPattern($values, $pattern, $negate));
+    }
+
+    public function getFilterByPatternProvider(): array
+    {
+        return [
+            'empty array' => [
+                [],
+                [],
+                "/^([0-9]{9})$/",
+                false
+            ],
+            'siren pattern' => [
+                [
+                    0 => "123456789",
+                    3 => "147258369"
+                ],
+                ["123456789", "test", "123", "147258369", "12345678910111213"],
+                "/^([0-9]{9})$/",
+                false
+            ],
+            'siren pattern negated' => [
+                [
+                    1 => "test",
+                    2 => "123",
+                    4 => "12345678910111213"
+                ],
+                ["123456789", "test", "123", "147258369", "12345678910111213"],
+                "/^([0-9]{9})$/",
+                true
+            ],
+            'no match' => [
+                [
+                    0 => "test",
+                    1 => "123",
+                ],
+                ["test", "123"],
+                "/^([0-9]{9})$/",
+                true
+            ],
+        ];
+    }
+
+    public function testFilterByPatternMalformedPattern(): void
+    {
+        $this->expectWarning();
+
+        ArrayUtils::filterByPattern([0 => 0], '#######');
+    }
+
+    /**
+     * @dataProvider getFlatToMapProvider
+     */
+    public function testFlatToMap(array $expected, ?array $array, ?\Closure $fnKey, ?\Closure $fnValue): void
+    {
+        $this->assertEquals($expected, ArrayUtils::flatToMap($array, $fnKey, $fnValue));
+    }
+
+    public function getFlatToMapProvider(): array
+    {
+        return [
+            'null array' => [
+                [],
+                null,
+                function (?int $value) {
+                    return $value;
+                },
+                function (?int $value) {
+                    return $value;
+                },
+            ],
+            'empty array' => [
+                [],
+                [],
+                function (?int $value) {
+                    return $value;
+                },
+                function (?int $value) {
+                    return $value;
+                },
+            ],
+            'key_value' => [
+                [2 => 3, 4 => 6, 6 => 9],
+                [1, 2, 3],
+                function (int $value) {
+                    return $value * 2;
+                },
+                function (int $value) {
+                    return $value * 3;
+                },
+            ],
+            'only key' => [
+                [5 => 1, 10 => 2, 15 => 3],
+                [1, 2, 3],
+                function (int $value) {
+                    return $value * 5;
+                },
+                null,
+            ],
+            'only value' => [
+                [1 => 4, 2 => 8, 3 => 12],
+                [1, 2, 3],
+                null,
+                function (int $value) {
+                    return $value * 4;
+                },
+            ],
+        ];
+    }
 }
