@@ -1,4 +1,9 @@
 services:
+    # Command
+    Smart\CoreBundle\Command\CommandPoolHelper:
+        arguments:
+            - '@Symfony\Component\HttpKernel\KernelInterface'
+            - '@translator'
     # Config
     Smart\CoreBundle\Config\IniOverrideConfig:
         arguments:
@@ -9,6 +14,10 @@ services:
             -   setContainer: [ '@service_container' ]
             -   setEntityManager: [ '@Doctrine\ORM\EntityManagerInterface' ]
         tags: [ 'controller.service_arguments' ]
+    # Monitoring
+    Smart\CoreBundle\Monitoring\ProcessMonitor:
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
     # Route
     Smart\CoreBundle\Route\RouteLoader:
         tags:
