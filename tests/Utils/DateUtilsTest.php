@@ -1302,4 +1302,27 @@ class DateUtilsTest extends TestCase
     {
         $this->assertEquals(new \DateTime('2019-10-10 08:00:00'), DateUtils::subYears(new \DateTime('2024-10-10 08:00:00'), 5));
     }
+
+    /**
+     * @dataProvider secondsToStringProvider
+     */
+    public function testSecondsToString(?string $expected, ?int $value): void
+    {
+        $this->assertEquals($expected, DateUtils::secondsToString($value));
+    }
+
+    public function secondsToStringProvider(): array
+    {
+        return [
+            'null value' => [null, null],
+            '0 seconds' => ['0s', 0],
+            '10 seconds' => ['10s', 10],
+            '1 minutes' => ['1m', 60],
+            '1 minutes and 30 secondes' => ['1m 30s', 90],
+            '1 hours' => ['1h', 3600],
+            '1 hours 15 minutes' => ['1h 15m', 4500],
+            '1 hours 1 minutes and 1 secondes' => ['1h 1m 1s', 3661],
+            '3 hours' => ['3h', 10800],
+        ];
+    }
 }

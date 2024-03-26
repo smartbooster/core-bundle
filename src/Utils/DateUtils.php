@@ -556,4 +556,28 @@ class DateUtils
 
         return $clonedDateTime;
     }
+
+    public static function secondsToString(?int $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $toReturn = '';
+        $hours = floor($value / 3600);
+        $remainingSeconds = $value % 3600;
+        $minutes = floor($remainingSeconds / 60);
+        $seconds = $remainingSeconds % 60;
+        if ($hours > 0) {
+            $toReturn .= "{$hours}h ";
+        }
+        if ($minutes > 0) {
+            $toReturn .= "{$minutes}m ";
+        }
+        if ($toReturn === '' || $seconds > 0) {
+            $toReturn .= "{$seconds}s";
+        }
+
+        return trim($toReturn);
+    }
 }
