@@ -53,4 +53,6 @@ interface ProcessInterface
     public function setData(?array $data): static;
 
     public function addData(string $key, mixed $value): void;
+
+    public function addExceptionTraceData(\Exception $e): void;
 }

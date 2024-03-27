@@ -219,4 +219,12 @@ trait ProcessTrait
     {
         $this->data[$key] = $value;
     }
+
+    /**
+     * Use this if you wish to store the exception trace on the internal data of the process
+     */
+    public function addExceptionTraceData(\Exception $e): void
+    {
+        $this->data['exception_trace'] = $e->getTrace();
+    }
 }
