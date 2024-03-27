@@ -6,6 +6,12 @@ use Smart\CoreBundle\Enum\ProcessStatusEnum;
 
 interface ProcessInterface
 {
+    public function isOngoing(): bool;
+
+    public function isSuccess(): bool;
+
+    public function isError(): bool;
+
     public function getId(): ?int;
 
     public function getType(): ?string;

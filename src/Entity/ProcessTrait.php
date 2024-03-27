@@ -41,6 +41,21 @@ trait ProcessTrait
     #[ORM\Column(nullable: true)]
     private ?array $data = null;
 
+    public function isOngoing(): bool
+    {
+        return $this->getStatus() === ProcessStatusEnum::ONGOING;
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->getStatus() === ProcessStatusEnum::SUCCESS;
+    }
+
+    public function isError(): bool
+    {
+        return $this->getStatus() === ProcessStatusEnum::ERROR;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
