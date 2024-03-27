@@ -357,9 +357,9 @@ name', "value" => 2],
                 // $keys
                 [0, 1, 5],
             ],
-            'last missing' => [
+            'one missing' => [
                 // expected
-                false,
+                true,
                 // array
                 [
                     0 => "000",
@@ -369,14 +369,13 @@ name', "value" => 2],
                 // $keys
                 [0, 1],
             ],
-            'first missing' => [
+            'key is not present' => [
                 // expected
                 false,
                 // array
                 [
                     'dummy' => "dummy",
                     'foo' => "foo",
-                    'bar' => "bar",
                 ],
                 // $keys
                 ['foo', 'bar'],
