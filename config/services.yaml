@@ -15,6 +15,9 @@ services:
             -   setEntityManager: [ '@Doctrine\ORM\EntityManagerInterface' ]
         tags: [ 'controller.service_arguments' ]
     # Monitoring
+    Smart\CoreBundle\Monitoring\ApiCallMonitor:
+        arguments:
+            - '@Smart\CoreBundle\Monitoring\ProcessMonitor'
     Smart\CoreBundle\Monitoring\ProcessMonitor:
         arguments:
             - '@Doctrine\ORM\EntityManagerInterface'
