@@ -7,6 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait WebsiteTrait
 {
+    /**
+     * @ORM\Column(length=300, nullable=true)
+     * @Assert\Length(max=300)
+     * @Assert\Url
+     */
     #[ORM\Column(length: 300, nullable: true)]
     #[Assert\Length(max: 300)]
     #[Assert\Url]
