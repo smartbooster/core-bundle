@@ -1,5 +1,10 @@
 CHANGELOG for 1.x
 ===================
+## v1.2.1 - (2024-03-27)
+### Fix
+
+- `ArrayUtils::checkIssetKeys` : Modify method with not strict comparaison
+
 ## v1.2.0 - (2024-03-27)
 ### Added
 - Common Entity Interface and Trait such as the `ProcessInterface` which we will use to monitor cron, api and file generation.

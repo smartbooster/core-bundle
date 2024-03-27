@@ -152,14 +152,21 @@ class ArrayUtils
     }
 
     /**
-     * Check if all keys are in array
+     * Check if all keys are set in array
+     * It's not a strict comparaison, all array values may not be in keys
      *
      * @param array $array array to compare
      * @param array $keys keys to check
      */
     public static function checkIssetKeys(array $array, array $keys): bool
     {
-        return empty(array_diff(array_keys($array), $keys));
+        foreach ($keys as $key) {
+            if (!isset($array[$key])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
