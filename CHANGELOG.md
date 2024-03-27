@@ -1,12 +1,13 @@
 CHANGELOG for 1.x
 ===================
-## v1.2.0 - (2024-03-26)
+## v1.2.0 - (2024-03-27)
 ### Added
 - Common Entity Interface and Trait such as the `ProcessInterface` which we will use to monitor cron, api and file generation.
 - `ProcessMonitor` to centralize process code management
 - `CommandPoolHelper` service to fetch data about the project symfony commands (like getting all cron choices)
 - `DateUtils::secondsToString` helper to convert seconds into a small summary string
 - `IniOverrideConfig::initDefaultTimezoneForCli` helper to properly set the timezone when using date with PHP CLI on CleverCloud
+- `ApiCallInterface` and trait to ease monitoring API calls 
 
 ### Fixed
 - `RegexUtils::PHONE_PATTERN` remove wrong extra digit needed on foreign number 
