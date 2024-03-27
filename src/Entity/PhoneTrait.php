@@ -8,6 +8,11 @@ use Smart\CoreBundle\Utils\RegexUtils;
 
 trait PhoneTrait
 {
+    /**
+     * @ORM\Column(length=20, nullable=true)
+     * @Assert\Length(max=20)
+     * @Assert\Regex(pattern=RegexUtils::PHONE_PATTERN, message=RegexUtils::PHONE_MESSAGE)
+     */
     #[ORM\Column(length: 20, nullable: true)]
     #[Assert\Length(max: 20)]
     #[Assert\Regex(pattern: RegexUtils::PHONE_PATTERN, message: RegexUtils::PHONE_MESSAGE)]
