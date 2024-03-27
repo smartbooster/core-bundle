@@ -4,7 +4,7 @@ namespace Smart\CoreBundle\Utils;
 
 class RegexUtils
 {
-    public const PHONE_PATTERN = '#^(\+[0-9]{2})?[0-9]{10}$#';
+    public const PHONE_PATTERN = '#^(\+[0-9]{1})?[0-9]{10}$#';
     public const PHONE_MESSAGE = 'phone.regex_error';
     public const FAX_MESSAGE = 'fax.regex_error';
 
