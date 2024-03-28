@@ -7,10 +7,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait PersonNameableTrait
 {
+    /**
+     * @ORM\Column(length=100, nullable=true)
+     * @Assert\Length(max=100)
+     */
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(max: 100)]
     protected ?string $firstName = null;
 
+    /**
+     * @ORM\Column(length=100, nullable=true)
+     * @Assert\Length(max=100)
+     */
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(max: 100)]
     protected ?string $lastName = null;

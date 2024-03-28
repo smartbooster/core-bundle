@@ -7,18 +7,34 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait AddressTrait
 {
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\Length(max=255)
+     */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $address = null;
 
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\Length(max=255)
+     */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $additionalAddress = null;
 
+    /**
+     * @ORM\Column(length=10, nullable=true)
+     * @Assert\Length(max=10)
+     */
     #[ORM\Column(length: 10, nullable: true)]
     #[Assert\Length(max: 10)]
     private ?string $postalCode = null;
 
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\Length(max=255)
+     */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $city = null;

@@ -9,12 +9,21 @@ trait ApiCallTrait
 {
     use ProcessTrait;
 
+    /**
+     * @ORM\Column(length=20)
+     */
     #[ORM\Column(length: 20)]
     private ?string $origin = null;
 
+    /**
+     * @ORM\Column
+     */
     #[ORM\Column]
     private ?int $statusCode = null;
 
+    /**
+     * @ORM\Column(length=10)
+     */
     #[ORM\Column(length: 10)]
     private ?string $method = null;
 
@@ -22,13 +31,21 @@ trait ApiCallTrait
      * The routeUrl property contains the full url used to call the API
      * On other hand, the route alias will be stored in the type property from the ProcessTrait. Storing the route alias this way can help you build
      * api stats call on top this trait/interface.
+     *
+     * @ORM\Column(type=Types::TEXT)
      */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $routeUrl = null;
 
+    /**
+     * @ORM\Column(nullable=true)
+     */
     #[ORM\Column(nullable: true)]
     private ?array $inputData = null;
 
+    /**
+     * @ORM\Column(type=Types::JSON, nullable=true)
+     */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private array|string|null $outputResponse = null;
 

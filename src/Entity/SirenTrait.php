@@ -8,6 +8,11 @@ use Smart\CoreBundle\Utils\RegexUtils;
 
 trait SirenTrait
 {
+    /**
+     * @ORM\Column(length=20, nullable=true)
+     * @Assert\Length(max=20)
+     * @Assert\Regex(pattern=RegexUtils::SIREN_PATTERN, message=RegexUtils::SIREN_MESSAGE)
+     */
     #[ORM\Column(length: 20, nullable: true)]
     #[Assert\Length(max: 20)]
     #[Assert\Regex(pattern: RegexUtils::SIREN_PATTERN, message: RegexUtils::SIREN_MESSAGE)]
