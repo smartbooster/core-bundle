@@ -198,7 +198,7 @@ trait ProcessTrait
         if ($this->logs == null) {
             $this->logs = [];
         }
-        array_unshift($this->logs, $log);
+        $this->logs[] = $log;
 
         return $this;
     }
