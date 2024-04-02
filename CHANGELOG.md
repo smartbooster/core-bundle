@@ -1,7 +1,16 @@
 CHANGELOG for 1.x
 ===================
+## v1.2.2 - (2024-04-02)
+### Added
+- Add mapping comment on EntityTrait to be compatible with doctrine annotations type
+- `ApiCallMonitor` to manage start/end ApiCallInterface
+- `ProcessInterface::addExceptionTraceData` function to store the exception trace
+
+### Fixed
+- `ProcessTrait::addLog` Switch adding log at the end instead of the beginning 
+
 ## v1.2.1 - (2024-03-27)
-### Fix
+### Fixed
 
 - `ArrayUtils::checkIssetKeys` : Modify method with not strict comparaison
 

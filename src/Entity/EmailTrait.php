@@ -7,6 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait EmailTrait
 {
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\Length(max=255)
+     * @Assert\Email
+     */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     #[Assert\Email]

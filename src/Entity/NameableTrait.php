@@ -7,6 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait NameableTrait
 {
+    /**
+     * @ORM\Column(length=255)
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank
+     */
     #[ORM\Column(length: 255)]
     #[Assert\Length(max: 255)]
     #[Assert\NotBlank]

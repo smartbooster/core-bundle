@@ -9,35 +9,63 @@ use Smart\CoreBundle\Utils\DateUtils;
 
 trait ProcessTrait
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @ORM\Column(length=50)
+     */
     #[ORM\Column(length: 50)]
     private ?string $type = null;
 
+    /**
+     * @ORM\Column(type=Types::DATETIME_MUTABLE)
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startedAt = null;
 
+    /**
+     * @ORM\Column(type=Types::DATETIME_MUTABLE, nullable=true)
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endedAt = null;
 
     /**
      * Duration in seconds between the start and end times
+     *
+     * @ORM\Column(nullable=true)
      */
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
+    /**
+     * @ORM\Column(length=15, enumType=ProcessStatusEnum::class)
+     */
     #[ORM\Column(length: 15, enumType: ProcessStatusEnum::class)]
     private ?ProcessStatusEnum $status = null;
 
+    /**
+     * @ORM\Column(type=Types::TEXT, nullable=true)
+     */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $summary = null;
 
+    /**
+     * @ORM\Column(nullable=true)
+     */
     #[ORM\Column(nullable: true)]
     private ?array $logs = null;
 
+    /**
+     * @ORM\Column(nullable=true)
+     */
     #[ORM\Column(nullable: true)]
     private ?array $data = null;
 
@@ -170,7 +198,7 @@ trait ProcessTrait
         if ($this->logs == null) {
             $this->logs = [];
         }
-        array_unshift($this->logs, $log);
+        $this->logs[] = $log;
 
         return $this;
     }
@@ -190,5 +218,13 @@ trait ProcessTrait
     public function addData(string $key, mixed $value): void
     {
         $this->data[$key] = $value;
+    }
+
+    /**
+     * Use this if you wish to store the exception trace on the internal data of the process
+     */
+    public function addExceptionTraceData(\Exception $e): void
+    {
+        $this->data['exception_trace'] = $e->getTrace();
     }
 }
