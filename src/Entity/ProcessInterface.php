@@ -30,6 +30,10 @@ interface ProcessInterface
 
     public function getDurationAsString(): ?string;
 
+    public function getDurationSeconds(): ?int;
+
+    public function getDurationSecondsAsString(): ?string;
+
     public function setDuration(?int $duration): static;
 
     public function getStatus(): ?ProcessStatusEnum;
