@@ -103,7 +103,13 @@ nelmio_security:
             script-src:
                 - 'self'
                 - 'unsafe-inline'
+                - 'unsafe-eval'
                 - 'https://maps.googleapis.com'
+                - 'https://use.fontawesome.com'
+                - 'https://www.google-analytics.com'
+                - 'https://www.youtube.com'
+                - 'https://www.youtube-nocookie.com'
+                - 'https://js.stripe.com'
             block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
 ```
 
