@@ -1318,11 +1318,35 @@ class DateUtilsTest extends TestCase
             '0 seconds' => ['0s', 0],
             '10 seconds' => ['10s', 10],
             '1 minutes' => ['1m', 60],
-            '1 minutes and 30 secondes' => ['1m 30s', 90],
+            '1 minutes and 30 seconds' => ['1m 30s', 90],
             '1 hours' => ['1h', 3600],
             '1 hours 15 minutes' => ['1h 15m', 4500],
-            '1 hours 1 minutes and 1 secondes' => ['1h 1m 1s', 3661],
+            '1 hours 1 minutes and 1 seconds' => ['1h 1m 1s', 3661],
             '3 hours' => ['3h', 10800],
+        ];
+    }
+
+    /**
+     * @dataProvider millisecondsToStringProvider
+     */
+    public function testMillisecondsToString(?string $expected, ?int $value): void
+    {
+        $this->assertEquals($expected, DateUtils::millisecondsToString($value));
+    }
+
+    public function millisecondsToStringProvider(): array
+    {
+        return [
+            'null value' => [null, null],
+            '0 milliseconds' => ['0ms', 0],
+            '12 milliseconds' => ['12ms', 12],
+            '123 milliseconds' => ['123ms', 123],
+            '1000 milliseconds to 1 second' => ['1s', 1000],
+            'exact seconds and no milliseconds' => ['7s', 7000],
+            'seconds and milliseconds' => ['26s 457ms', 26457],
+            '1 minute' => ['1m', 60000],
+            '1 minute and some milliseconds' => ['1m', 60123],
+            // all timing cases above falls into the testSecondsToString
         ];
     }
 }

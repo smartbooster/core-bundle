@@ -38,11 +38,11 @@ trait ProcessTrait
     private ?\DateTimeInterface $endedAt = null;
 
     /**
-     * Duration in seconds between the start and end times
+     * Duration in milliseconds between the start and end times
      *
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(nullable=true, options={"unsigned":true})
      */
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['unsigned' => true])]
     private ?int $duration = null;
 
     /**
@@ -132,7 +132,24 @@ trait ProcessTrait
 
     public function getDurationAsString(): ?string
     {
-        return DateUtils::secondsToString($this->duration);
+        return DateUtils::millisecondsToString($this->duration);
+    }
+
+    public function getDurationSeconds(): ?int
+    {
+        if ($this->getDuration() === null) {
+            return null;
+        }
+
+        return $this->getDuration() / 1000;
+    }
+
+    /**
+     * Variant to use for process where printing milliseconds doesn't matter
+     */
+    public function getDurationSecondsAsString(): ?string
+    {
+        return DateUtils::secondsToString($this->getDurationSeconds());
     }
 
     public function setDuration(?int $duration): static

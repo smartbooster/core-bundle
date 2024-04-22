@@ -580,4 +580,24 @@ class DateUtils
 
         return trim($toReturn);
     }
+
+    public static function millisecondsToString(?int $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+        $toReturn = self::secondsToString($value / 1000); // We reduce it to the seconds to benefit from secondsToString
+        if ($value > 60000) { // We act that printing the number of ms is only relevant if the $value is under a minute.
+            return $toReturn;
+        } elseif ($value < 1000) { // If inferior to 1 second we remove the '0s'
+            $toReturn = '';
+        }
+
+        $milliseconds = $value % 1000;
+        if ($toReturn === '' || $milliseconds !== 0) {
+            $toReturn .= " {$milliseconds}ms";
+        }
+
+        return trim($toReturn);
+    }
 }

@@ -1,5 +1,18 @@
 CHANGELOG for 1.x
 ===================
+## v1.2.4 - (2024-04-22)
+
+**The process duration value is now calculated in milliseconds instead of seconds.**  
+So update your databases values accordingly when updating to this version.  
+We added new function to the interface to get the value in seconds if you don't care about milliseconds.
+
+### Fixed
+- `ProcessMonitor::end` duration calculation in milliseconds instead of seconds.
+
+### Added
+- `ProcessInterface::getDurationSeconds` + `ProcessInterface::getDurationSecondsAsString` to still manage process duration in seconds.
+- `DateUtils::millisecondsToString` that adds up the number of milliseconds to the string, only if the value is less than a minute.
+
 ## v1.2.3 - (2024-04-18)
 ### Added
 - `StringUtils::upperAccentuatedCharacter` + tests
