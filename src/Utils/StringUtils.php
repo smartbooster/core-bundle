@@ -12,6 +12,9 @@ use function Symfony\Component\String\u;
  */
 class StringUtils
 {
+    public const LOWER_ACCENTUATED_CHARACTER = ['é', 'è', 'ê', 'ë', 'à', 'á', 'â', 'ï'];
+    public const UPPER_ACCENTUATED_CHARACTER = ['É', 'È', 'Ê', 'Ë', 'À', 'Á', 'Â', 'Ï'];
+
     /**
      * input : App\Entity\Folder\SomeEntityName
      * output : folder_some_entity_name
@@ -126,5 +129,61 @@ class StringUtils
         }
 
         return $result;
+    }
+
+    public static function upperAccentuatedCharacter(array|string|null $string): array|string
+    {
+        return str_replace(
+            self::LOWER_ACCENTUATED_CHARACTER,
+            self::UPPER_ACCENTUATED_CHARACTER,
+            $string
+        );
+    }
+
+    public static function lowerAccentuatedCharacter(array|string|null $string): array|string
+    {
+        return str_replace(
+            self::UPPER_ACCENTUATED_CHARACTER,
+            self::LOWER_ACCENTUATED_CHARACTER,
+            $string
+        );
+    }
+
+    public static function formatLastName(?string $string): string
+    {
+        if ($string === null) {
+            return '';
+        }
+
+        $toReturn = strtoupper($string);
+        // We use string into upperAccentuatedCharacter parameter, so the return will be string
+        return self::upperAccentuatedCharacter($toReturn); // @phpstan-ignore-line
+    }
+
+    public static function formatFirstName(?string $string): string
+    {
+        if ($string === null) {
+            return '';
+        }
+
+        if (in_array(substr($string, 0, 2), self::LOWER_ACCENTUATED_CHARACTER)) {
+            $firstLetter = self::upperAccentuatedCharacter(substr($string, 0, 2));
+            $endString = strtolower(substr(self::lowerAccentuatedCharacter($string), 2)); // @phpstan-ignore-line
+            $toReturn = $firstLetter . $endString; // @phpstan-ignore-line
+        } else {
+            $toReturn = ucfirst(strtolower(self::lowerAccentuatedCharacter($string))); // @phpstan-ignore-line
+        }
+
+        return $toReturn;
+    }
+
+    public static function formatSpaceBetween(?string $first, ?string $last): string
+    {
+        $space = '';
+        if (strlen($first) > 0 && strlen($last) > 0) {
+            $space = ' ';
+        }
+
+        return $first . $space . $last;
     }
 }

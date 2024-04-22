@@ -1,5 +1,13 @@
 CHANGELOG for 1.x
 ===================
+## v1.2.3 - (2024-04-18)
+### Added
+- `StringUtils::upperAccentuatedCharacter` + tests
+- `StringUtils::lowerAccentuatedCharacter` + tests
+- `StringUtils::formatLastName` + tests
+- `StringUtils::formatFirstName` + tests
+- `StringUtils::formatSpaceBetween` + tests
+
 ## v1.2.2 - (2024-04-02)
 ### Added
 - Add mapping comment on EntityTrait to be compatible with doctrine annotations type

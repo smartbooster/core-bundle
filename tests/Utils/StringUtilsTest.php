@@ -199,4 +199,121 @@ text",
             'past double alphabetical' => ['BA', 53],
         ];
     }
+
+    /**
+     * @dataProvider getLastNameProvider
+     * @param string|null $expected
+     * @param string|null $values
+     */
+    public function testFormatLastName($expected, $values): void
+    {
+        $this->assertSame($expected, StringUtils::formatLastName($values));
+    }
+
+    /**
+     * @return array
+     */
+    public function getLastNameProvider(): array
+    {
+        return [
+            'null' => [
+                '',
+                null
+            ],
+            'simple_upper' => [
+                // expected
+                "DUCROT",
+                // values
+                "ducrot"
+            ],
+            'accentuated_character' => [
+                "ÉÈÊËÀÁÂÏ",
+                "éèêëàáâï"
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getFirstNameProvider
+     * @param string|null $expected
+     * @param string|null $values
+     */
+    public function testFormatFirstName($expected, $values): void
+    {
+        $this->assertSame($expected, StringUtils::formatFirstName($values));
+    }
+
+    /**
+     * @return array
+     */
+    public function getFirstNameProvider()
+    {
+        return [
+            'null' => [
+                // expected
+                '',
+                // values
+                null
+            ],
+            'simple_ucfirst' => [
+                // expected
+                "Mathieu",
+                // values
+                "mathieu"
+            ],
+            'ensure_ucfirst' => [
+                // expected
+                "Mathieu",
+                // values
+                "mathIEU"
+            ],
+            'accentuated_character_first_only' => [
+                "Àmoré",
+                "àmorÉ"
+            ],
+            'accentuated_character_end' => [
+                "Jérémy",
+                "jérémy"
+            ],
+            'ensure_lower_end' => [
+                "Jérémy",
+                "jérÉMY"
+            ],
+        ];
+    }
+
+
+    /**
+     * @dataProvider formatSpaceBetweenProvider
+     */
+    public function testFormatSpaceBetween(string $expected, ?string $first, ?string $last): void
+    {
+        $this->assertSame($expected, StringUtils::formatSpaceBetween($first, $last));
+    }
+
+    public function formatSpaceBetweenProvider(): array
+    {
+        return [
+            'simple' => [
+                'first last',
+                "first",
+                "last"
+            ],
+            'first_null' => [
+                'last',
+                null,
+                "last"
+            ],
+            'last_null' => [
+                'first',
+                'first',
+                null
+            ],
+            'both_null' => [
+                '',
+                null,
+                null
+            ]
+        ];
+    }
 }
