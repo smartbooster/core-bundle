@@ -15,16 +15,27 @@ class ProcessMonitor
     {
     }
 
-    public function start(ProcessInterface $process): ProcessInterface
+    /**
+     * If your process is long or asynchrone you might want to flush it on start, if so pass true to the $flush param
+     */
+    public function start(ProcessInterface $process, bool $flush = false): ProcessInterface
     {
         $process->setStartedAt(new \DateTime());
         $process->setStatus(ProcessStatusEnum::ONGOING);
+        if ($flush) {
+            $this->entityManager->persist($process);
+            $this->entityManager->flush();
+        }
 
         return $process;
     }
 
-    public function end(ProcessInterface $process, bool $isSuccess = true, bool $flush = true): void
+    public function end(?ProcessInterface $process, bool $isSuccess = true, bool $flush = true): void
     {
+        if ($process == null) {
+            return;
+        }
+
         $endedAt = new \DateTime();
         $process->setEndedAt($endedAt);
         $process->setDuration((int) $endedAt->format('Uv') - (int) $process->getStartedAt()->format('Uv'));
