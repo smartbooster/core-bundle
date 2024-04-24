@@ -5,12 +5,16 @@ namespace Smart\CoreBundle\Monitoring;
 use Doctrine\ORM\EntityManagerInterface;
 use Smart\CoreBundle\Entity\ProcessInterface;
 use Smart\CoreBundle\Enum\ProcessStatusEnum;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 class ProcessMonitor
 {
+    protected ?ProcessInterface $process = null;
+    protected ?SymfonyStyle $consoleIo = null;
+
     public function __construct(private readonly EntityManagerInterface $entityManager)
     {
     }
@@ -26,6 +30,7 @@ class ProcessMonitor
             $this->entityManager->persist($process);
             $this->entityManager->flush();
         }
+        $this->process = $process;
 
         return $process;
     }
@@ -49,5 +54,52 @@ class ProcessMonitor
         if ($flush) {
             $this->entityManager->flush();
         }
+    }
+
+    public function log(string $message): void
+    {
+        $this->process?->addLog($message);
+        $this->consoleIo?->writeln($message);
+    }
+
+    public function logSection(string $message): void
+    {
+        $this->process?->addLog('--- ' . $message);
+        $this->consoleIo?->section($message);
+    }
+
+    public function logWarning(string $message): void
+    {
+        $this->process?->addLog('/!\\ ' . $message);
+        $this->consoleIo?->warning($message);
+    }
+
+    public function logSuccess(string $message): void
+    {
+        $this->process?->setSummary($message);
+        $this->consoleIo?->success($message);
+    }
+
+    public function logException(\Exception $e): void
+    {
+        $message = $e->getMessage();
+        $this->process?->setSummary($message);
+        $this->process?->addExceptionTraceData($e);
+        $this->consoleIo?->error($message);
+    }
+
+    public function processAddData(string $key, mixed $value): void
+    {
+        $this->process?->addData($key, $value);
+    }
+
+    public function getProcess(): ?ProcessInterface
+    {
+        return $this->process;
+    }
+
+    public function setConsoleIo(?SymfonyStyle $consoleIo): void
+    {
+        $this->consoleIo = $consoleIo;
     }
 }
