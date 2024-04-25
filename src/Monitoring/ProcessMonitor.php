@@ -84,7 +84,7 @@ class ProcessMonitor
     {
         $message = $e->getMessage();
         $this->process?->setSummary($message);
-        $this->process?->addExceptionTraceData($e);
+        // $this->process?->addExceptionTraceData($e); cause memomry limit issue on clever, try to catch the exception with sentry instead
         $this->consoleIo?->error($message);
     }
 
