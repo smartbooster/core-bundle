@@ -1,5 +1,14 @@
 CHANGELOG for 1.x
 ===================
+## v1.3.0 - (2024-04-29)
+### Added
+- `ISO8601Formatter` for common date formatting
+- `ProcessMonitor` Add functions to manage process log and print them out to the console
+
+### Changed
+- `ProcessMonitor::start` Add boolean flush param to better manage when the process should be flushed
+- `ProcessMonitor::end` Handle passing process param as null 
+
 ## v1.2.4 - (2024-04-22)
 
 **The process duration value is now calculated in milliseconds instead of seconds.**  
