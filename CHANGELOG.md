@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.3.1 - (2024-04-30)
+### Added
+- `DateUtils::addWorkingDays` to calculate a date based on working days
+
 ## v1.3.0 - (2024-04-29)
 ### Added
 - `ISO8601Formatter` for common date formatting

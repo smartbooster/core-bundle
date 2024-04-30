@@ -517,6 +517,14 @@ class DateUtils
         return $clonedDateTime;
     }
 
+    public static function addWorkingDays(\DateTime $dateTime, int $daysNb): \DateTime
+    {
+        $clonedDateTime = clone $dateTime;
+        $clonedDateTime->modify("+$daysNb Weekday");
+
+        return $clonedDateTime;
+    }
+
     public static function subDays(\DateTime $dateTime, int $daysNb): \DateTime
     {
         $clonedDateTime = clone $dateTime;
