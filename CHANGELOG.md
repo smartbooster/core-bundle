@@ -1,5 +1,8 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.0 - (2024-05-06)
+- `PhpFormatter` common date formatting to use on DateTime::format https://www.php.net/manual/en/datetime.format.php
+
 ## v1.3.0 - (2024-04-29)
 ### Added
 - `ISO8601Formatter` for common date formatting
