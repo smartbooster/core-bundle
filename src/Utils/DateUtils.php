@@ -586,7 +586,7 @@ class DateUtils
         if ($value === null) {
             return null;
         }
-        $toReturn = self::secondsToString($value / 1000); // We reduce it to the seconds to benefit from secondsToString
+        $toReturn = self::secondsToString((int) ($value / 1000)); // We reduce it to the seconds to benefit from secondsToString
         if ($value > 60000) { // We act that printing the number of ms is only relevant if the $value is under a minute.
             return $toReturn;
         } elseif ($value < 1000) { // If inferior to 1 second we remove the '0s'
