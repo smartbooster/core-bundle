@@ -1,6 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.1 - (2024-05-29)
+### Fixed
+- `DateUtils::millisecondsToString` int type cast when calling **secondsToString** to fix the deprecated: Implicit conversion from float
+
 ## v1.4.0 - (2024-05-06)
+### Added
 - `PhpFormatter` common date formatting to use on DateTime::format https://www.php.net/manual/en/datetime.format.php
 
 ## v1.3.0 - (2024-04-29)
