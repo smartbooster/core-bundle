@@ -3,8 +3,8 @@
 namespace Smart\CoreBundle\Monitoring;
 
 use Smart\CoreBundle\Entity\ApiCallInterface;
-use Smart\CoreBundle\Entity\ProcessInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -15,9 +15,9 @@ class ApiCallMonitor
     {
     }
 
-    public function start(ApiCallInterface $apiCall, Request $request): ApiCallInterface
+    public function start(ApiCallInterface $apiCall, Request $request, bool $flush = false): ApiCallInterface
     {
-        $this->processMonitor->start($apiCall);
+        $this->processMonitor->start($apiCall, $flush);
         $apiCall->setMethod($request->getMethod());
         $apiCall->setRouteUrl($request->getUri());
         $apiCall->setType($request->attributes->get('_route'));
@@ -29,6 +29,11 @@ class ApiCallMonitor
     public function end(ApiCallInterface $apiCall, int $statusCode, bool $flush = true): void
     {
         $apiCall->setStatusCode($statusCode);
-        $this->processMonitor->end($apiCall, $statusCode >= 200 && $statusCode < 300, $flush);
+        $this->processMonitor->end($apiCall, $statusCode >= Response::HTTP_CONTINUE && $statusCode < Response::HTTP_BAD_REQUEST, $flush);
+    }
+
+    public function getProcessMonitor(): ProcessMonitor
+    {
+        return $this->processMonitor;
     }
 }
