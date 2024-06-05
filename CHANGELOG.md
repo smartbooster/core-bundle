@@ -1,5 +1,13 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.2 - (2024-06-05)
+### Added
+- `ApiCallMonitor::getProcessMonitor` getter to access the ProcessMonitor instance through it
+
+### Changed
+- `ApiCallMonitor::start` add **$flush** param to match `ProcessMonitor::start` definition
+- `ApiCallMonitor::end` use Symfony Response const instead of hard coded value for the isSuccess check, also expand the range to >= 100 and < 400
+
 ## v1.4.1 - (2024-05-29)
 ### Fixed
 - `DateUtils::millisecondsToString` int type cast when calling **secondsToString** to fix the deprecated: Implicit conversion from float
