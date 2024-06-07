@@ -44,10 +44,30 @@ trait ApiCallTrait
     private ?array $inputData = null;
 
     /**
+     * This contains the raw request content in case we receive a malformed JSON
+     *
+     * @ORM\Column(type=Types::TEXT, nullable=true)
+     */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $rawContent = null;
+
+    /**
      * @ORM\Column(type=Types::JSON, nullable=true)
      */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private array|string|null $outputResponse = null;
+
+    /**
+     * @ORM\Column(type=Types::JSON, nullable=true)
+     */
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $headers = null;
+
+    /**
+     * @ORM\Column(length=30, nullable=true)
+     */
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $contentTypeFormat = null;
 
     public function __toString(): string
     {
@@ -119,6 +139,11 @@ trait ApiCallTrait
         return $this;
     }
 
+    public function hasInputData(): bool
+    {
+        return $this->getInputData() !== null;
+    }
+
     public function getOutputResponse(): array|string|null
     {
         return $this->outputResponse;
@@ -129,5 +154,40 @@ trait ApiCallTrait
         $this->outputResponse = $outputResponse;
 
         return $this;
+    }
+
+    public function getHeaders(): ?array
+    {
+        return $this->headers;
+    }
+
+    public function setHeaders(?array $headers): void
+    {
+        $this->headers = $headers;
+    }
+
+    public function getRawContent(): ?string
+    {
+        return $this->rawContent;
+    }
+
+    public function setRawContent(?string $rawContent): void
+    {
+        $this->rawContent = $rawContent;
+    }
+
+    public function getContentTypeFormat(): ?string
+    {
+        return $this->contentTypeFormat;
+    }
+
+    public function setContentTypeFormat(?string $contentTypeFormat): void
+    {
+        $this->contentTypeFormat = $contentTypeFormat;
+    }
+
+    public function isJson(): bool
+    {
+        return $this->getContentTypeFormat() === 'json';
     }
 }

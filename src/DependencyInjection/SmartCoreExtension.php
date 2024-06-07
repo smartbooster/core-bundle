@@ -2,6 +2,7 @@
 
 namespace Smart\CoreBundle\DependencyInjection;
 
+use Smart\CoreBundle\Monitoring\ApiCallMonitor;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,5 +17,9 @@ class SmartCoreExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.yaml');
+
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $apiCallMonitor = $container->getDefinition(ApiCallMonitor::class);
+        $apiCallMonitor->addMethodCall('setRestartAllowedRoutes', [$config['monitoring_api_restart_allowed_routes']]);
     }
 }

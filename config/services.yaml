@@ -18,6 +18,7 @@ services:
     Smart\CoreBundle\Monitoring\ApiCallMonitor:
         arguments:
             - '@Smart\CoreBundle\Monitoring\ProcessMonitor'
+            - '@Symfony\Contracts\HttpClient\HttpClientInterface'
     Smart\CoreBundle\Monitoring\ProcessMonitor:
         arguments:
             - '@Doctrine\ORM\EntityManagerInterface'

@@ -56,6 +56,12 @@ class ProcessMonitor
         }
     }
 
+    public function restart(ProcessInterface $process): void
+    {
+        $process->setRestartedAt(new \DateTime());
+        $this->entityManager->flush();
+    }
+
     public function log(string $message): void
     {
         $this->process?->addLog($message);
