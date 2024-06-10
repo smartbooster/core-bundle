@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.5.0 - (2024-06-10)
+### Added
+- `ProcessTrait::restartedAt` Used to know when we wanted to retry this process (creating a new dedicated process based on this one)
+- `ApiCallTrait` add missing properties **rawContent**, **headers** and **contentTypeFormat** to be able to redo the api call with every orginal data 
+- `ApiCallMonitor::restart` Method to recall an already monitor api call
+- `smart_core` config to handle which API route is allowed to be restarted by the `ApiCallMonitor`
+
 ## v1.4.2 - (2024-06-05)
 ### Added
 - `ApiCallMonitor::getProcessMonitor` getter to access the ProcessMonitor instance through it

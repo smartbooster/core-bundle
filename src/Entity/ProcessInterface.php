@@ -59,4 +59,10 @@ interface ProcessInterface
     public function addData(string $key, mixed $value): void;
 
     public function addExceptionTraceData(\Exception $e): void;
+
+    public function canRestart(): bool;
+
+    public function getRestartedAt(): ?\DateTime;
+
+    public function setRestartedAt(?\DateTime $restartedAt): void;
 }

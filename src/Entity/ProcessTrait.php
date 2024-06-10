@@ -69,6 +69,14 @@ trait ProcessTrait
     #[ORM\Column(nullable: true)]
     private ?array $data = null;
 
+    /**
+     * Used to know when we wanted to retry this process (creating a new dedicated process based on this one)
+     *
+     * @ORM\Column(type=Types::DATETIME_MUTABLE, nullable=true)
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTime $restartedAt = null;
+
     public function isOngoing(): bool
     {
         return $this->getStatus() === ProcessStatusEnum::ONGOING;
@@ -82,6 +90,11 @@ trait ProcessTrait
     public function isError(): bool
     {
         return $this->getStatus() === ProcessStatusEnum::ERROR;
+    }
+
+    public function canRestart(): bool
+    {
+        return $this->isError() and $this->getRestartedAt() === null;
     }
 
     public function getId(): ?int
@@ -243,5 +256,15 @@ trait ProcessTrait
     public function addExceptionTraceData(\Exception $e): void
     {
         $this->data['exception_trace'] = $e->getTrace();
+    }
+
+    public function getRestartedAt(): ?\DateTime
+    {
+        return $this->restartedAt;
+    }
+
+    public function setRestartedAt(?\DateTime $restartedAt): void
+    {
+        $this->restartedAt = $restartedAt;
     }
 }
