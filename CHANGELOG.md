@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.6.0 - (2024-06-12)
+### Added
+- `MarkdownUtils` to help formatting markdown content before being render as html
+
 ## v1.5.0 - (2024-06-10)
 ### Added
 - `ProcessTrait::restartedAt` Used to know when we wanted to retry this process (creating a new dedicated process based on this one)
