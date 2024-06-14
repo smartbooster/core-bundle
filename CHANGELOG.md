@@ -1,5 +1,10 @@
 CHANGELOG for 1.x
 ===================
+## v1.7.0 - (2024-06-14)
+### Added
+- `MonitoringApiControllerTrait` used to centralize ApiCall manipulation during api monitoring
+- `ApiCallMonitor::logException` simplify logging exception for `ApiCall` using the `ProcessMonitor`
+
 ## v1.6.0 - (2024-06-12)
 ### Added
 - `MarkdownUtils` to help formatting markdown content before being render as html
