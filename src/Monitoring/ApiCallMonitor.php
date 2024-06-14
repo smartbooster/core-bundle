@@ -77,6 +77,11 @@ class ApiCallMonitor
         return $response;
     }
 
+    public function logException(\Exception $e): void
+    {
+        $this->getProcessMonitor()->logException($e);
+    }
+
     public function getProcessMonitor(): ProcessMonitor
     {
         return $this->processMonitor;
