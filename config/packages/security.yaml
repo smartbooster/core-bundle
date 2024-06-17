@@ -1,0 +1,5 @@
+# Nécéssaire pour faire marcher le make cc sinon les dépendances aux services security ne sont pas chargés
+security:
+  firewalls:
+    dev:
+      security: false

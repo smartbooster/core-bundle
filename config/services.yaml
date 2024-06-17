@@ -1,4 +1,7 @@
 services:
+    # Alice
+    # Service Fidry\AliceDataFixtures\Loader\PurgerLoader not exist, and it must be aliased. AbstractFixtures need it.
+    Fidry\AliceDataFixtures\Loader\PurgerLoader: '@fidry_alice_data_fixtures.doctrine.purger_loader'
     # Command
     Smart\CoreBundle\Command\CommandPoolHelper:
         arguments:
@@ -14,6 +17,25 @@ services:
             -   setContainer: [ '@service_container' ]
             -   setEntityManager: [ '@Doctrine\ORM\EntityManagerInterface' ]
         tags: [ 'controller.service_arguments' ]
+    # EventListener
+    Smart\CoreBundle\EventListener\HistoryDoctrineListener:
+        arguments:
+            - '@Smart\CoreBundle\Logger\HistoryLogger'
+        tags:
+            - {name: doctrine.event_listener, event: prePersist, priority: 500}
+            - {name: doctrine.event_listener, event: preUpdate, priority: 500}
+    Smart\CoreBundle\EventListener\HistoryLoggerListener:
+        arguments:
+            - '@request_stack'
+            - '@security.token_storage'
+            - '@Smart\CoreBundle\Logger\HistoryLogger'
+            - '%env(DOMAIN)%'
+        tags:
+            - {name: kernel.event_subscriber}
+    # Logger
+    Smart\CoreBundle\Logger\HistoryLogger:
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
     # Monitoring
     Smart\CoreBundle\Monitoring\ApiCallMonitor:
         arguments:
@@ -28,6 +50,3 @@ services:
             - { name: routing.loader }
     # Sentry
     Smart\CoreBundle\Sentry\SentryCallback:
-    # Alice
-    # Service Fidry\AliceDataFixtures\Loader\PurgerLoader not exist, and it must be aliased. AbstractFixtures need it.
-    Fidry\AliceDataFixtures\Loader\PurgerLoader: '@fidry_alice_data_fixtures.doctrine.purger_loader'
