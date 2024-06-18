@@ -15,10 +15,11 @@ trait MonitoringApiControllerTrait
     protected ApiCallMonitor $apiCallMonitor;
     protected ?ApiCallInterface $apiCall = null;
 
-    protected function startApiCall(Request $request, string $origin): void
+    protected function startApiCall(Request $request, string $origin, bool $flush = false): void
     {
-        $this->apiCall = $this->apiCallMonitor->start(new ApiCall(), $request);
+        $this->apiCall = new ApiCall();
         $this->apiCall->setOrigin($origin);
+        $this->apiCall = $this->apiCallMonitor->start($this->apiCall, $request, $flush);
     }
 
     protected function endApiCall(mixed $outputResponse = null, int $statusCode = Response::HTTP_OK, ?\Exception $e = null): void

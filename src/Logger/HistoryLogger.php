@@ -38,6 +38,8 @@ class HistoryLogger
     public const STATUS_CODE_PROPERTY = 'status_code'; // Possible de définir un status code pour les appels API
     public const INTERNAL_PROPERTY = 'internal'; // Flag pour identifier les lignes internes
     public const SUCCESS_PROPERTY = 'success'; // Flag pour identifier les lignes d'update de status qui marque un succès
+    public const CRON_ID_PROPERTY = 'cron_id'; // ID du monitoring cron lié à l'ajout de l'historique
+    public const API_ID_PROPERTY = 'api_id'; // ID du monitoring ApiCall lié à l'ajout de l'historique
 
     protected EntityManagerInterface $entityManager;
     private ?string $context = null;

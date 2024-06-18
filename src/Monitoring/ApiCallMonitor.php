@@ -22,7 +22,6 @@ class ApiCallMonitor
 
     public function start(ApiCallInterface $apiCall, Request $request, bool $flush = false): ApiCallInterface
     {
-        $this->processMonitor->start($apiCall, $flush);
         $apiCall->setMethod($request->getMethod());
         $apiCall->setRouteUrl($request->getUri());
         $apiCall->setType($request->attributes->get('_route'));
@@ -41,6 +40,9 @@ class ApiCallMonitor
         }
 
         $apiCall->setHeaders($request->headers->all());
+
+        // MDT We start the process after parsing the request to ensure all ApiCall properties that are non-nullable are set
+        $this->processMonitor->start($apiCall, $flush);
 
         return $apiCall;
     }

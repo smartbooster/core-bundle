@@ -18,7 +18,7 @@ trait ApiCallTrait
     /**
      * @ORM\Column
      */
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $statusCode = null;
 
     /**
@@ -96,7 +96,7 @@ trait ApiCallTrait
         return $this->statusCode;
     }
 
-    public function setStatusCode(int $statusCode): static
+    public function setStatusCode(?int $statusCode): static
     {
         $this->statusCode = $statusCode;
 
