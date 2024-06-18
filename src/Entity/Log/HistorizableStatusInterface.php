@@ -3,7 +3,7 @@
 namespace Smart\CoreBundle\Entity\Log;
 
 /**
- * Permet d'avoir un affichage spécifique sur les transitions de status dans l'historique
+ * Allows you to have a dedicated display of status transitions in the history rows from the sonata show_history_field.html.twig template
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 interface HistorizableStatusInterface

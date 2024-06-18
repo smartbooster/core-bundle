@@ -13,7 +13,7 @@ class RequestUtils
             return 'app';
         }
 
-        // MDT fallback au cas où il n'y a pas de sous domaine et que l'host est différent du domaine
+        // MDT fallback in case there is no subdomain and the host is different from the domain
         $toReturn = 'app';
         if (
             str_starts_with($host, 'app.') ||

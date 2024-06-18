@@ -21,8 +21,8 @@ class HistoryDoctrineListener
     {
     }
 
-    // @param typé avec LifecycleEventArgs sinon le load des fixtures ne fonctionne pas
-    // devrait pouvoir passer à Doctrine\ORM\Event\PrePersistEventArgs après update de doctrine/orm 2.14
+    // @param typed with LifecycleEventArgs or else the fixture loading won't work
+    // Should work with Doctrine\ORM\Event\PrePersistEventArgs after doctrine/orm 2.14 update
     public function prePersist(LifecycleEventArgs $args): void
     {
         $this->handleHistory($args, $this->prePersistCode);
@@ -45,7 +45,7 @@ class HistoryDoctrineListener
             /** @var PreUpdateEventArgs $args */
             $entityData = $args->getEntityChangeSet();
 
-            // Si update avec uniquement history on skip pour ne pas créer de doublon d'history (cas email)
+            // If update with only the history field, we skip the field to avoid duplicate history (email case)
             if (count($entityData) === 1 && isset($entityData['history'])) {
                 return;
             }
@@ -79,19 +79,19 @@ class HistoryDoctrineListener
                 $historyData[HistoryLogger::STATUS_PROPERTY] = $statusDiff;
             }
 
-            // MDT diff des collections ManyToMany, actuellement pas possible d'avoir l'état de la collection avant preUpdate
+            // MDT diff of ManyToMany collections, currently not possible to have the state of the collection before preUpdate
             $uow = $args->getObjectManager()->getUnitOfWork();
             $entityClass = get_class($entity);
             foreach ($uow->getScheduledCollectionUpdates() as $collection) {
                 if ($entityClass !== get_class($collection->getOwner())) {
                     continue;
                 }
-                // MDT c_u clé raccourci pour collection_update
+                // MDT the 'c_u' string is a shortcut index key meaning collection_update
                 $entityData[$collection->getMapping()['fieldName']]['c_u'] = $collection->map(function ($item) {
                     return $this->serializeDiffValue($item);
                 })->toArray();
             }
-            // MDT l'event preUpdate n'est pas trigger si la seul modif de l'event concerne la suppression de collection
+            // MDT the preUpdate event is not triggered if the only modification of the event concerns the deletion of the collection
             // cf. https://github.com/doctrine/orm/issues/9960
             foreach ($uow->getScheduledCollectionDeletions() as $collection) {
                 $entityData[$collection->getMapping()['fieldName']] = 'label.empty';
@@ -112,7 +112,7 @@ class HistoryDoctrineListener
             $historyData = array_merge($historyData, $this->historyExtraData);
         }
 
-        // Pas besoin de setFlushLog car il a déjà lieu après l'event doctrine prePersist/preUpdate
+        // No need for setFlushLog because it already takes place after the prePersist/preUpdate event doctrine
         $this->historyLogger->log($entity, $code, $historyData);
     }
 

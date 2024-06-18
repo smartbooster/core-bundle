@@ -1,4 +1,4 @@
-# Nécéssaire pour faire marcher le make cc sinon les dépendances aux services security ne sont pas chargés
+# Required to run make cc on GitHub CI otherwise dependencies on security services are not loaded
 security:
   firewalls:
     dev:

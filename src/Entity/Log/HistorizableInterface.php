@@ -16,7 +16,7 @@ interface HistorizableInterface
     public function addHistory(array $history): self;
 
     /**
-     * Permet d'activer ou non l'historique sur les events doctrine prePersist/preUpdate pour les diffs
+     * Allows you to activate or not the history on prePersist/preUpdate doctrine events for diffs
      */
     public function isDoctrineListenerEnable(): bool;
 }

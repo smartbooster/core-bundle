@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Controller to init internal variables of the HistoryLogger
+ * Listener to init internal variables of the HistoryLogger
  *
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
