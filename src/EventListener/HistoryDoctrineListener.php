@@ -103,6 +103,11 @@ class HistoryDoctrineListener
             unset($historyData[HistoryLogger::DIFF_PROPERTY]['archivedAt']);
         }
 
+        // If the $entityData is empty after parsing ChangeSet we remove the index to lower history data storage in the database
+        if (empty($historyData[HistoryLogger::DIFF_PROPERTY])) {
+            unset($historyData[HistoryLogger::DIFF_PROPERTY]);
+        }
+
         if ($this->historyExtraData !== null) {
             $historyData = array_merge($historyData, $this->historyExtraData);
         }

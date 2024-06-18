@@ -5,7 +5,6 @@ namespace Smart\CoreBundle\EventListener;
 use Smart\CoreBundle\Entity\User\UserProfileInterface;
 use Smart\CoreBundle\Logger\HistoryLogger;
 use Smart\CoreBundle\Utils\RequestUtils;
-use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;

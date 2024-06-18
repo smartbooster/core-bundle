@@ -1,5 +1,16 @@
 CHANGELOG for 1.x
 ===================
+## v1.8.0 - (2024-06-18)
+
+**Add Entity json History feature**
+
+### Added
+- `HistoryInterface`(s) and trait to add json history on entity
+- `UserProfileInterface` to add on User entity that can be mentioned on history rows
+- `MailableInterface` to identify entities which have email sending feature
+- `HistoryLogger` and dedicated listeners to call him when doctrine detect changes during **prePersist** and **preUpdate**  
+- `RequestUtils` to ease domain context detection  
+
 ## v1.7.0 - (2024-06-14)
 ### Added
 - `MonitoringApiControllerTrait` used to centralize ApiCall manipulation during api monitoring
