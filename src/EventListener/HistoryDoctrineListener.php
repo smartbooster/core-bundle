@@ -6,6 +6,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Smart\CoreBundle\Entity\Log\HistorizableInterface;
 use Smart\CoreBundle\Entity\Log\HistorizableStatusInterface;
+use Smart\CoreBundle\Formatter\PhpFormatter;
 use Smart\CoreBundle\Logger\HistoryLogger;
 
 /**
@@ -119,11 +120,11 @@ class HistoryDoctrineListener
     private function serializeDiffValue(mixed $value): mixed
     {
         if ($value instanceof \DateTimeInterface) {
-            if ($value->format('d/m/Y') === '01/01/1970') {
+            if ($value->format(PhpFormatter::DATE_FR) === '01/01/1970') {
                 return $value->format('H\hi');
             }
 
-            return $value->format('Y-m-d\TH:i:sP');
+            return $value->format(\DateTimeInterface::ATOM);
         } elseif ($value instanceof \Stringable) {
             return (string) $value;
         }

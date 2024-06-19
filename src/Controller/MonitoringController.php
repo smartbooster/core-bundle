@@ -4,6 +4,7 @@ namespace Smart\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Smart\CoreBundle\Config\IniOverrideConfig;
+use Smart\CoreBundle\Formatter\PhpFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ class MonitoringController extends AbstractController
      */
     public function dateFormatting(): Response
     {
-        $format = 'd/m/Y H:i:s';
+        $format = PhpFormatter::DATETIME_WITH_SECONDS_FR;
         $datetime = new \DateTime();
         $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::SHORT, \IntlDateFormatter::LONG);
 
