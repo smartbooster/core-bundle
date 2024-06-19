@@ -46,11 +46,28 @@ class HistoryLogger
     private ?string $origin = null;
     private ?string $user = null;
     private ?string $userProfile = null;
+    private ?string $title = null;
+    private ?string $comment = null;
+    private ?string $description = null;
+    private ?bool $internal = null;
+    private ?bool $success = null;
+    private ?int $cronId = null;
+    private ?int $apiId = null;
     protected bool $flushLog = false;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * MDT if you need to flush the log, be sure to call it before calling the log method
+     */
+    public function setFlushLog(bool $flushLog): static
+    {
+        $this->flushLog = $flushLog;
+
+        return $this;
     }
 
     /**
@@ -79,20 +96,26 @@ class HistoryLogger
     public function log(HistorizableInterface $entity, ?string $code = null, array $data = []): void
     {
         $history = array_merge([self::DATE_PROPERTY => time()], $data);
-        if ($code !== null) {
-            $history[self::CODE_PROPERTY] = $code;
-        }
-        if ($this->context !== null) {
-            $history[self::CONTEXT_PROPERTY] = $this->context;
-        }
-        if ($this->origin !== null) {
-            $history[self::ORIGIN_PROPERTY] = $this->origin;
-        }
-        if ($this->user !== null) {
-            $history[self::USER_PROPERTY] = $this->user;
-        }
-        if ($this->userProfile !== null) {
-            $history[self::USER_PROFILE_PROPERTY] = $this->userProfile;
+        foreach (
+            [
+                self::CODE_PROPERTY => $code,
+                // MDT check if possible refacto based on dynamic constante/properties
+                self::CONTEXT_PROPERTY => $this->context,
+                self::ORIGIN_PROPERTY => $this->origin,
+                self::USER_PROPERTY => $this->user,
+                self::USER_PROFILE_PROPERTY => $this->userProfile,
+                self::TITLE_PROPERTY => $this->title,
+                self::COMMENT_PROPERTY => $this->comment,
+                self::DESCRIPTION_PROPERTY => $this->description,
+                self::INTERNAL_PROPERTY => $this->internal,
+                self::SUCCESS_PROPERTY => $this->success,
+                self::CRON_ID_PROPERTY => $this->cronId,
+                self::API_ID_PROPERTY => $this->apiId,
+            ] as $key => $value
+        ) {
+            if ($value !== null) {
+                $history[$key] = $value;
+            }
         }
 
         $entity->addHistory($history);
@@ -102,29 +125,81 @@ class HistoryLogger
         }
     }
 
-    public function setContext(string $context): void
+    public function setContext(string $context): static
     {
         $this->context = $context;
+
+        return $this;
     }
 
-    public function setOrigin(?string $origin): void
+    public function setOrigin(?string $origin): static
     {
         $this->origin = $origin;
+
+        return $this;
     }
 
-    public function setUser(?string $user): void
+    public function setUser(?string $user): static
     {
         $this->user = $user;
+
+        return $this;
     }
 
-    public function setUserProfile(?string $userProfile): void
+    public function setUserProfile(?string $userProfile): static
     {
         $this->userProfile = $userProfile;
+
+        return $this;
     }
 
-    public function setFlushLog(bool $flushLog): void
+    public function setTitle(?string $title): static
     {
-        $this->flushLog = $flushLog;
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function setInternal(?bool $internal): static
+    {
+        $this->internal = $internal;
+
+        return $this;
+    }
+
+    public function setSuccess(?bool $success): static
+    {
+        $this->success = $success;
+
+        return $this;
+    }
+
+    public function setCronId(?int $cronId): static
+    {
+        $this->cronId = $cronId;
+
+        return $this;
+    }
+
+    public function setApiId(?int $apiId): static
+    {
+        $this->apiId = $apiId;
+
+        return $this;
     }
 
     public function getEntityManager(): EntityManagerInterface
