@@ -44,14 +44,14 @@ class HistoryLoggerListener implements EventSubscriberInterface
 
         // Set the origin based on the action controller
         if (is_array($event->getController())) {
-            /** @var string $controllerClass */
-            $controllerClass = get_class($event->getController()[0]);
+            $controller = $event->getController()[0];
             $controllerAction = $event->getController()[1];
         } else {
-            $controllerClass = null;
+            $controller = null;
             $controllerAction = null;
         }
-        $isCrudController = str_ends_with($controllerClass, '\CRUDController');
+        $isCrudController = is_a($controller, '\Sonata\AdminBundle\Controller\CRUDController');
+
         if ($isCrudController && $controllerAction === 'createAction') {
             $this->historyLogger->setOrigin('h.crt_f');
         } elseif ($isCrudController && $controllerAction === 'editAction') {
@@ -60,7 +60,7 @@ class HistoryLoggerListener implements EventSubscriberInterface
             $this->historyLogger->setOrigin('h.imp_f');
         } elseif ($isCrudController && $controllerAction === 'archiveAction') {
             $this->historyLogger->setOrigin('h.arc_a');
-        } elseif ($controllerClass !== null && str_ends_with($controllerClass, '\SecurityController') && $controllerAction === 'profile') {
+        } elseif ($controller !== null && str_ends_with((string) get_class($controller), '\SecurityController') && $controllerAction === 'profile') {
             $this->historyLogger->setOrigin('h.prf_f');
         }
 
