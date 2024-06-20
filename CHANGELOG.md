@@ -3,6 +3,7 @@ CHANGELOG for 1.x
 ## v1.7.1 - (2024-06-20)
 ### Added
 - `ArrayUtils::hasDuplicateValue` + tests
+- `StringUtils::fillPrefix` Fill a prefix to value until specified length + tests
 
 ## v1.7.0 - (2024-06-14)
 ### Added
