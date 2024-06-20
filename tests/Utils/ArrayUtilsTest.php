@@ -576,4 +576,34 @@ name', "value" => 2],
             ],
         ];
     }
+
+    /**
+     * @dataProvider hasDuplicateProvider
+     */
+    public function testHasDuplicateValue(bool $expected, array $array): void
+    {
+        $this->assertSame($expected, ArrayUtils::hasDuplicateValue($array));
+    }
+
+    public function hasDuplicateProvider(): array
+    {
+        return [
+            'array_with_string_duplicated' => [
+                true,
+                ['a', 'b', 'c', 'a']
+            ],
+            'array_with_string_not_duplicated' => [
+                false,
+                ['a', 'b', 'c']
+            ],
+            'array_with_int_duplicated' => [
+                true,
+                [1, 15, 15, 50]
+            ],
+            'array_with_int_not_duplicated' => [
+                false,
+                [18, 10, 88]
+            ],
+        ];
+    }
 }

@@ -264,4 +264,12 @@ class ArrayUtils
 
         return array_combine($keys, $values);
     }
+
+    /**
+     * Inspiration : https://stackoverflow.com/questions/3145607/php-check-if-an-array-has-duplicates
+     */
+    public static function hasDuplicateValue(array $array): bool
+    {
+        return count($array) !== count(array_flip($array));
+    }
 }
