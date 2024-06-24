@@ -16,7 +16,7 @@ trait ApiCallTrait
     private ?string $origin = null;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(nullable=true)
      */
     #[ORM\Column(nullable: true)]
     private ?int $statusCode = null;

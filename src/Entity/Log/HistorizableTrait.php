@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HistorizableTrait
 {
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     protected ?array $history = null;
 
