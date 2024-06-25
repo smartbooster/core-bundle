@@ -1,6 +1,6 @@
 CHANGELOG for 1.x
 ===================
-## v1.8.0 - (2024-06-19)
+## v1.8.0 - (2024-06-25)
 
 **Add Entity json History feature**
 
