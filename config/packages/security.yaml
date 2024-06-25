@@ -1,0 +1,5 @@
+# Required to run make cc on GitHub CI otherwise dependencies on security services are not loaded
+security:
+  firewalls:
+    dev:
+      security: false

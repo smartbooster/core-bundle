@@ -1,5 +1,22 @@
 CHANGELOG for 1.x
 ===================
+## v1.8.0 - (2024-06-25)
+
+**Add Entity json History feature**
+
+### Added
+- `HistoryInterface`(s) and trait to add json history on entity
+- `UserProfileInterface` to add on User entity that can be mentioned on history rows
+- `MailableInterface` to identify entities which have email sending feature
+- `HistoryLogger` and dedicated listeners to call him when doctrine detect changes during **prePersist** and **preUpdate**  
+- `HistoryLogger` new **CRON_ID_PROPERTY** and **API_ID_PROPERTY** to link the history row with his corresponding monitoring entity id
+- `RequestUtils` to ease domain context detection  
+
+### Changed
+- `MonitoringApiControllerTrait::startApiCall` add optionnal **$flush** param in case we directly want the id to be logged in an entity history
+- `ApiCallMonitor::start` We now start the process after parsing the request to ensure all ApiCall properties that are non-nullable are set before flushing it
+- `ApiCallTrait` statusCode is now nullable for ongoing ApiCall
+
 ## v1.7.0 - (2024-06-14)
 ### Added
 - `MonitoringApiControllerTrait` used to centralize ApiCall manipulation during api monitoring
