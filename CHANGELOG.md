@@ -1,5 +1,16 @@
 CHANGELOG for 1.x
 ===================
+## v1.9.0 - (2024-07-11)
+### Added
+- `FileableInterface`, `ImageableInterface`, `PdfInterface` and their trait to demonstrate how to properly configure VichUploader annotations/attributes
+- `EmbeddedFile` to deal with multiple files on the same entity. To use in combination with a OneToOne relation and ORM\Embedded
+- `UuidInterface` and trait to for uuid management
+- `ParentFileTransformer` to used on form with entity implementing the `FileableInterface` to auto set the parent relation
+- `MimeTypesUtils` helper for constraints mimeTypes check
+
+### Fixed
+- `NameableTrait` handle setName with null type
+
 ## v1.8.0 - (2024-06-25)
 
 **Add Entity json History feature**
