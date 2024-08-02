@@ -1,10 +1,5 @@
 CHANGELOG for 1.x
 ===================
-## v1.2.5 - (2024-04-22)
-### Added
-- Adding scripts to the list of scripts that can be executed in `script-src` Nelmio Security recommendations config.
-- Add missing sentry settings to readme Sentry configuration part
-
 ## v1.2.4 - (2024-04-22)
 
 **The process duration value is now calculated in milliseconds instead of seconds.**  
