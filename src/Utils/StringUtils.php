@@ -186,4 +186,23 @@ class StringUtils
 
         return $first . $space . $last;
     }
+
+    /**
+     * Fill a prefix to value until specified length.
+     * For example this can be used on invoice number generation to fill in missing character.
+     *
+     * <pre>
+     * <?php
+     * fillPrefix(1, 4, '0');
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * '0001'
+     * </pre>
+     */
+    public static function fillPrefix(int|string $value, int $length, string $prefixValue): string
+    {
+        return sprintf("%$prefixValue{$length}s", $value);
+    }
 }

@@ -316,4 +316,36 @@ text",
             ]
         ];
     }
+
+    /**
+     * @dataProvider fillPrefixProvider
+     */
+    public function testFillPrefix(string $expected, int|string $value, int $length, string $prefixValue): void
+    {
+        $this->assertSame($expected, StringUtils::fillPrefix($value, $length, $prefixValue));
+    }
+
+    public function fillPrefixProvider(): array
+    {
+        return [
+            'simple' => [
+                '0001',
+                1,
+                4,
+                '0'
+            ],
+            'full' => [
+                '99999',
+                '99999',
+                5,
+                '0'
+            ],
+            'big_prefix' => [
+                '0011',
+                11,
+                4,
+                '000000000000000'
+            ],
+        ];
+    }
 }
