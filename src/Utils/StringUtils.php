@@ -188,7 +188,8 @@ class StringUtils
     }
 
     /**
-     * Fill a prefix to value until specified length
+     * Fill a prefix to value until specified length.
+     * For example this can be used on invoice number generation to fill in missing character.
      *
      * <pre>
      * <?php
