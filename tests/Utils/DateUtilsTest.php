@@ -1278,6 +1278,27 @@ class DateUtilsTest extends TestCase
         $this->assertEquals(new \DateTime('2024-10-15 08:00:00'), DateUtils::addDays(new \DateTime('2024-10-10 08:00:00'), 5));
     }
 
+    /**
+     * @dataProvider addWorkingDaysProvider
+     */
+    public function testAddWorkingDays(string $dateTime, int $daysNb, string $expect): void
+    {
+        $this->assertSame(
+            $expect,
+            DateUtils::addWorkingDays(new \DateTime($dateTime), $daysNb)->format('Y-m-d')
+        );
+    }
+
+    public function addWorkingDaysProvider(): array
+    {
+        return [
+            '10_days' => ['2024-03-13', 10, '2024-03-27'],
+            '20_days' => ['2024-03-01', 20, '2024-03-29'],
+            'one_day_with_week_end' => ['2024-03-15', 1, '2024-03-18'],
+            'calculate_on_bissextile_year' => ['2024-02-28', 6, '2024-03-07'],
+        ];
+    }
+
     public function testSubDays(): void
     {
         $this->assertEquals(new \DateTime('2024-10-05 08:00:00'), DateUtils::subDays(new \DateTime('2024-10-10 08:00:00'), 5));
