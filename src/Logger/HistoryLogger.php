@@ -118,6 +118,16 @@ class HistoryLogger
             }
         }
 
+        // If the history log is an update but without data we don't log it to the database.
+        if (
+            $code === self::UPDATED_CODE
+            && !isset($history[self::DIFF_PROPERTY])
+            && $this->title === null
+            && $this->comment === null
+            && $this->description === null
+        ) {
+            return;
+        }
         $entity->addHistory($history);
 
         if ($this->flushLog) {
