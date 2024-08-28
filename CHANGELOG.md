@@ -1,5 +1,18 @@
 CHANGELOG for 1.x
 ===================
+## v1.10.0 - (2024-08-28)
+### Added
+- `ArrayUtils::hasDuplicateValue` + tests (@lfortunier)
+- `StringUtils::fillPrefix` Fill a prefix to value until specified length + tests (@lfortunier)
+- `DateUtils::addWorkingDays` to calculate a date based on working days + tests (@lfortunier)
+- `HistorizableInterface::getHistoryDiffFieldsToSkip` to manage fields to skip logging on history (@mathieu-ducrot)
+
+### Changed
+- `README.md` update : add scripts to the list of scripts that can be executed in `script-src` Nelmio Security recommendations config. (@lfortunier)
+- `README.md` update : Add missing sentry settings configuration (@lfortunier)
+- `RequestUtils::getContextFromHost` Add .sso subdomain for proper detection on localhost (@mathieu-ducrot)
+- `HistoryLogger::log` skip history log if it's an update without data (ex: diff detected in EntityChangeSet but the targetted fields are actually skip from getHistoryDiffFieldsToSkip @mathieu-ducrot)
+
 ## v1.9.0 - (2024-07-11)
 ### Added
 - `FileableInterface`, `ImageableInterface`, `PdfInterface` and their trait to demonstrate how to properly configure VichUploader annotations/attributes

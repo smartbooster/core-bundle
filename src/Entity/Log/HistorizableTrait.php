@@ -42,4 +42,9 @@ trait HistorizableTrait
     {
         return true;
     }
+
+    public function getHistoryDiffFieldsToSkip(): array
+    {
+        return [];
+    }
 }
