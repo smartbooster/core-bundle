@@ -53,8 +53,15 @@ class HistoryDoctrineListener
 
             $statusDiff = null;
             $isHistorizableStatus = $entity instanceof HistorizableStatusInterface;
+            $diffFieldsToSkip = $entity->getHistoryDiffFieldsToSkip();
             foreach ($entityData as $field => $change) {
-                if ($field === 'history' || $field === 'updatedAt' || $field === 'updatedAtMonth' || $field === 'updatedAtYear') {
+                if (
+                    $field === 'history'
+                    || $field === 'updatedAt'
+                    || $field === 'updatedAtMonth'
+                    || $field === 'updatedAtYear'
+                    || isset($diffFieldsToSkip[$field])
+                ) {
                     unset($entityData[$field]);
                     continue;
                 }
