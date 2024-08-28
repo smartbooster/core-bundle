@@ -16,11 +16,12 @@ class RequestUtils
         // MDT fallback in case there is no subdomain and the host is different from the domain
         $toReturn = 'app';
         if (
-            str_starts_with($host, 'app.') ||
-            str_starts_with($host, 'admin.') ||
-            str_starts_with($host, 'api.') ||
-            str_starts_with($host, 'extranet.') ||
-            substr_count($host, '.') > 1
+            str_starts_with($host, 'app.')
+            || str_starts_with($host, 'admin.')
+            || str_starts_with($host, 'api.')
+            || str_starts_with($host, 'extranet.')
+            || str_starts_with($host, 'sso.')
+            || substr_count($host, '.') > 1
         ) {
             $toReturn = substr($host, 0, (int) strpos($host, '.'));
         }
