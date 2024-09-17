@@ -123,6 +123,7 @@ nelmio_security:
             # this is a port of https://github.com/twitter/secureheaders/blob/83a564a235c8be1a8a3901373dbc769da32f6ed7/lib/secure_headers/headers/policy_management.rb#L97
             browser_adaptive:
                 enabled: true
+            # this is a full list of known case, you must keep only useful script in project
             script-src:
                 - 'self'
                 - 'unsafe-inline'
@@ -133,6 +134,13 @@ nelmio_security:
                 - 'https://www.youtube.com'
                 - 'https://www.youtube-nocookie.com'
                 - 'https://js.stripe.com'
+                - 'https://canny.io/'
+                - 'https://www.google.com/'
+                - 'https://www.gstatic.com/'
+                - 'https://code.iconify.design'
+                - 'https://cdn.jsdelivr.net'
+                - 'http://embed.typeform.com'
+                - 'https://embed.typeform.com'
             block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
 ```
 
