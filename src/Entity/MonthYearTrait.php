@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Smart\CoreBundle\Utils\DateUtils;
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait MonthelableTrait
+trait MonthYearTrait
 {
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -45,7 +45,7 @@ trait MonthelableTrait
         $this->year = $year;
     }
 
-    public function setMonthelableDate(\DateTime $date): void
+    public function setMonthYearFromDate(\DateTime $date): void
     {
         $this->month = (int) $date->format('n');
         $this->year = (int) $date->format('Y');

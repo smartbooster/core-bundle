@@ -11,7 +11,7 @@ trait CreatableTrait
      * @ORM\Column(name="created_at", type="datetime")
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTime $createdAt = null;
+    protected ?\DateTime $createdAt = null;
 
     public function getCreatedAt(): ?\DateTime
     {
