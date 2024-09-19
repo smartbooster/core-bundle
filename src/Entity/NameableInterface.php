@@ -6,5 +6,5 @@ interface NameableInterface
 {
     public function getName(): ?string;
 
-    public function setName(string $name): self;
+    public function setName(?string $name): self;
 }
