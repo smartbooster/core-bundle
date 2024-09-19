@@ -1,5 +1,19 @@
 CHANGELOG for 1.x
 ===================
+## v1.11.0 - (2024-09-19)
+### Added
+`CreatableTrait` Trait & interface with creation date
+`MonthYearTrait` Trait & interface with numeric representation of a month and his numeric year. Useful for statistics purposes.
+
+### Changed
+`README.md` update : Add missing nelmio security settings configuration (@lfortunier)
+
+### Fixed
+- `HistoryLogger` add missing STATUS_PROPERTY check on **log** update skip
+- `NameableInterface::setName` add missing null case as it is mentioned on the trait
+- `NameableTrait::name` property scope set as protected
+- `PersonNameableTrait::getInitial` use mb_substr for string with first accentuated character
+
 ## v1.10.0 - (2024-08-28)
 ### Added
 - `ArrayUtils::hasDuplicateValue` + tests (@lfortunier)

@@ -37,8 +37,8 @@ trait PersonNameableTrait
     {
         return sprintf(
             '%s%s',
-            substr(trim($this->getFirstName()), 0, 1),
-            substr(trim($this->getLastName()), 0, 1)
+            mb_substr(trim($this->getFirstName()), 0, 1),
+            mb_substr(trim($this->getLastName()), 0, 1)
         );
     }
 

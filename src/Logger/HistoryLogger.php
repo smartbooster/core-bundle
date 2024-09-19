@@ -122,6 +122,7 @@ class HistoryLogger
         if (
             $code === self::UPDATED_CODE
             && !isset($history[self::DIFF_PROPERTY])
+            && !isset($history[self::STATUS_PROPERTY])
             && $this->title === null
             && $this->comment === null
             && $this->description === null
