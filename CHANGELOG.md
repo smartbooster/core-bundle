@@ -1,12 +1,22 @@
 CHANGELOG for 1.x
 ===================
+## v1.12.0 - (2024-09-23)
+### Added
+- `ArchivableInterface` & trait
+- `CanonicalInterface` & trait
+- `CodableInterface` & trait
+- `EnableInterface` & trait
+- `PositionableInterface` & trait
+- `SearchableInterface` & trait
+- `UpdatableInterface` & trait
+
 ## v1.11.0 - (2024-09-19)
 ### Added
-`CreatableTrait` Trait & interface with creation date
-`MonthYearTrait` Trait & interface with numeric representation of a month and his numeric year. Useful for statistics purposes.
+- `CreatableTrait` Trait & interface with creation date
+- `MonthYearTrait` Trait & interface with numeric representation of a month and his numeric year. Useful for statistics purposes.
 
 ### Changed
-`README.md` update : Add missing nelmio security settings configuration (@lfortunier)
+- `README.md` update : Add missing nelmio security settings configuration (@lfortunier)
 
 ### Fixed
 - `HistoryLogger` add missing STATUS_PROPERTY check on **log** update skip
