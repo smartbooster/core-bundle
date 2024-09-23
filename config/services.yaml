@@ -3,6 +3,13 @@ services:
     # Service Fidry\AliceDataFixtures\Loader\PurgerLoader not exist, and it must be aliased. AbstractFixtures need it.
     Fidry\AliceDataFixtures\Loader\PurgerLoader: '@fidry_alice_data_fixtures.doctrine.purger_loader'
     # Command
+    Smart\CoreBundle\Command\EntityCleanupCommand:
+        arguments:
+            - '@Smart\CoreBundle\Monitoring\ProcessMonitor'
+            - '@Smart\CoreBundle\Config\IniOverrideConfig'
+            - '@Doctrine\ORM\EntityManagerInterface'
+            - '@translator'
+        tags: [ 'console.command' ]
     Smart\CoreBundle\Command\CommandPoolHelper:
         arguments:
             - '@Symfony\Component\HttpKernel\KernelInterface'

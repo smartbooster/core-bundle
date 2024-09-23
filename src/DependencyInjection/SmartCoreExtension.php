@@ -2,6 +2,7 @@
 
 namespace Smart\CoreBundle\DependencyInjection;
 
+use Smart\CoreBundle\Command\EntityCleanupCommand;
 use Smart\CoreBundle\Monitoring\ApiCallMonitor;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -21,5 +22,8 @@ class SmartCoreExtension extends Extension
         $config = $this->processConfiguration(new Configuration(), $configs);
         $apiCallMonitor = $container->getDefinition(ApiCallMonitor::class);
         $apiCallMonitor->addMethodCall('setRestartAllowedRoutes', [$config['monitoring_api_restart_allowed_routes']]);
+
+        $entityCleanupCommand = $container->getDefinition(EntityCleanupCommand::class);
+        $entityCleanupCommand->addMethodCall('setCommandConfigs', [$config['entity_cleanup_command_configs']]);
     }
 }

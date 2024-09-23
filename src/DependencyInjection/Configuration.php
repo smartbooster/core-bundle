@@ -2,6 +2,7 @@
 
 namespace Smart\CoreBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -22,9 +23,29 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                     ->defaultValue([])
                 ->end()
+                ->append($this->getEntityCleanupCommandConfigsDefinition())
             ->end()
         ;
 
         return $treeBuilder;
+    }
+
+    private function getEntityCleanupCommandConfigsDefinition(): ArrayNodeDefinition
+    {
+        return (new TreeBuilder('entity_cleanup_command_configs'))->getRootNode()
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->arrayPrototype()
+                ->children()
+                    ->scalarNode('older_than')->isRequired()->end()
+                    ->scalarNode('older_than_property')->defaultValue('startedAt')->end()
+                    ->scalarNode('class')->defaultValue('cron')->end()
+                    ->scalarNode('where')->defaultNull()->end()
+                    ->arrayNode('properties_to_clean')
+                        ->scalarPrototype()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }
