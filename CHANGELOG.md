@@ -4,6 +4,9 @@ CHANGELOG for 1.x
 ### Added
 - `EntityCleanupCommand` to delete cron, clean api calls or other entity easily through the bundle configuration **entity_cleanup_command_configs**
 
+### Changed
+- `UpdatableInterface::getUpdatedAt` and `UpdatableInterface::setUpdatedAt` handle nullable datetime
+
 ## v1.12.0 - (2024-09-23)
 ### Added
 - `ArchivableInterface` & trait
