@@ -91,7 +91,7 @@ class HistoryDoctrineListener
             $uow = $args->getObjectManager()->getUnitOfWork();
             $entityClass = get_class($entity);
             foreach ($uow->getScheduledCollectionUpdates() as $collection) {
-                if ($entityClass !== get_class($collection->getOwner())) {
+                if ($entityClass !== get_class($collection->getOwner()) || isset($diffFieldsToSkip[$collection->getMapping()['fieldName']])) {
                     continue;
                 }
                 // MDT the 'c_u' string is a shortcut index key meaning collection_update
@@ -102,6 +102,10 @@ class HistoryDoctrineListener
             // MDT the preUpdate event is not triggered if the only modification of the event concerns the deletion of the collection
             // cf. https://github.com/doctrine/orm/issues/9960
             foreach ($uow->getScheduledCollectionDeletions() as $collection) {
+                if ($entityClass !== get_class($collection->getOwner()) || isset($diffFieldsToSkip[$collection->getMapping()['fieldName']])) {
+                    continue;
+                }
+
                 $entityData[$collection->getMapping()['fieldName']] = 'label.empty';
             }
             $historyData[HistoryLogger::DIFF_PROPERTY] = $entityData;

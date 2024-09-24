@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.13.1 - (2024-09-24)
+### Fixed
+- `HistoryDoctrineListener::handleHistory` set deleted collection only to the owner
+
+### Added
+- `HistorizableInterface::getHistoryDiffFieldsToSkip` be able to skip doctrine collections fields in `HistoryDoctrineListener::handleHistory`
+
 ## v1.13.0 - (2024-09-24)
 ### Added
 - `EntityCleanupCommand` to delete cron, clean api calls or other entity easily through the bundle configuration **entity_cleanup_command_configs**
