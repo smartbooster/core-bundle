@@ -11,7 +11,7 @@ trait UpdatableTrait
      * @ORM\Column(type="datetime", nullable=true)
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    protected \DateTimeInterface $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -25,15 +25,15 @@ trait UpdatableTrait
     #[ORM\Column(nullable: true)]
     protected ?int $updatedAtYear = null;
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt, bool $initIntegerFields = true): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt, bool $initIntegerFields = true): void
     {
         $this->updatedAt = $updatedAt;
-        if ($initIntegerFields) {
+        if ($updatedAt !== null && $initIntegerFields) {
             $this->updatedAtMonth = (int) $updatedAt->format('m');
             $this->updatedAtYear = (int) $updatedAt->format('Y');
         }

@@ -1,0 +1,5 @@
+cron:
+    smart_entity_cleanup.label: Commande de nettoyage
+label:
+    api_calls: Appels API
+    crons: Crons

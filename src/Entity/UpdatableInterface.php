@@ -4,9 +4,9 @@ namespace Smart\CoreBundle\Entity;
 
 interface UpdatableInterface
 {
-    public function getUpdatedAt(): \DateTimeInterface;
+    public function getUpdatedAt(): ?\DateTimeInterface;
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt, bool $initIntegerFields = true): void;
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt, bool $initIntegerFields = true): void;
 
     public function getUpdatedAtMonth(): ?int;
 
