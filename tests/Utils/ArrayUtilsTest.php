@@ -606,4 +606,22 @@ name', "value" => 2],
             ],
         ];
     }
+
+    /**
+     * @dataProvider toIndexedArrayProvider
+     */
+    public function testToIndexedArray(array $expected, array $array): void
+    {
+        $this->assertSame($expected, ArrayUtils::toIndexedArray($array));
+    }
+
+    public function toIndexedArrayProvider(): array
+    {
+        return [
+            'simple_array_indexed' => [[1, 2, 3], ['3' => 1, '2' => 2, '1' => 3]],
+            'simple_array_not_indexed' => [[1, 2, 3], [1, 2, 3]],
+            'multidimensional_array_indexed' => [[[1, 2], [3, 4]], [['dummy' => 1, 'test' => 2], ['8' => 3, '1' => 4]]],
+            'multidimensional_array_not_indexed' => [[[1, 2], [3, 4]], [[1, 2], [3, 4]]],
+        ];
+    }
 }

@@ -272,4 +272,28 @@ class ArrayUtils
     {
         return count($array) !== count(array_flip($array));
     }
+
+    /**
+     * Delete keys of array and multidimensional array
+     *
+     *  <pre>
+     *  <?php
+     *  toIndexedArray(['john' => 1, 'doe' => ['smart' => 100, 'booster' => 200]);
+     *  ?>
+     *  </pre>
+     *  The above example will output:
+     *  <pre>
+     *  [1, [100, 200]]
+     *  </pre>
+     */
+    public static function toIndexedArray(array $array): array
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $array[$key] = self::toIndexedArray($value);
+            }
+        }
+
+        return array_values($array);
+    }
 }
