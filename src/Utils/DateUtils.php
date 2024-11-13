@@ -43,7 +43,7 @@ class DateUtils
     {
         $formatter = new \IntlDateFormatter(locale: $locale, dateType: \IntlDateFormatter::FULL, timeType: \IntlDateFormatter::FULL, pattern: 'MMMM');
         for ($i = 1; $i <= 12; $i++) {
-            $month = $formatter->format(strtotime("2000-$i")); // @phpstan-ignore-line MDT the year is arbitrary and does not impact the month
+            $month = $formatter->format(strtotime("2000-$i")); // MDT the year is arbitrary and does not impact the month
             $toReturn[ucfirst((string) $month)] = $i;
         }
 
