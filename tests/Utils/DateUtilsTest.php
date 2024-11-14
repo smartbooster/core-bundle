@@ -1221,6 +1221,23 @@ class DateUtilsTest extends TestCase
     }
 
     /**
+     * @dataProvider getGetFormattedShortMonthProvider
+     */
+    public function testGetFormattedShortMonth(string $expected, string $date, string $locale): void
+    {
+        $this->assertEquals($expected, DateUtils::getFormattedShortMonth(new \DateTime($date), $locale));
+    }
+
+    public function getGetFormattedShortMonthProvider(): array
+    {
+        return [
+            'Jan (fr)' => ['Jan', '2022-01-15', 'fr_FR'],
+            'Juin' => ['Juin', '2020-06-01', 'fr_FR'],
+            'Jan (en)' => ['Jan', '2020-01-01', 'en_EN'],
+        ];
+    }
+
+    /**
      * @dataProvider getGetFormattedLongMonthYearsProvider
      */
     public function testGetFormattedLongMonthYears(string $expected, string $date, string $locale): void
