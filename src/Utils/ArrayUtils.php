@@ -296,4 +296,24 @@ class ArrayUtils
 
         return array_values($array);
     }
+
+    /**
+     * Order an key value array like other array
+     * @param array $arrayToSort The array to sort. It's sort by the key of every values.
+     * @param array $arraySorted The array to use for sorting. The comparison is between values, not between keys.
+     * @return array
+     *  <pre>
+     *  <?php
+     *  sortArrayKeyByArray(['orange' => null, 'white' => null, 'blue' => null], ['blue', 'orange', 'white']);
+     *  ?>
+     *  </pre>
+     *  The above example will output:
+     *  <pre>
+     *  ['blue' => null, 'orange' => null, 'white' => null]
+     *  </pre>
+     */
+    public static function sortArrayKeyByArray(array $arrayToSort, array $arraySorted): array
+    {
+        return array_replace(array_intersect_key(array_flip($arraySorted), $arrayToSort), $arrayToSort);
+    }
 }
