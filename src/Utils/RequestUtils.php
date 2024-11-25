@@ -21,6 +21,7 @@ class RequestUtils
             || str_starts_with($host, 'api.')
             || str_starts_with($host, 'extranet.')
             || str_starts_with($host, 'sso.')
+            || str_ends_with($host, '.localhost')
             || substr_count($host, '.') > 1
         ) {
             $toReturn = substr($host, 0, (int) strpos($host, '.'));
