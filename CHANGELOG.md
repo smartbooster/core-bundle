@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.14.0 - (2024-11-25)
+### Added
+- `ArrayUtils::toIndexedArray` + tests Delete keys of array and multidimensional array (@lfortunier)
+- 
+### Fixed
+- `RequestUtils::getContextFromHost` add host ending with '.localhost' fallback
+
 ## v1.13.1 - (2024-09-24)
 ### Fixed
 - `HistoryDoctrineListener::handleHistory` set deleted collection only to the owner
