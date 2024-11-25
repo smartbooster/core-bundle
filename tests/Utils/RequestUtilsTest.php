@@ -24,9 +24,9 @@ class RequestUtilsTest extends TestCase
             'localhost' => ['app', 'localhost'],
             'localhost admin' => ['admin', 'admin.localhost'],
             'localhost app' => ['app', 'app.localhost'],
+            'localhost account' => ['account', 'account.localhost'],
             'localhost partenaire' => ['partenaire', 'partenaire.pro.localhost'],
-            // MDT to demonstrate that additional subdomain is needed like the test above in the case of localhost because there is no .fr extension
-            'localhost fallback with app' => ['app', 'partenaire.localhost'],
+            'localhost fallback with app if no ending extension and different than localhost' => ['app', 'domain'],
             'custom domain' => ['app', 'domain.fr', 'domain.fr'],
             'custom domain subdomain admin' => ['admin', 'admin.domain.fr', 'domain.fr'],
             'custom domain subdomain app' => ['app', 'app.domain.fr', 'domain.fr'],
