@@ -23,15 +23,7 @@ class StringUtils
      */
     public static function getEntitySnakeName(string $entityClassName): string
     {
-        return u(str_replace([
-            'Proxies\__CG__\\',
-            'App\Entity\\',
-            '\\',
-        ], [
-            '',
-            '',
-            '_',
-        ], $entityClassName))->snake()->toString();
+        return u($entityClassName)->snake()->replace('app_entity_', '')->replace('proxies_cg_', '');
     }
 
     /**
