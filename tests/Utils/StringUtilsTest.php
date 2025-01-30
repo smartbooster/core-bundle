@@ -15,8 +15,16 @@ class StringUtilsTest extends TestCase
         $this->assertEquals('dummy', StringUtils::getEntitySnakeName('App\Entity\Dummy'));
         $this->assertEquals('context_foo', StringUtils::getEntitySnakeName('App\Entity\Context\Foo'));
         $this->assertEquals('context_foo_bar', StringUtils::getEntitySnakeName('App\Entity\Context\FooBar'));
+        $this->assertEquals('context_foo_bar', StringUtils::getEntitySnakeName('App\Entity\Context\FOOBar'));
         $this->assertEquals('context_sub_folder_foo_bar', StringUtils::getEntitySnakeName('App\Entity\Context\SubFolder\FooBar'));
         $this->assertEquals('prospect_organization', StringUtils::getEntitySnakeName('Proxies\__CG__\App\Entity\Prospect\Organization'));
+        $this->assertEquals('prospect_organization', StringUtils::getEntitySnakeName('Proxies\__CG__\App\Entity\PROSPECT\Organization'));
+        $this->assertEquals('capital_letter', StringUtils::getEntitySnakeName('App\Entity\CAPITAL\Letter'));
+        $this->assertEquals('capitalletter', StringUtils::getEntitySnakeName('App\Entity\CAPITAL\LETTER'));
+        $this->assertEquals('capital_foo_letter', StringUtils::getEntitySnakeName('App\Entity\Capital\FOO\Letter'));
+        $this->assertEquals('capitalfoo_letter', StringUtils::getEntitySnakeName('App\Entity\CAPITAL\FOO\Letter'));
+        $this->assertEquals('capital_letter', StringUtils::getEntitySnakeName('App\Entity\Capital\LETTER'));
+        $this->assertEquals('website_cms_page', StringUtils::getEntitySnakeName('App\Entity\Website\CMS\Page'));
     }
 
     public function testGetEntityShortName(): void

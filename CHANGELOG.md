@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.14.1 - (2025-01-30)
+### Fixed
+- `StringUtils::getEntitySnakeName` fixed return value on folder named with full capital letter by doing the snake conversion first then the replace 
+
 ## v1.14.0 - (2024-11-25)
 ### Added
 - `ArrayUtils::toIndexedArray` + tests Delete keys of array and multidimensional array (@lfortunier)
