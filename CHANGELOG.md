@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.14.2 - (2025-02-06)
+### Fixed
+- `GroupConcat::parse` Fix access to the value of the `$lexer->lookahead` if it's an array or a Token object
+
 ## v1.14.1 - (2025-01-30)
 ### Fixed
 - `StringUtils::getEntitySnakeName` fixed return value on folder named with full capital letter by doing the snake conversion first then the replace 
