@@ -86,7 +86,7 @@ class ProcessMonitor
         $this->consoleIo?->success($message);
     }
 
-    public function logException(\Exception $e): void
+    public function logException(\Throwable $e): void
     {
         $message = $e->getMessage();
         $this->process?->setSummary($message);

@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.14.3 - (2025-03-06)
+### Fixed
+- `ProcessMonitor::logException` switch $e param type from `\Exception` to `\Throwable` to better handle lower level error log (such as undefined method, ...) 
+
 ## v1.14.2 - (2025-02-06)
 ### Fixed
 - `GroupConcat::parse` Fix access to the value of the `$lexer->lookahead` if it's an array or a Token object
