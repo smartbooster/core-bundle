@@ -456,6 +456,31 @@ class DateUtils
     }
 
     /**
+     * Return short month locale format, substring 3 char except "Juin"
+     *
+     * <pre>
+     * <?php
+     * getFormattedShortMonth(new \DateTime('2022-01-15'));
+     * ?>
+     * </pre>
+     * The above example will output:
+     * <pre>
+     * Jan
+     * </pre>
+     */
+    public static function getFormattedShortMonth(\DateTime $date, string $locale = 'fr_FR'): string
+    {
+        $month = self::getFormattedLongMonth($date, $locale);
+
+        // It must be "Juin" in full otherwise there be multiple "Jui." key with "Juillet"
+        if ($month === 'Juin') {
+            return $month;
+        }
+
+        return mb_substr((string)$month, 0, 3);
+    }
+
+    /**
      * Return full month year locale format
      *
      * <pre>
