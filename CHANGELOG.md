@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.14.4 - (2025-06-24)
+### Added
+- `FileUtils::slugifyFilename` Slugify and normalize filename + tests
+
 ## v1.14.3 - (2025-03-06)
 ### Fixed
 - `ProcessMonitor::logException` switch $e param type from `\Exception` to `\Throwable` to better handle lower level error log (such as undefined method, ...) 
