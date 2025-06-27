@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.15.0 - (2025-06-27)
+### Added
+- `ProcessStatusEnum` new methods based on the `EnumTrait` from the platform-core-bundle : getBgColor, getBgColors, getTextColors, getTextColor, labels
+
 ## v1.14.4 - (2025-06-24)
 ### Added
 - `FileUtils::slugifyFilename` Slugify and normalize filename + tests
