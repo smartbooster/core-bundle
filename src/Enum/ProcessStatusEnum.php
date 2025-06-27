@@ -21,4 +21,40 @@ enum ProcessStatusEnum: string
 
         return $toReturn;
     }
+
+    public static function getBgColor(mixed $case): ?string
+    {
+        return match ($case) {
+            self::ONGOING => '#3b82f6', // info-color colors.blue.500
+            self::SUCCESS => '#22c55e', // success-color colors.green.500
+            self::ERROR => '#dc2626', // danger-color colors.red.600
+            default => null,
+        };
+    }
+
+    public static function getBgColors(): array
+    {
+        return array_map(function (self $case) {
+            return self::getBgColor($case);
+        }, self::cases());
+    }
+
+    public static function getTextColors(): array
+    {
+        return array_map(function (self $case) {
+            return self::getTextColor($case);
+        }, self::cases());
+    }
+
+    public static function getTextColor(mixed $case): ?string
+    {
+        return '#ffffff';
+    }
+
+    public static function labels(TranslatorInterface $translator): array
+    {
+        return array_map(function (self $case) use ($translator) {
+            return $translator->trans(self::PREFIX_LABEL . $case->value, [], 'enum');
+        }, self::cases());
+    }
 }
