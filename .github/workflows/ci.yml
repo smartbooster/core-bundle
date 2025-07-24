@@ -13,6 +13,8 @@ jobs:
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
+            -   name: Configure GitHub token for Composer
+                run: composer config -g github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
             -   name: "Install: vendor & clear cache"
                 run: make install
             -   name: Run coverage
