@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.15.1 - (2025-07-24)
+### Fixed
+- `HistoryDoctrineListener::handleHistory` Fixed an issue with double flush operations inside listener. Logging is now forced without an immediate flush to prevent potential bugs caused by multiple flushes.
+
 ## v1.15.0 - (2025-06-27)
 ### Added
 - `ProcessStatusEnum` new methods based on the `EnumTrait` from the platform-core-bundle : getBgColor, getBgColors, getTextColors, getTextColor, labels

@@ -70,6 +70,11 @@ class HistoryLogger
         return $this;
     }
 
+    public function isFlushLog(): bool
+    {
+        return $this->flushLog;
+    }
+
     /**
      * @param array $data Donnée de la ligne d'historique. Array (et non objet) pour être le plus performant possible dans HistoryDoctrineListener
      *  [

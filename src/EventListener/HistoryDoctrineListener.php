@@ -125,7 +125,10 @@ class HistoryDoctrineListener
         }
 
         // No need for setFlushLog because it already takes place after the prePersist/preUpdate event doctrine
+        $previousHistoryLoggerFlushLog = $this->historyLogger->isFlushLog();
+        $this->historyLogger->setFlushLog(false);
         $this->historyLogger->log($entity, $code, $historyData);
+        $this->historyLogger->setFlushLog($previousHistoryLoggerFlushLog);
     }
 
     private function serializeDiffValue(mixed $value): mixed
