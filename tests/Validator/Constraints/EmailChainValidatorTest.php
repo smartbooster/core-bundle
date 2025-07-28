@@ -2,9 +2,9 @@
 
 namespace Smart\CoreBundle\Tests\Validator\Constraints;
 
+use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\EmailChain;
 use Smart\CoreBundle\Validator\Constraints\EmailChainValidator;
-use Smart\StandardBundle\Validator\Constraints\AbstractValidatorTest;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/EmailChainValidatorTest.php
@@ -27,10 +27,10 @@ class EmailChainValidatorTest extends AbstractValidatorTest
         $constraint = new EmailChain();
         $validator = $this->initValidator('email_chain.format_error');
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function failProvider(): array
+    public static function failProvider(): array
     {
         return [
             'extension missing' => ["missing@extension"],
@@ -47,10 +47,10 @@ class EmailChainValidatorTest extends AbstractValidatorTest
         $constraint = new EmailChain();
         $validator = $this->initValidator();
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function validProvider(): array
+    public static function validProvider(): array
     {
         return [
             'simple valid email' => ["test@valid.fr"],

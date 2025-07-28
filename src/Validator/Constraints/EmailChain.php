@@ -21,7 +21,7 @@ class EmailChain extends Constraint
      */
     public function __construct(
         mixed $options = null,
-        array $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
         string $separator = ','
     ) {

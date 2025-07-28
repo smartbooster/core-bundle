@@ -20,7 +20,7 @@ class ArrayUtilsTest extends TestCase
         $this->assertEquals($expected, ArrayUtils::getArrayFromTextarea($values));
     }
 
-    public function getArrayFromTextareaProvider(): array
+    public static function getArrayFromTextareaProvider(): array
     {
         return [
             'clean textarea' => [
@@ -64,7 +64,7 @@ class ArrayUtilsTest extends TestCase
         }
     }
 
-    public function getMultiArrayNbFieldsExceptionFromTextareaProvider(): array
+    public static function getMultiArrayNbFieldsExceptionFromTextareaProvider(): array
     {
         return [
             'missing_field_data' => [
@@ -120,7 +120,7 @@ class ArrayUtilsTest extends TestCase
         }
     }
 
-    public function getMultiArrayNbMaxRowsExceptionProvider(): array
+    public static function getMultiArrayNbMaxRowsExceptionProvider(): array
     {
         return [
             'nb_max_rows_exception' => [
@@ -155,7 +155,7 @@ class ArrayUtilsTest extends TestCase
         $this->assertEquals($expectedMultiArray, ArrayUtils::getMultiArrayFromTextarea($string, $delimiter, $fields));
     }
 
-    public function getMultiArrayFromTextareaProvider(): array
+    public static function getMultiArrayFromTextareaProvider(): array
     {
         $simpleString = "TEST_CODE_1;NAME_1;1
             TEST_CODE_2;NAME_2;2
@@ -302,7 +302,7 @@ name', "value" => 2],
         $this->assertEquals($expected, ArrayUtils::flattenArrayValues($input, $separator));
     }
 
-    public function flattenArrayValuesProvider(): array
+    public static function flattenArrayValuesProvider(): array
     {
         return [
             'simple case' => [
@@ -342,7 +342,7 @@ name', "value" => 2],
         $this->assertEquals($expected, ArrayUtils::checkIssetKeys($array, $keys));
     }
 
-    public function checkIssetKeysProvider(): array
+    public static function checkIssetKeysProvider(): array
     {
         return [
             'all present' => [
@@ -403,7 +403,7 @@ name', "value" => 2],
         }
     }
 
-    public function getTrimExplodeProvider(): array
+    public static function getTrimExplodeProvider(): array
     {
         return [
             'empty string' => [
@@ -444,7 +444,7 @@ name', "value" => 2],
         $this->assertEquals($expected, ArrayUtils::removeEmpty($values));
     }
 
-    public function getRemoveEmptyProvider(): array
+    public static function getRemoveEmptyProvider(): array
     {
         return [
             'empty array' => [
@@ -470,7 +470,7 @@ name', "value" => 2],
         $this->assertEquals($expected, ArrayUtils::filterByPattern($values, $pattern, $negate));
     }
 
-    public function getFilterByPatternProvider(): array
+    public static function getFilterByPatternProvider(): array
     {
         return [
             'empty array' => [
@@ -512,9 +512,17 @@ name', "value" => 2],
 
     public function testFilterByPatternMalformedPattern(): void
     {
-        $this->expectWarning();
+        set_error_handler(function ($errno, $errstr) {
+            $this->assertStringContainsString('preg_match', $errstr);
+            return true;
+        }, E_WARNING);
 
-        ArrayUtils::filterByPattern([0 => 0], '#######');
+        try {
+            ArrayUtils::filterByPattern([0 => 0], '#######');
+        } finally {
+            // Restaurer le gestionnaire d'erreur original
+            restore_error_handler();
+        }
     }
 
     /**
@@ -525,7 +533,7 @@ name', "value" => 2],
         $this->assertEquals($expected, ArrayUtils::flatToMap($array, $fnKey, $fnValue));
     }
 
-    public function getFlatToMapProvider(): array
+    public static function getFlatToMapProvider(): array
     {
         return [
             'null array' => [
@@ -585,7 +593,7 @@ name', "value" => 2],
         $this->assertSame($expected, ArrayUtils::hasDuplicateValue($array));
     }
 
-    public function hasDuplicateProvider(): array
+    public static function hasDuplicateProvider(): array
     {
         return [
             'array_with_string_duplicated' => [
@@ -615,7 +623,7 @@ name', "value" => 2],
         $this->assertSame($expected, ArrayUtils::toIndexedArray($array));
     }
 
-    public function toIndexedArrayProvider(): array
+    public static function toIndexedArrayProvider(): array
     {
         return [
             'simple_associative_array' => [[1, 2, 3], ['3' => 1, '2' => 2, '1' => 3]],

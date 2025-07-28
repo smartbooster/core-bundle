@@ -51,7 +51,7 @@ class ArrayUtils
      * @param ?int $nbMaxRows (Optional) Maximum number of lines allowed in the conversion from string to array
      * @return array
      */
-    public static function getMultiArrayFromTextarea(string $string, string $delimiter, array $fields = [], int $nbMaxRows = null): array
+    public static function getMultiArrayFromTextarea(string $string, string $delimiter, array $fields = [], ?int $nbMaxRows = null): array
     {
         $nbRows = StringUtils::getNbRowsFromTextarea($string, $delimiter);
         if (empty($fields)) { // We remove the header line from the nbRows if we are in dynamic mode

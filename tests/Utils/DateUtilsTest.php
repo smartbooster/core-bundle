@@ -20,7 +20,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getMonthsBetween($startedAt, $endedAt));
     }
 
-    public function getMonthsBetweenProvider(): array
+    public static function getMonthsBetweenProvider(): array
     {
         return [
             'same year with 1 month' => [
@@ -72,7 +72,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFormattedDayOrMonth($number));
     }
 
-    public function getFormattedDayOrMonthProvider(): array
+    public static function getFormattedDayOrMonthProvider(): array
     {
         return [
             '01' => ['01', 1],
@@ -117,7 +117,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getDaysBetween($startedAt, $endedAt, $options));
     }
 
-    public function getDaysBetweenProvider(): array
+    public static function getDaysBetweenProvider(): array
     {
         return [
             'same month' => [
@@ -223,7 +223,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getTimeIntervals($startTime, $endTime));
     }
 
-    public function getTimeIntervalsProvider(): array
+    public static function getTimeIntervalsProvider(): array
     {
         return [
             'morning transition after noon' => [
@@ -275,7 +275,7 @@ class DateUtilsTest extends TestCase
         }
     }
 
-    public function getCalendarDaysProvider(): array
+    public static function getCalendarDaysProvider(): array
     {
         return [
             '01_2023' => [
@@ -802,7 +802,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getPrevIntFormatFromMonthYear($month, $year, $format));
     }
 
-    public function getPrevIntFormatFromMonthYearProvider(): array
+    public static function getPrevIntFormatFromMonthYearProvider(): array
     {
         return [
             '01_2023_n' => [12, 1, 2023, 'n'],
@@ -820,7 +820,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getNextIntFormatFromMonthYear($month, $year, $format));
     }
 
-    public function getNextIntFormatFromMonthYearProvider(): array
+    public static function getNextIntFormatFromMonthYearProvider(): array
     {
         return [
             '12_2023_n' => [1, 12, 2023, 'n'],
@@ -838,7 +838,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getFirstDayOfMonthYear($month, $year)->format('Y-m-d H:i:s'));
     }
 
-    public function getFirstDayOfMonthYearProvider(): array
+    public static function getFirstDayOfMonthYearProvider(): array
     {
         return [
             '2023-12-01 00:00:00' => ['2023-12-01 00:00:00', 12, 2023],
@@ -854,7 +854,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getLastDayOfMonthYear($month, $year)->format('Y-m-d H:i:s'));
     }
 
-    public function getLastDayOfMonthYearProvider(): array
+    public static function getLastDayOfMonthYearProvider(): array
     {
         return [
             '31_days' => ['2023-12-31 23:59:59', 12, 2023],
@@ -872,7 +872,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFirstDayYearFromDateTime($datetime));
     }
 
-    public function getGetFirstDayYearFromDateTimeProvider(): array
+    public static function getGetFirstDayYearFromDateTimeProvider(): array
     {
         return [
             'septembre_2020' => [
@@ -894,7 +894,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getLastDayMonthFromDateTime($datetime));
     }
 
-    public function getGetLastDayMonthFromDateTimeProvider(): array
+    public static function getGetLastDayMonthFromDateTimeProvider(): array
     {
         return [
             'september_2020' => [
@@ -924,7 +924,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getMonthsBetweenDateTimes($start, $end));
     }
 
-    public function getMonthsBetweenDateTimesProvider(): array
+    public static function getMonthsBetweenDateTimesProvider(): array
     {
         return [
             'one_month' => [
@@ -958,7 +958,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getDateTimeMonth($value));
     }
 
-    public function getDateTimeMonthProvider(): array
+    public static function getDateTimeMonthProvider(): array
     {
         return [
             '02' => [
@@ -984,7 +984,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getDateTimeYear($value));
     }
 
-    public function getDateTimeYearProvider(): array
+    public static function getDateTimeYearProvider(): array
     {
         return [
             '2022' => [
@@ -1010,7 +1010,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getNbOfWorkingDaysBetweenDateTimes($start, $end));
     }
 
-    public function getGetNbOfWorkingDaysBetweenDateTimesProvider(): array
+    public static function getGetNbOfWorkingDaysBetweenDateTimesProvider(): array
     {
         return [
             'less than 24 hours' => [
@@ -1064,7 +1064,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($string, DateUtils::getDateTimeFromMonthYear($string)->format('m/Y'));
     }
 
-    public function getGetDateTimeFromMonthYearProvider(): array
+    public static function getGetDateTimeFromMonthYearProvider(): array
     {
         return [
             'simple' => [
@@ -1091,7 +1091,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getLastDayPreviousMonthFromDateTime($dateTime)->format('Y-m-d H:i:s'));
     }
 
-    public function getGetLastDayPreviousMonthFromDateTimeProvider(): array
+    public static function getGetLastDayPreviousMonthFromDateTimeProvider(): array
     {
         return [
             'case 30 days from first day' => [
@@ -1133,7 +1133,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFirstDayNextMonthFromDateTime($dateTime)->format('Y-m-d'));
     }
 
-    public function getGetFirstDayNextMonthFromDateTimeProvider(): array
+    public static function getGetFirstDayNextMonthFromDateTimeProvider(): array
     {
         return [
             '01/01' => [
@@ -1155,7 +1155,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFirstDayMonth($dateTime)->format('d/m/Y H:i:s'));
     }
 
-    public function getGetFirstDayMonthProvider(): array
+    public static function getGetFirstDayMonthProvider(): array
     {
         return [
             'simple' => [
@@ -1177,7 +1177,7 @@ class DateUtilsTest extends TestCase
         $this->assertSame($expected, DateUtils::getNextBirthdayDateTime($birthday, $currentDay)->format('Y-m-d'));
     }
 
-    public function getNextBirthdayDateTimeProvider(): array
+    public static function getNextBirthdayDateTimeProvider(): array
     {
         return [
             'case plus one year' => [
@@ -1211,7 +1211,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFormattedLongMonth(new \DateTime($date), $locale));
     }
 
-    public function getGetFormattedLongMonthProvider(): array
+    public static function getGetFormattedLongMonthProvider(): array
     {
         return [
             'Janvier' => ['Janvier', '2022-01-15', 'fr_FR'],
@@ -1228,7 +1228,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFormattedLongMonthYears(new \DateTime($date), $locale));
     }
 
-    public function getGetFormattedLongMonthYearsProvider(): array
+    public static function getGetFormattedLongMonthYearsProvider(): array
     {
         return [
             'Janvier 2022' => ['Janvier 2022', '2022-01-15', 'fr_FR'],
@@ -1245,7 +1245,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getFormattedShortMonthYears(new \DateTime($date)));
     }
 
-    public function getFormattedShortMonthYearsProvider(): array
+    public static function getFormattedShortMonthYearsProvider(): array
     {
         return [
             'Janvier 2022' => ['Jan. 22', '2022-01-15'],
@@ -1263,7 +1263,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::getNbDayBetweenDateTimes($start, $end));
     }
 
-    public function getGetNbDayBetweenDateTimesProvider(): array
+    public static function getGetNbDayBetweenDateTimesProvider(): array
     {
         return [
             'lass than 24 hours' => [0, new \DateTime('2022-07-18 08:00:00'), new \DateTime('2022-07-18 15:00:00')],
@@ -1289,7 +1289,7 @@ class DateUtilsTest extends TestCase
         );
     }
 
-    public function addWorkingDaysProvider(): array
+    public static function addWorkingDaysProvider(): array
     {
         return [
             '10_days' => ['2024-03-13', 10, '2024-03-27'],
@@ -1332,7 +1332,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::secondsToString($value));
     }
 
-    public function secondsToStringProvider(): array
+    public static function secondsToStringProvider(): array
     {
         return [
             'null value' => [null, null],
@@ -1355,7 +1355,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals($expected, DateUtils::millisecondsToString($value));
     }
 
-    public function millisecondsToStringProvider(): array
+    public static function millisecondsToStringProvider(): array
     {
         return [
             'null value' => [null, null],

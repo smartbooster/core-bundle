@@ -17,18 +17,19 @@
     "doctrine/orm": "^2.13",
     "egulias/email-validator": "^3.0|^4.0",
     "nelmio/security-bundle": "^2.8 || ^3.0",
-    "sentry/sentry-symfony": "^4.9",
+    "sentry/sentry-symfony": "^4.9 || ^5.1",
     "symfony/apache-pack": "^1.0",
     "symfony/form": "^5.4|^6.2",
     "symfony/framework-bundle": "^5.4|^6.2",
     "symfony/security-bundle": "^5.4|^6.2",
     "symfony/translation": "^5.4|^6.2",
+    "symfony/http-client": "^5.4|^6.2",
     "theofidry/alice-data-fixtures": "^1.5"
   },
   "require-dev": {
     "smartbooster/standard-bundle": "^1.0",
     "symfony/flex": "^2",
-    "symfony/phpunit-bridge": "^5.4|^6.2",
+    "symfony/phpunit-bridge": "^5.4|^6.2|^7.0",
     "symfony/runtime": "^5.4|^6.2",
     "symfony/twig-bundle": "^5.4|^6.2"
   },

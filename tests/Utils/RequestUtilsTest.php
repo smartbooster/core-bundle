@@ -18,7 +18,7 @@ class RequestUtilsTest extends TestCase
         $this->assertEquals($expected, RequestUtils::getContextFromHost($host, $domain));
     }
 
-    public function getContextFromHostProvider(): array
+    public static function getContextFromHostProvider(): array
     {
         return [
             'localhost' => ['app', 'localhost'],

@@ -21,7 +21,7 @@ class MathUtilsTest extends TestCase
         $this->assertEqualsWithDelta($expected, MathUtils::calculatePercentage($partial, $total, $roundPrecision), 0.000000001);
     }
 
-    public function getPercentProvider(): array
+    public static function getPercentProvider(): array
     {
         return [
             'calc_percent_round_0' => [
@@ -52,7 +52,7 @@ class MathUtilsTest extends TestCase
         }
     }
 
-    public function formatBytesProvider(): array
+    public static function formatBytesProvider(): array
     {
         return [
             '999 B' => [
@@ -76,7 +76,7 @@ class MathUtilsTest extends TestCase
         $this->assertSame($expected, MathUtils::convertCentsToEuro($price));
     }
 
-    public function convertCentsToEuroProvider(): array
+    public static function convertCentsToEuroProvider(): array
     {
         return [
             'simple' => [5, 500],
@@ -100,7 +100,7 @@ class MathUtilsTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function calculateAverageProvider(): array
+    public static function calculateAverageProvider(): array
     {
         return [
             'empty values' => [0, [], null],
@@ -118,7 +118,7 @@ class MathUtilsTest extends TestCase
         $this->assertEquals($expected, MathUtils::calculateDivision($dividend, $divider, $roundPrecision));
     }
 
-    public function getCalculateDivisionProvider(): array
+    public static function getCalculateDivisionProvider(): array
     {
         return [
             'simple' => [

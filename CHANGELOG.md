@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.16.0 - (2025-07-28)
+### Added
+- `composer.json` Allow sentry/sentry-symfony ^5.1 for PHP 8.4 support
+### Fixed 
+- Fixed deprecated on implicitly nullable param for PHP 8.4 support
+
 ## v1.15.1 - (2025-07-24)
 ### Fixed
 - `HistoryDoctrineListener::handleHistory` Fixed an issue with double flush operations inside listener. Logging is now forced without an immediate flush to prevent potential bugs caused by multiple flushes.
