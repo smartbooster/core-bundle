@@ -2,9 +2,9 @@
 
 namespace Smart\CoreBundle\Tests\Validator\Constraints;
 
+use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\IsModulo;
 use Smart\CoreBundle\Validator\Constraints\IsModuloValidator;
-use Smart\StandardBundle\Validator\Constraints\AbstractValidatorTest;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/IsModuloValidatorTest.php
@@ -29,10 +29,10 @@ class IsModuloValidatorTest extends AbstractValidatorTest
         $constraint = new IsModulo(15);
         $validator = $this->initValidator(self::INVALID_MESSAGE);
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function failProvider(): array
+    public static function failProvider(): array
     {
         return [
             '1' => [1],
@@ -52,10 +52,10 @@ class IsModuloValidatorTest extends AbstractValidatorTest
         $constraint = new IsModulo(15);
         $validator = $this->initValidator();
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function validProvider(): array
+    public static function validProvider(): array
     {
         return [
             '0' => [0],

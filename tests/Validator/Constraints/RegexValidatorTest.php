@@ -2,8 +2,8 @@
 
 namespace Smart\CoreBundle\Tests\Validator\Constraints;
 
+use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Utils\RegexUtils;
-use Smart\StandardBundle\Validator\Constraints\AbstractValidatorTest;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\RegexValidator;
 
@@ -30,10 +30,10 @@ class RegexValidatorTest extends AbstractValidatorTest
         $constraint = new Regex(['pattern' => RegexUtils::PHONE_PATTERN]);
         $validator = $this->initValidator();
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function validPhoneProvider(): array
+    public static function validPhoneProvider(): array
     {
         return [
             'concatenated number ' => ["0601020304"],
@@ -49,10 +49,10 @@ class RegexValidatorTest extends AbstractValidatorTest
         $constraint = new Regex(['pattern' => RegexUtils::PHONE_PATTERN]);
         $validator = $this->initValidator(self::INVALID_MESSAGE);
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function unvalidPhoneProvider(): array
+    public static function unvalidPhoneProvider(): array
     {
         return [
             'number missing' => ["06 01 02 03 0"],
@@ -75,10 +75,10 @@ class RegexValidatorTest extends AbstractValidatorTest
         $constraint = new Regex(['pattern' => RegexUtils::POSTAL_CODE_PATTERN]);
         $validator = $this->initValidator();
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function validPostalCodeProvider(): array
+    public static function validPostalCodeProvider(): array
     {
         return [
             'normal code' => ["26780"],
@@ -95,10 +95,10 @@ class RegexValidatorTest extends AbstractValidatorTest
         $constraint = new Regex(['pattern' => RegexUtils::POSTAL_CODE_PATTERN]);
         $validator = $this->initValidator(self::INVALID_MESSAGE);
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
-    public function unvalidPostalCodeProvider(): array
+    public static function unvalidPostalCodeProvider(): array
     {
         return [
             'number missing' => ["123"],

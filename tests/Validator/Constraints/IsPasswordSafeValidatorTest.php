@@ -2,9 +2,9 @@
 
 namespace Smart\CoreBundle\Tests\Validator\Constraints;
 
+use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\IsPasswordSafe;
 use Smart\CoreBundle\Validator\Constraints\IsPasswordSafeValidator;
-use Smart\StandardBundle\Validator\Constraints\AbstractValidatorTest;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/IsPasswordSafeValidatorTest.php
@@ -30,13 +30,13 @@ class IsPasswordSafeValidatorTest extends AbstractValidatorTest
         $constraint = new IsPasswordSafe();
         $validator = $this->initValidator($expectedMessage);
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
     /**
      * @return array
      */
-    public function failPasswordProvider()
+    public static function failPasswordProvider()
     {
         return [
             ["too_SH0RT", "is_password_safe.length_error"],
@@ -56,13 +56,13 @@ class IsPasswordSafeValidatorTest extends AbstractValidatorTest
         $constraint = new IsPasswordSafe();
         $validator = $this->initValidator();
 
-        $validator->validate($value, $constraint);
+        $validator->validate($value, $constraint); // @phpstan-ignore-line
     }
 
     /**
      * @return array
      */
-    public function validPasswordProvider()
+    public static function validPasswordProvider()
     {
         return [
             ["Aa12345678"],

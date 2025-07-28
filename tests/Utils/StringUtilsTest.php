@@ -56,7 +56,7 @@ class StringUtilsTest extends TestCase
         $this->assertEquals($expected, StringUtils::getNbRowsFromTextarea($values, ';'));
     }
 
-    public function getNbRowsFromTextareaProvider(): array
+    public static function getNbRowsFromTextareaProvider(): array
     {
         return [
             'Case 1 row' => [
@@ -95,7 +95,7 @@ class StringUtilsTest extends TestCase
         $this->assertEquals($expected, StringUtils::encodeNewLine($values));
     }
 
-    public function encodeNewLineProvider(): array
+    public static function encodeNewLineProvider(): array
     {
         return [
             'multiple_rows' => [
@@ -130,7 +130,7 @@ text"
         $this->assertEquals($expected, StringUtils::decodeNewLine($values));
     }
 
-    public function decodeNewLineProvider(): array
+    public static function decodeNewLineProvider(): array
     {
         return [
             'multiple_rows' => [
@@ -163,7 +163,7 @@ text",
         $this->assertEquals($expected, StringUtils::transformSnakeCaseToCamelCase($values));
     }
 
-    public function transformSnakeCaseToPascalCaseProvider(): array
+    public static function transformSnakeCaseToPascalCaseProvider(): array
     {
         return [
             'foo_bar' => [
@@ -195,7 +195,7 @@ text",
         $this->assertEquals($expected, StringUtils::intToExcelColumn($n));
     }
 
-    public function intToExcelColumnProvider(): array
+    public static function intToExcelColumnProvider(): array
     {
         return [
             'lower 0' => ['', -1],
@@ -221,7 +221,7 @@ text",
     /**
      * @return array
      */
-    public function getLastNameProvider(): array
+    public static function getLastNameProvider(): array
     {
         return [
             'null' => [
@@ -254,7 +254,7 @@ text",
     /**
      * @return array
      */
-    public function getFirstNameProvider()
+    public static function getFirstNameProvider()
     {
         return [
             'null' => [
@@ -299,7 +299,7 @@ text",
         $this->assertSame($expected, StringUtils::formatSpaceBetween($first, $last));
     }
 
-    public function formatSpaceBetweenProvider(): array
+    public static function formatSpaceBetweenProvider(): array
     {
         return [
             'simple' => [
@@ -333,7 +333,7 @@ text",
         $this->assertSame($expected, StringUtils::fillPrefix($value, $length, $prefixValue));
     }
 
-    public function fillPrefixProvider(): array
+    public static function fillPrefixProvider(): array
     {
         return [
             'simple' => [

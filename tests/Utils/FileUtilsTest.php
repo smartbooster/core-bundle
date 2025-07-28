@@ -18,7 +18,7 @@ class FileUtilsTest extends TestCase
         $this->assertSame($expected, FileUtils::slugifyFilename($filename));
     }
 
-    public function slugifyFilenameProvider(): array
+    public static function slugifyFilenameProvider(): array
     {
         return [
             'basic' => [

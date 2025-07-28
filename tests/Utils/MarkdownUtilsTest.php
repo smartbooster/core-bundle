@@ -18,7 +18,7 @@ class MarkdownUtilsTest extends TestCase
         $this->assertEquals($expected, MarkdownUtils::addAnchorToHeadings($md, $baseUrl));
     }
 
-    public function addAnchorToHeadingsProvider(): array
+    public static function addAnchorToHeadingsProvider(): array
     {
         $baseUrl = 'http://url.test';
 
