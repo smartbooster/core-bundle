@@ -18,7 +18,7 @@ class IsModulo extends Constraint
     public function __construct(
         int $modulo,
         mixed $options = null,
-        array $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
     ) {
         parent::__construct($options, $groups, $payload);

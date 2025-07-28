@@ -20,12 +20,12 @@ final class RouteLoader extends Loader
      *
      * Note that the smart_core type ensures that the support will not overlap the type of the Loader for other bundle
      */
-    public function supports(mixed $resource, string $type = null): bool
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return 'smart_core' === $type;
     }
 
-    public function load(mixed $resource, string $type = null): RouteCollection
+    public function load(mixed $resource, ?string $type = null): RouteCollection
     {
         $collection = new RouteCollection();
         $routeNamePrefix = 'smart_core_monitoring_';

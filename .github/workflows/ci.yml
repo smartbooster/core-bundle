@@ -6,7 +6,7 @@ jobs:
     ci:
         runs-on: ubuntu-latest
         container:
-            image: ghcr.io/${{ github.repository_owner }}/symfony-docker:php8.2
+            image: ghcr.io/${{ github.repository_owner }}/symfony-docker:php8.4
             credentials:
                 username: ${{ github.actor }}
                 password: ${{ secrets.GITHUB_TOKEN }}
