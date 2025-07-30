@@ -4,15 +4,14 @@ namespace Smart\CoreBundle\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
 use Smart\CoreBundle\Utils\RequestUtils;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Utils/RequestUtilsTest.php
  */
 class RequestUtilsTest extends TestCase
 {
-    /**
-     * @dataProvider getContextFromHostProvider
-     */
+    #[DataProvider('getContextFromHostProvider')]
     public function testGetContextFromHost(string $expected, string $host, ?string $domain = null): void
     {
         $this->assertEquals($expected, RequestUtils::getContextFromHost($host, $domain));

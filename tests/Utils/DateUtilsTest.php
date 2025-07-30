@@ -4,6 +4,7 @@ namespace Smart\CoreBundle\Tests\Utils;
 
 use Smart\CoreBundle\Utils\DateUtils;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -12,9 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DateUtilsTest extends TestCase
 {
-    /**
-     * @dataProvider getMonthsBetweenProvider
-     */
+    #[DataProvider('getMonthsBetweenProvider')]
     public function testGetMonthsBetween(array $expected, \DateTime $startedAt, \DateTime $endedAt): void
     {
         $this->assertSame($expected, DateUtils::getMonthsBetween($startedAt, $endedAt));
@@ -64,9 +63,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getFormattedDayOrMonthProvider
-     */
+    #[DataProvider('getFormattedDayOrMonthProvider')]
     public function testGetFormattedDayOrMonth(string $expected, int $number): void
     {
         $this->assertEquals($expected, DateUtils::getFormattedDayOrMonth($number));
@@ -109,9 +106,7 @@ class DateUtilsTest extends TestCase
         $this->assertNull(DateUtils::monthYearToString(year: 2023));
     }
 
-    /**
-     * @dataProvider getDaysBetweenProvider
-     */
+    #[DataProvider('getDaysBetweenProvider')]
     public function testGetDaysBetween(array $expected, \DateTime $startedAt, \DateTime $endedAt, array $options = []): void
     {
         $this->assertSame($expected, DateUtils::getDaysBetween($startedAt, $endedAt, $options));
@@ -215,9 +210,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getTimeIntervalsProvider
-     */
+    #[DataProvider('getTimeIntervalsProvider')]
     public function testGetTimeIntervals(array $expected, string $startTime, string $endTime): void
     {
         $this->assertSame($expected, DateUtils::getTimeIntervals($startTime, $endTime));
@@ -258,9 +251,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getCalendarDaysProvider
-     */
+    #[DataProvider('getCalendarDaysProvider')]
     public function testGetCalendarDays(int $month, int $year, array $expected): void
     {
         $results = DateUtils::getCalendarDays($month, $year);
@@ -794,9 +785,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getPrevIntFormatFromMonthYearProvider
-     */
+    #[DataProvider('getPrevIntFormatFromMonthYearProvider')]
     public function testGetPrevIntFormatFromMonthYear(int $expected, int $month, int $year, string $format): void
     {
         $this->assertSame($expected, DateUtils::getPrevIntFormatFromMonthYear($month, $year, $format));
@@ -812,9 +801,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getNextIntFormatFromMonthYearProvider
-     */
+    #[DataProvider('getNextIntFormatFromMonthYearProvider')]
     public function testGetNextIntFormatFromMonthYear(int $expected, int $month, int $year, string $format): void
     {
         $this->assertSame($expected, DateUtils::getNextIntFormatFromMonthYear($month, $year, $format));
@@ -830,9 +817,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getFirstDayOfMonthYearProvider
-     */
+    #[DataProvider('getFirstDayOfMonthYearProvider')]
     public function testGetFirstDayOfMonthYear(string $expected, int $month, int $year): void
     {
         $this->assertSame($expected, DateUtils::getFirstDayOfMonthYear($month, $year)->format('Y-m-d H:i:s'));
@@ -846,9 +831,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getLastDayOfMonthYearProvider
-     */
+    #[DataProvider('getLastDayOfMonthYearProvider')]
     public function testGetLastDayOfMonthYear(string $expected, int $month, int $year): void
     {
         $this->assertSame($expected, DateUtils::getLastDayOfMonthYear($month, $year)->format('Y-m-d H:i:s'));
@@ -864,9 +847,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetFirstDayYearFromDateTimeProvider
-     */
+    #[DataProvider('getGetFirstDayYearFromDateTimeProvider')]
     public function testGetFirstDayYearFromDateTime(\DateTime $expected, \DateTime $datetime): void
     {
         $this->assertEquals($expected, DateUtils::getFirstDayYearFromDateTime($datetime));
@@ -886,9 +867,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetLastDayMonthFromDateTimeProvider
-     */
+    #[DataProvider('getGetLastDayMonthFromDateTimeProvider')]
     public function testGetLastDayMonthFromDateTime(\DateTime $expected, \DateTime $datetime): void
     {
         $this->assertEquals($expected, DateUtils::getLastDayMonthFromDateTime($datetime));
@@ -916,9 +895,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getMonthsBetweenDateTimesProvider
-     */
+    #[DataProvider('getMonthsBetweenDateTimesProvider')]
     public function testGetMonthsBetweenDateTimes(array $expected, \DateTime $start, \DateTime $end): void
     {
         $this->assertEquals($expected, DateUtils::getMonthsBetweenDateTimes($start, $end));
@@ -950,9 +927,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getDateTimeMonthProvider
-     */
+    #[DataProvider('getDateTimeMonthProvider')]
     public function testGetDateTimeMonth(string $expected, \DateTime $value): void
     {
         $this->assertEquals($expected, DateUtils::getDateTimeMonth($value));
@@ -976,9 +951,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getDateTimeYearProvider
-     */
+    #[DataProvider('getDateTimeYearProvider')]
     public function testGetDateTimeYear(string $expected, \DateTime $value): void
     {
         $this->assertEquals($expected, DateUtils::getDateTimeYear($value));
@@ -1002,9 +975,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetNbOfWorkingDaysBetweenDateTimesProvider
-     */
+    #[DataProvider('getGetNbOfWorkingDaysBetweenDateTimesProvider')]
     public function testGetNbOfWorkingDaysBetweenDateTimes(int $expected, \DateTime $start, \DateTime $end): void
     {
         $this->assertEquals($expected, DateUtils::getNbOfWorkingDaysBetweenDateTimes($start, $end));
@@ -1056,9 +1027,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetDateTimeFromMonthYearProvider
-     */
+    #[DataProvider('getGetDateTimeFromMonthYearProvider')]
     public function testGetDateTimeFromMonthYear(string $string): void
     {
         $this->assertEquals($string, DateUtils::getDateTimeFromMonthYear($string)->format('m/Y'));
@@ -1083,9 +1052,7 @@ class DateUtilsTest extends TestCase
         DateUtils::getDateTimeFromMonthYear('');
     }
 
-    /**
-     * @dataProvider getGetLastDayPreviousMonthFromDateTimeProvider
-     */
+    #[DataProvider('getGetLastDayPreviousMonthFromDateTimeProvider')]
     public function testGetLastDayPreviousMonthFromDateTime(string $expected, \DateTime $dateTime): void
     {
         $this->assertEquals($expected, DateUtils::getLastDayPreviousMonthFromDateTime($dateTime)->format('Y-m-d H:i:s'));
@@ -1125,9 +1092,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetFirstDayNextMonthFromDateTimeProvider
-     */
+    #[DataProvider('getGetFirstDayNextMonthFromDateTimeProvider')]
     public function testGetFirstDayNextMonthFromDateTime(string $expected, \DateTime $dateTime): void
     {
         $this->assertEquals($expected, DateUtils::getFirstDayNextMonthFromDateTime($dateTime)->format('Y-m-d'));
@@ -1147,9 +1112,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetFirstDayMonthProvider
-     */
+    #[DataProvider('getGetFirstDayMonthProvider')]
     public function testGetFirstDayMonth(string $expected, \DateTime $dateTime): void
     {
         $this->assertEquals($expected, DateUtils::getFirstDayMonth($dateTime)->format('d/m/Y H:i:s'));
@@ -1169,9 +1132,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getNextBirthdayDateTimeProvider
-     */
+    #[DataProvider('getNextBirthdayDateTimeProvider')]
     public function testGetNextBirthdayDateTime(string $expected, \DateTime $birthday, \DateTime $currentDay): void
     {
         $this->assertSame($expected, DateUtils::getNextBirthdayDateTime($birthday, $currentDay)->format('Y-m-d'));
@@ -1203,9 +1164,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetFormattedLongMonthProvider
-     */
+    #[DataProvider('getGetFormattedLongMonthProvider')]
     public function testGetFormattedLongMonth(string $expected, string $date, string $locale): void
     {
         $this->assertEquals($expected, DateUtils::getFormattedLongMonth(new \DateTime($date), $locale));
@@ -1220,9 +1179,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetFormattedLongMonthYearsProvider
-     */
+    #[DataProvider('getGetFormattedLongMonthYearsProvider')]
     public function testGetFormattedLongMonthYears(string $expected, string $date, string $locale): void
     {
         $this->assertEquals($expected, DateUtils::getFormattedLongMonthYears(new \DateTime($date), $locale));
@@ -1237,9 +1194,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getFormattedShortMonthYearsProvider
-     */
+    #[DataProvider('getFormattedShortMonthYearsProvider')]
     public function testGetFormattedShortMonthYears(string $expected, string $date): void
     {
         $this->assertEquals($expected, DateUtils::getFormattedShortMonthYears(new \DateTime($date)));
@@ -1255,9 +1210,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getGetNbDayBetweenDateTimesProvider
-     */
+    #[DataProvider('getGetNbDayBetweenDateTimesProvider')]
     public function testGetNbDayBetweenDateTimes(int $expected, \DateTime $start, \DateTime $end): void
     {
         $this->assertEquals($expected, DateUtils::getNbDayBetweenDateTimes($start, $end));
@@ -1278,9 +1231,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals(new \DateTime('2024-10-15 08:00:00'), DateUtils::addDays(new \DateTime('2024-10-10 08:00:00'), 5));
     }
 
-    /**
-     * @dataProvider addWorkingDaysProvider
-     */
+    #[DataProvider('addWorkingDaysProvider')]
     public function testAddWorkingDays(string $dateTime, int $daysNb, string $expect): void
     {
         $this->assertSame(
@@ -1324,9 +1275,7 @@ class DateUtilsTest extends TestCase
         $this->assertEquals(new \DateTime('2019-10-10 08:00:00'), DateUtils::subYears(new \DateTime('2024-10-10 08:00:00'), 5));
     }
 
-    /**
-     * @dataProvider secondsToStringProvider
-     */
+    #[DataProvider('secondsToStringProvider')]
     public function testSecondsToString(?string $expected, ?int $value): void
     {
         $this->assertEquals($expected, DateUtils::secondsToString($value));
@@ -1347,9 +1296,7 @@ class DateUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider millisecondsToStringProvider
-     */
+    #[DataProvider('millisecondsToStringProvider')]
     public function testMillisecondsToString(?string $expected, ?int $value): void
     {
         $this->assertEquals($expected, DateUtils::millisecondsToString($value));

@@ -4,15 +4,14 @@ namespace Smart\CoreBundle\Tests\Utils;
 
 use Smart\CoreBundle\Utils\MarkdownUtils;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Utils/MarkdownUtilsTest.php
  */
 class MarkdownUtilsTest extends TestCase
 {
-    /**
-     * @dataProvider addAnchorToHeadingsProvider
-     */
+    #[DataProvider('addAnchorToHeadingsProvider')]
     public function testAddAnchorToHeadings(string $expected, string $md, string $baseUrl): void
     {
         $this->assertEquals($expected, MarkdownUtils::addAnchorToHeadings($md, $baseUrl));

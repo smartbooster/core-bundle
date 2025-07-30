@@ -6,15 +6,14 @@ use Smart\CoreBundle\Exception\Utils\ArrayUtils\MultiArrayNbFieldsException;
 use Smart\CoreBundle\Exception\Utils\ArrayUtils\MultiArrayNbMaxRowsException;
 use Smart\CoreBundle\Utils\ArrayUtils;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Utils/ArrayUtilsTest.php
  */
 class ArrayUtilsTest extends TestCase
 {
-    /**
-     * @dataProvider getArrayFromTextareaProvider
-     */
+    #[DataProvider('getArrayFromTextareaProvider')]
     public function testArrayFromTextarea(array $expected, ?string $values): void
     {
         $this->assertEquals($expected, ArrayUtils::getArrayFromTextarea($values));
@@ -49,12 +48,12 @@ class ArrayUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getMultiArrayNbFieldsExceptionFromTextareaProvider
      * @param string $string
      * @param string $delimiter
      * @param array $fields
      * @param array $keys
      */
+    #[DataProvider('getMultiArrayNbFieldsExceptionFromTextareaProvider')]
     public function testMultiArrayNbFieldsExceptionFromTextarea(string $string, string $delimiter, array $fields, array $keys): void
     {
         try {
@@ -105,12 +104,12 @@ class ArrayUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getMultiArrayNbMaxRowsExceptionProvider
      * @param string $string
      * @param string $delimiter
      * @param array $fields
      * @param int $nbMaxRows
      */
+    #[DataProvider('getMultiArrayNbMaxRowsExceptionProvider')]
     public function testMultiArrayNbMaxRowsExceptionFromTextarea(string $string, string $delimiter, array $fields, int $nbMaxRows): void
     {
         try {
@@ -144,12 +143,12 @@ class ArrayUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getMultiArrayFromTextareaProvider
      * @param array $expectedMultiArray
      * @param string $string
      * @param string $delimiter
      * @param array $fields
      */
+    #[DataProvider('getMultiArrayFromTextareaProvider')]
     public function testMultiArrayFromTextarea(array $expectedMultiArray, string $string, string $delimiter, array $fields = []): void
     {
         $this->assertEquals($expectedMultiArray, ArrayUtils::getMultiArrayFromTextarea($string, $delimiter, $fields));
@@ -294,9 +293,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider flattenArrayValuesProvider
-     */
+    #[DataProvider('flattenArrayValuesProvider')]
     public function testFlattenArrayValues(array $expected, array $input, string $separator): void
     {
         $this->assertEquals($expected, ArrayUtils::flattenArrayValues($input, $separator));
@@ -334,9 +331,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider checkIssetKeysProvider
-     */
+    #[DataProvider('checkIssetKeysProvider')]
     public function testCheckIssetKeys(bool $expected, array $array, array $keys): void
     {
         $this->assertEquals($expected, ArrayUtils::checkIssetKeys($array, $keys));
@@ -391,9 +386,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider getTrimExplodeProvider
-     */
+    #[DataProvider('getTrimExplodeProvider')]
     public function testTrimExplode(array $expected, string $string, ?string $separator): void
     {
         if ($separator === null) {
@@ -436,9 +429,7 @@ name', "value" => 2],
         ArrayUtils::trimExplode('', '');
     }
 
-    /**
-     * @dataProvider getRemoveEmptyProvider
-     */
+    #[DataProvider('getRemoveEmptyProvider')]
     public function testRemoveEmpty(array $expected, array $values): void
     {
         $this->assertEquals($expected, ArrayUtils::removeEmpty($values));
@@ -462,9 +453,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider getFilterByPatternProvider
-     */
+    #[DataProvider('getFilterByPatternProvider')]
     public function testFilterByPattern(array $expected, array $values, string $pattern, bool $negate): void
     {
         $this->assertEquals($expected, ArrayUtils::filterByPattern($values, $pattern, $negate));
@@ -525,9 +514,7 @@ name', "value" => 2],
         }
     }
 
-    /**
-     * @dataProvider getFlatToMapProvider
-     */
+    #[DataProvider('getFlatToMapProvider')]
     public function testFlatToMap(array $expected, ?array $array, ?\Closure $fnKey, ?\Closure $fnValue): void
     {
         $this->assertEquals($expected, ArrayUtils::flatToMap($array, $fnKey, $fnValue));
@@ -585,9 +572,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider hasDuplicateProvider
-     */
+    #[DataProvider('hasDuplicateProvider')]
     public function testHasDuplicateValue(bool $expected, array $array): void
     {
         $this->assertSame($expected, ArrayUtils::hasDuplicateValue($array));
@@ -615,9 +600,7 @@ name', "value" => 2],
         ];
     }
 
-    /**
-     * @dataProvider toIndexedArrayProvider
-     */
+    #[DataProvider('toIndexedArrayProvider')]
     public function testToIndexedArray(array $expected, array $array): void
     {
         $this->assertSame($expected, ArrayUtils::toIndexedArray($array));

@@ -5,6 +5,7 @@ namespace Smart\CoreBundle\Tests\Validator\Constraints;
 use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\IsPasswordSafe;
 use Smart\CoreBundle\Validator\Constraints\IsPasswordSafeValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/IsPasswordSafeValidatorTest.php
@@ -23,8 +24,8 @@ class IsPasswordSafeValidatorTest extends AbstractValidatorTest
      * Test not valid password
      * @param string $value
      * @param string $expectedMessage
-     * @dataProvider failPasswordProvider
      */
+    #[DataProvider('failPasswordProvider')]
     public function testValidationFail($value, $expectedMessage): void
     {
         $constraint = new IsPasswordSafe();
@@ -49,8 +50,8 @@ class IsPasswordSafeValidatorTest extends AbstractValidatorTest
     /**
      * Test valid password
      * @param string $value
-     * @dataProvider validPasswordProvider
      */
+    #[DataProvider('validPasswordProvider')]
     public function testValidationOk($value): void
     {
         $constraint = new IsPasswordSafe();

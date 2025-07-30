@@ -85,7 +85,7 @@ class ArrayUtils
 
             // Test of the number of values for the current row (+ skip if empty row)
             $nbRowValues = count($row);
-            if ($nbRowValues != $nbFields && $nbRowValues === 1 && trim($row[0]) === '') {
+            if ($nbRowValues != $nbFields && $nbRowValues === 1 && trim($row[0] ?? '') === '') {
                 $rowIndex++;
                 continue;
             } elseif ($nbRowValues != $nbFields) {

@@ -6,6 +6,7 @@ use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Utils\RegexUtils;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\RegexValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/RegexValidatorTest.php
@@ -22,9 +23,7 @@ class RegexValidatorTest extends AbstractValidatorTest
         return new RegexValidator();
     }
 
-    /**
-     * @dataProvider validPhoneProvider
-     */
+    #[DataProvider('validPhoneProvider')]
     public function testValidRegexPhone(string $value): void
     {
         $constraint = new Regex(['pattern' => RegexUtils::PHONE_PATTERN]);
@@ -41,9 +40,7 @@ class RegexValidatorTest extends AbstractValidatorTest
         ];
     }
 
-    /**
-     * @dataProvider unvalidPhoneProvider
-     */
+    #[DataProvider('unvalidPhoneProvider')]
     public function testUnvalidRegexPhone(string $value): void
     {
         $constraint = new Regex(['pattern' => RegexUtils::PHONE_PATTERN]);
@@ -67,9 +64,7 @@ class RegexValidatorTest extends AbstractValidatorTest
         ];
     }
 
-    /**
-     * @dataProvider validPostalCodeProvider
-     */
+    #[DataProvider('validPostalCodeProvider')]
     public function testValidRegexPostalCode(string $value): void
     {
         $constraint = new Regex(['pattern' => RegexUtils::POSTAL_CODE_PATTERN]);
@@ -87,9 +82,7 @@ class RegexValidatorTest extends AbstractValidatorTest
         ];
     }
 
-    /**
-     * @dataProvider unvalidPostalCodeProvider
-     */
+    #[DataProvider('unvalidPostalCodeProvider')]
     public function testUnvalidRegexPostalCode(string $value): void
     {
         $constraint = new Regex(['pattern' => RegexUtils::POSTAL_CODE_PATTERN]);

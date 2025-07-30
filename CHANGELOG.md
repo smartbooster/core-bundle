@@ -1,5 +1,13 @@
 CHANGELOG for 1.x
 ===================
+## v1.16.1 - (2025-07-30)
+### Changed
+- Update `phpunit.xml` & `phpstan.neon` config according to standard-bundle v1.1.2
+- Add use_savepoints on doctrine test config in case of future database tests in the bundle
+- Use DataProvider attribut as PHPUnit version updated to 12.2
+### Fixed
+- Fix PHP 8.4 deprecations in `ArrayUtils` & `StringUtils` with trim & strlen functions
+
 ## v1.16.0 - (2025-07-28)
 ### Added
 - `composer.json` Allow sentry/sentry-symfony ^5.1 for PHP 8.4 support
