@@ -46,7 +46,7 @@ enum ProcessStatusEnum: string
         }, self::cases());
     }
 
-    public static function getTextColor(mixed $case): ?string
+    public static function getTextColor(mixed $case): ?string // @phpstan-ignore-line false positive can be null on override
     {
         return '#ffffff';
     }

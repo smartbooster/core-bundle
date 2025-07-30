@@ -5,6 +5,7 @@ namespace Smart\CoreBundle\Tests\Validator\Constraints;
 use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\IsModulo;
 use Smart\CoreBundle\Validator\Constraints\IsModuloValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/IsModuloValidatorTest.php
@@ -21,9 +22,7 @@ class IsModuloValidatorTest extends AbstractValidatorTest
         return new IsModuloValidator();
     }
 
-    /**
-     * @dataProvider failProvider
-     */
+    #[DataProvider('failProvider')]
     public function testValidationFail(int $value): void
     {
         $constraint = new IsModulo(15);
@@ -44,9 +43,7 @@ class IsModuloValidatorTest extends AbstractValidatorTest
         ];
     }
 
-    /**
-     * @dataProvider validProvider
-     */
+    #[DataProvider('validProvider')]
     public function testValidationOk(int $value): void
     {
         $constraint = new IsModulo(15);

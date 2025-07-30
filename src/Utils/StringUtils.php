@@ -172,7 +172,7 @@ class StringUtils
     public static function formatSpaceBetween(?string $first, ?string $last): string
     {
         $space = '';
-        if (strlen($first) > 0 && strlen($last) > 0) {
+        if (strlen($first ?? '') > 0 && strlen($last ?? '') > 0) {
             $space = ' ';
         }
 

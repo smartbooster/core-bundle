@@ -5,6 +5,7 @@ namespace Smart\CoreBundle\Tests\Utils;
 use App\Utils\NumberUtils;
 use Smart\CoreBundle\Utils\MathUtils;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -13,9 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MathUtilsTest extends TestCase
 {
-    /**
-     * @dataProvider getPercentProvider
-     */
+    #[DataProvider('getPercentProvider')]
     public function testCalcPercent(float $expected, float $partial, float $total, ?int $roundPrecision = null): void
     {
         $this->assertEqualsWithDelta($expected, MathUtils::calculatePercentage($partial, $total, $roundPrecision), 0.000000001);
@@ -40,9 +39,7 @@ class MathUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider formatBytesProvider
-     */
+    #[DataProvider('formatBytesProvider')]
     public function testFormatBytes(string $expected, float $size, ?int $roundPrecision = null): void
     {
         if ($roundPrecision === null) {
@@ -70,7 +67,7 @@ class MathUtilsTest extends TestCase
         ];
     }
 
-    /** @dataProvider convertCentsToEuroProvider */
+    #[DataProvider('convertCentsToEuroProvider')]
     public function testConvertCentsToEuro(float $expected, float $price): void
     {
         $this->assertSame($expected, MathUtils::convertCentsToEuro($price));
@@ -86,9 +83,7 @@ class MathUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider calculateAverageProvider
-     */
+    #[DataProvider('calculateAverageProvider')]
     public function testCalculateAverage(float $expected, array $values, ?int $roundPrecision): void
     {
         if (null === $roundPrecision) {
@@ -110,9 +105,7 @@ class MathUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getCalculateDivisionProvider
-     */
+    #[DataProvider('getCalculateDivisionProvider')]
     public function testCalculateDivision(float $expected, ?int $dividend, int $divider, int $roundPrecision): void
     {
         $this->assertEquals($expected, MathUtils::calculateDivision($dividend, $divider, $roundPrecision));

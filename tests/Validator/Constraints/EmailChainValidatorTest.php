@@ -5,6 +5,7 @@ namespace Smart\CoreBundle\Tests\Validator\Constraints;
 use Smart\CoreBundle\AbstractValidatorTest;
 use Smart\CoreBundle\Validator\Constraints\EmailChain;
 use Smart\CoreBundle\Validator\Constraints\EmailChainValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Validator/Constraints/EmailChainValidatorTest.php
@@ -19,9 +20,7 @@ class EmailChainValidatorTest extends AbstractValidatorTest
         return new EmailChainValidator();
     }
 
-    /**
-     * @dataProvider failProvider
-     */
+    #[DataProvider('failProvider')]
     public function testValidationFail(string $value): void
     {
         $constraint = new EmailChain();
@@ -39,9 +38,7 @@ class EmailChainValidatorTest extends AbstractValidatorTest
         ];
     }
 
-    /**
-     * @dataProvider validProvider
-     */
+    #[DataProvider('validProvider')]
     public function testValidationOk(string $value): void
     {
         $constraint = new EmailChain();

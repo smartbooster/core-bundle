@@ -4,6 +4,7 @@ namespace Smart\CoreBundle\Tests\Utils;
 
 use Smart\CoreBundle\Utils\StringUtils;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * vendor/bin/simple-phpunit tests/Utils/StringUtilsTest.php
@@ -48,9 +49,7 @@ class StringUtilsTest extends TestCase
         $this->assertEquals('extranet_dummy_', StringUtils::getEntityRoutePrefix('App\Entity\Dummy', 'extranet'));
     }
 
-    /**
-     * @dataProvider getNbRowsFromTextareaProvider
-     */
+    #[DataProvider('getNbRowsFromTextareaProvider')]
     public function testGetNbRowsFromTextarea(int $expected, string $values): void
     {
         $this->assertEquals($expected, StringUtils::getNbRowsFromTextarea($values, ';'));
@@ -87,9 +86,7 @@ class StringUtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider encodeNewLineProvider
-     */
+    #[DataProvider('encodeNewLineProvider')]
     public function testEncodeNewLine(?string $expected, ?string $values): void
     {
         $this->assertEquals($expected, StringUtils::encodeNewLine($values));
@@ -122,9 +119,7 @@ text"
         ];
     }
 
-    /**
-     * @dataProvider decodeNewLineProvider
-     */
+    #[DataProvider('decodeNewLineProvider')]
     public function testDecodeNewLine(?string $expected, ?string $values): void
     {
         $this->assertEquals($expected, StringUtils::decodeNewLine($values));
@@ -155,9 +150,7 @@ text",
         ];
     }
 
-    /**
-     * @dataProvider transformSnakeCaseToPascalCaseProvider
-     */
+    #[DataProvider('transformSnakeCaseToPascalCaseProvider')]
     public function testTransformSnakeCaseToPascalCase(string $expected, string $values): void
     {
         $this->assertEquals($expected, StringUtils::transformSnakeCaseToCamelCase($values));
@@ -187,9 +180,7 @@ text",
         ];
     }
 
-    /**
-     * @dataProvider intToExcelColumnProvider
-     */
+    #[DataProvider('intToExcelColumnProvider')]
     public function testIntToExcelColumn(string $expected, int $n): void
     {
         $this->assertEquals($expected, StringUtils::intToExcelColumn($n));
@@ -209,10 +200,10 @@ text",
     }
 
     /**
-     * @dataProvider getLastNameProvider
      * @param string|null $expected
      * @param string|null $values
      */
+    #[DataProvider('getLastNameProvider')]
     public function testFormatLastName($expected, $values): void
     {
         $this->assertSame($expected, StringUtils::formatLastName($values));
@@ -242,10 +233,10 @@ text",
     }
 
     /**
-     * @dataProvider getFirstNameProvider
      * @param string|null $expected
      * @param string|null $values
      */
+    #[DataProvider('getFirstNameProvider')]
     public function testFormatFirstName($expected, $values): void
     {
         $this->assertSame($expected, StringUtils::formatFirstName($values));
@@ -291,9 +282,7 @@ text",
     }
 
 
-    /**
-     * @dataProvider formatSpaceBetweenProvider
-     */
+    #[DataProvider('formatSpaceBetweenProvider')]
     public function testFormatSpaceBetween(string $expected, ?string $first, ?string $last): void
     {
         $this->assertSame($expected, StringUtils::formatSpaceBetween($first, $last));
@@ -325,9 +314,7 @@ text",
         ];
     }
 
-    /**
-     * @dataProvider fillPrefixProvider
-     */
+    #[DataProvider('fillPrefixProvider')]
     public function testFillPrefix(string $expected, int|string $value, int $length, string $prefixValue): void
     {
         $this->assertSame($expected, StringUtils::fillPrefix($value, $length, $prefixValue));
