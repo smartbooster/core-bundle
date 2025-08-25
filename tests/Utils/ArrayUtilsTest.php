@@ -615,4 +615,47 @@ name', "value" => 2],
             'multidimensional_indexed_array_no_changes' => [[[1, 2], [3, 4]], [[1, 2], [3, 4]]],
         ];
     }
+
+    /**
+     * @dataProvider sortArrayKeyByArrayProvider
+     */
+    public function testSortArrayKeyByArray(array $expected, array $arrayToSort, array $arraySorted): void
+    {
+        $this->assertSame($expected, ArrayUtils::sortArrayKeyByArray($arrayToSort, $arraySorted));
+    }
+
+    public function sortArrayKeyByArrayProvider(): array
+    {
+        return [
+            'simple_array' => [
+                ['blue' => null, 'orange' => null, 'white' => null],
+                ['orange' => null, 'white' => null, 'blue' => null],
+                ['blue', 'orange', 'white']
+            ],
+            'multi_array' => [[
+                'blue' => ['foe' => 3],
+                'orange' => ['foe' => 5],
+                'white' => ['foe' => 4],
+            ], [
+                'orange' => ['foe' => 5],
+                'white' => ['foe' => 4],
+                'blue' => ['foe' => 3],
+            ], ['blue', 'orange', 'white']],
+            'simple_array_with_missing_array_to_order_key' => [
+                ['blue' => null, 'orange' => null, 'white' => null],
+                ['orange' => null, 'white' => null, 'blue' => null],
+                ['blue', 'black', 'orange', 'white', 'purple']
+            ],
+            'multi_array_with_missing_array_to_order_key' => [[
+                'blue' => ['foe' => 3],
+                'orange' => ['foe' => 5],
+                'white' => ['foe' => 4],
+            ], [
+                'orange' => ['foe' => 5],
+                'white' => ['foe' => 4],
+                'blue' => ['foe' => 3],
+            ], ['blue', 'black', 'orange', 'white', 'purple']],
+            'simple_array_with_missing_array_ordering_key' => [[1 => null, 3 => null, 2 => null], [2 => null, 3 => null, 1 => null], [1, 3]],
+        ];
+    }
 }
