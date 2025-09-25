@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.16.2 - (2025-09-25)
+### Added
+- `ProcessStatusEnum::addQbOrderBy` Add method to add a qb order by on the enum
+
 ## v1.16.1 - (2025-07-30)
 ### Changed
 - Update `phpunit.xml` & `phpstan.neon` config according to standard-bundle v1.1.2

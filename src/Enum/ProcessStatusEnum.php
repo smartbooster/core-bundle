@@ -2,6 +2,7 @@
 
 namespace Smart\CoreBundle\Enum;
 
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 enum ProcessStatusEnum: string
@@ -56,5 +57,21 @@ enum ProcessStatusEnum: string
         return array_map(function (self $case) use ($translator) {
             return $translator->trans(self::PREFIX_LABEL . $case->value, [], 'enum');
         }, self::cases());
+    }
+
+    public static function addQbOrderBy(QueryBuilder $qb, string $field, string $order, string $alias = 'o', ?string $jsonProperty = null): void
+    {
+        if ($jsonProperty !== null) {
+            $sort = "FIELD(JSON_UNQUOTE(JSON_EXTRACT($alias.$jsonProperty, '$.$field'))";
+        } else {
+            $sort = "FIELD(ANY_VALUE($alias.$field)";
+        }
+        foreach (self::cases() as $case) {
+            $sortParamName = ":{$field}_sort_" . $case->value;
+            $sort .= ', ' . $sortParamName;
+            $qb->setParameter($sortParamName, $case->value);
+        }
+        $sort .= ')';
+        $qb->orderBy($sort, $order);
     }
 }
