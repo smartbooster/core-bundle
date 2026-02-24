@@ -117,7 +117,7 @@ class StringUtils
             $n--; // Decrement $n to match Excel's 1-based indexing
             $remainder = $n % 26;
             $result = chr(65 + $remainder) . $result;
-            $n = (int)($n / 26);
+            $n = (int) ($n / 26);
         }
 
         return $result;

@@ -2,7 +2,6 @@
 
 namespace Smart\CoreBundle\Tests\Utils;
 
-use App\Utils\NumberUtils;
 use Smart\CoreBundle\Utils\MathUtils;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;

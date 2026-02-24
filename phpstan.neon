@@ -31,31 +31,31 @@ parameters:
         lineAfter: 0   # Number of lines to display after error line (default: 2)
     errorFormat: friendly
     reportUnmatchedIgnoredErrors: false
-    treatPhpDocTypesAsCertain: false
     symfony:
         containerXmlPath: var/cache/dev/Smart_CoreBundle_KernelDevDebugContainer.xml
     ignoreErrors:
         # Ignore error by identifier
-        - identifier: doctrine.columnType
-        - identifier: doctrine.associationType
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
-        # Règles Niveau 8 à dépiler
-        - identifier: argument.type
-        - identifier: return.type
-        - identifier: trait.unused
-        - identifier: class.notFound
-        - identifier: function.impossibleType
-        # Règles Niveau 9 à dépiler
-        - identifier: offsetAccess.nonOffsetAccessible
-        - identifier: foreach.nonIterable
-        - identifier: offsetAccess.invalidOffset
-        - identifier: assign.propertyType
-        # Règles Niveau 10 à dépiler
-        - identifier: encapsedStringPart.nonString
-        - identifier: postInc.type
-        - identifier: binaryOp.invalid
-        - identifier: cast.string
+        - identifier: trait.unused # normal to ignore in the context of the bundle
+        -
+            identifier: class.notFound
+            # False positif post install during github qa
+            path: tests/bootstrap.php # 3
+        -
+            identifier: function.impossibleType
+            # False positif post install during github qa
+            path: tests/bootstrap.php # 1
+        # Level 8 rules to unstack
+        - identifier: argument.type # 44
+        - identifier: return.type # 3
+        # Level 9 rules to unstack
+        - identifier: offsetAccess.nonOffsetAccessible # 10
+        - identifier: foreach.nonIterable # 4
+        - identifier: offsetAccess.invalidOffset # 2
+        # Level 10 rules to unstack
+        - identifier: encapsedStringPart.nonString # 2
+        - identifier: binaryOp.invalid # 4
 
     bootstrapFiles:
         - vendor/bin/.phpunit/phpunit/vendor/autoload.php

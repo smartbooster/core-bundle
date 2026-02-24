@@ -16,6 +16,8 @@ interface MailableInterface extends \Stringable
      *  For example : getEmail() ?? getEmail2()
      */
     public function getRecipientEmail(): ?string;
+
     public function getCc(): ?string;
+
     public function getCci(): ?string;
 }

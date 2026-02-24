@@ -155,9 +155,9 @@ class EntityCleanupCommand extends Command
             return Cron::class; // @phpstan-ignore-line
         } elseif ($class === 'api_call') {
             return ApiCall::class; // @phpstan-ignore-line
-        } else {
-            return $class;
         }
+
+        return $class;
     }
 
     public function setCommandConfigs(array $commandConfigs): void

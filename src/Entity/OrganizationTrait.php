@@ -3,7 +3,6 @@
 namespace Smart\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Smart\CoreBundle\Entity\AddressTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait OrganizationTrait
