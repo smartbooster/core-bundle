@@ -20,8 +20,8 @@ class ParentFileTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-        if ($value !== null && $value->getParent() === null) {
-            $value->setParent($this->parent);
+        if ($value !== null && $value->getParent() === null) { // qa: todo à typer @phpstan-ignore method.nonObject
+            $value->setParent($this->parent); // qa: todo à typer @phpstan-ignore method.nonObject
         }
 
         return $value;

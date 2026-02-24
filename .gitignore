@@ -25,3 +25,4 @@
 ###> smartbooster/standard-bundle ###
 /.phpcs-cache
 ###< smartbooster/standard-bundle ###
+/.php-cs-fixer.cache

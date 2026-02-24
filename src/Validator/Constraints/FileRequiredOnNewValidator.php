@@ -21,10 +21,10 @@ class FileRequiredOnNewValidator extends ConstraintValidator
         $object = $this->context->getObject();
         // Need symfony/form dependency
         if ($object instanceof FormInterface) { // MDT adjust if use the contraints from collection
-            $object = $object->getParent()->getData();
+            $object = $object->getParent()->getData(); // qa: Faux positif @phpstan-ignore method.nonObject
         }
 
-        if ($object !== null && $object->getId() === null && $object->getFile() === null) {
+        if ($object !== null && $object->getId() === null && $object->getFile() === null) { // qa: Faux positif @phpstan-ignore-line
             $this->context->buildViolation($constraint->message)
                 ->atPath('file')
                 ->addViolation();

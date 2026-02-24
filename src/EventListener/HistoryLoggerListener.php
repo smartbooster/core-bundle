@@ -39,7 +39,7 @@ class HistoryLoggerListener implements EventSubscriberInterface
     {
         // Set the context base on the domain
         $request = $this->requestStack->getCurrentRequest();
-        $this->context = RequestUtils::getContextFromHost($request->getHost(), $this->domain);
+        $this->context = RequestUtils::getContextFromHost($request->getHost(), $this->domain); // qa: Faux positif car dans le context Controller on a bien toujours l'objet request @phpstan-ignore method.nonObject
         $this->historyLogger->setContext($this->context);
 
         // Set the origin based on the action controller

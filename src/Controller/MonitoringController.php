@@ -23,9 +23,9 @@ class MonitoringController extends AbstractController
         ]);
     }
 
-    public function phpinfo(): void
+    public function phpinfo(): void // phpcs:ignore
     {
-        phpinfo();
+        phpinfo(); // phpcs:ignore
         die;
     }
 
