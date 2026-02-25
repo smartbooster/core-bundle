@@ -13,12 +13,12 @@ class ParentFileTransformer implements DataTransformerInterface
         $this->parent = $parent;
     }
 
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         return $value;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if ($value !== null && $value->getParent() === null) { // qa: todo à typer @phpstan-ignore method.nonObject
             $value->setParent($this->parent); // qa: todo à typer @phpstan-ignore method.nonObject

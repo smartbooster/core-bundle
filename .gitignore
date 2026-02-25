@@ -27,3 +27,5 @@
 ###< smartbooster/standard-bundle ###
 /.php-cs-fixer.cache
 /php_cs_fixer_report.json
+/config/reference.php
+/tests/bootstrap.php

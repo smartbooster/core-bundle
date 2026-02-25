@@ -1,7 +1,11 @@
 CHANGELOG for 1.x
 ===================
-## v1.16.3 - (2026-02-26)
-# Fixed
+## v1.17.0 - (2026-02-25)
+### Added
+- Allow Symfony 7.4
+
+## v1.16.3 - (2026-02-25)
+### Fixed
 - QA changes to match standard-bundle related from version ^1.2 : .php-cs-fixer.dist + phpcs security + phpstan lvl10 
 
 ## v1.16.2 - (2025-09-25)
