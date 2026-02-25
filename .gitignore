@@ -29,3 +29,4 @@
 /php_cs_fixer_report.json
 /config/reference.php
 /tests/bootstrap.php
+/.claude/settings.local.json
