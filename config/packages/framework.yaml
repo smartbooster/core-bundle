@@ -1,3 +1,6 @@
 # Required for the QA lint-twig to work
 framework:
     secret: 'dummy'
+    property_info:
+        # See the impacts of setting this to true when migrating to SF 8 https://symfony.com/doc/7.4/reference/configuration/framework.html#with-constructor-extractor
+        with_constructor_extractor: false

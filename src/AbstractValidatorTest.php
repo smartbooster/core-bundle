@@ -30,10 +30,6 @@ abstract class AbstractValidatorTest extends TestCase
 
         if ($expectedMessage !== null) {
             // Configuration pour les tests qui attendent une violation
-            // Retour du même builder après chaque méthode pour permettre le chaînage
-            $builder->method('addViolation')
-                ->willReturn($builder);
-
             $builder->method('setParameter')
                 ->willReturn($builder);
 
