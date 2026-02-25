@@ -110,9 +110,9 @@ class DateUtils
                 $isAfterEndHour = ((int) $endedAt->format('H')) >= $options['end_hour'];
 
                 if (
-                    ($startedAt->format($dateFormat) === $endedAt->format($dateFormat) && (!$isBeforeStartHour || !$isAfterEndHour)) ||
-                    ($date->format($dateFormat) === $startedAt->format($dateFormat) && !$isBeforeStartHour) ||
-                    ($date->format($dateFormat) === $endedAt->format($dateFormat) && !$isAfterEndHour)
+                    ($startedAt->format($dateFormat) === $endedAt->format($dateFormat) && (!$isBeforeStartHour || !$isAfterEndHour))
+                    || ($date->format($dateFormat) === $startedAt->format($dateFormat) && !$isBeforeStartHour)
+                    || ($date->format($dateFormat) === $endedAt->format($dateFormat) && !$isAfterEndHour)
                 ) {
                     continue;
                 }
@@ -136,7 +136,7 @@ class DateUtils
             $firstDayOfCalendar->modify('last Monday');
         }
 
-        $lastDayOfMonth = clone (new \DateTime())->setDate($year, $month, (int)$fistDayOfMonth->format('t'));
+        $lastDayOfMonth = clone (new \DateTime())->setDate($year, $month, (int) $fistDayOfMonth->format('t'));
         $lastDayOfCalendar = clone $lastDayOfMonth;
         // we will only search for the next Sunday if the day number is different from Sunday (7)
         if ($lastDayOfMonth->format('N') !== '7') {
@@ -154,12 +154,12 @@ class DateUtils
                 'isSameMonth' => (int) $currentDay->format('n') === $month,
                 'isSameDay' => $today->format('d') === $currentDay->format('d') && (int) $currentDay->format('n') === $month,
                 'isToday' => $isToday,
-                'isWeekend' => (int) $currentDay->format('N') === 6 || (int)$currentDay->format('N') === 7,
+                'isWeekend' => (int) $currentDay->format('N') === 6 || (int) $currentDay->format('N') === 7,
                 'isBeforeToday' => !$isToday && $currentDay < $today,
             ];
 
             $currentDay->modify('+1 day');
-        };
+        }
 
         return $toReturn;
     }
@@ -426,7 +426,7 @@ class DateUtils
         if (!$currentDay instanceof \DateTime) {
             $currentDay = new \DateTime();
         }
-        $nextBirthday->setDate((int)$currentDay->format('Y'), (int)$birthday->format('m'), (int)$birthday->format('d'));
+        $nextBirthday->setDate((int) $currentDay->format('Y'), (int) $birthday->format('m'), (int) $birthday->format('d'));
         if ($nextBirthday <= $currentDay) {
             $nextBirthday->modify('next year');
         }

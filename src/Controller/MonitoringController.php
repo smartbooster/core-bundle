@@ -23,10 +23,10 @@ class MonitoringController extends AbstractController
         ]);
     }
 
-    public function phpinfo(): void
+    public function phpinfo(): void // phpcs:ignore
     {
-        phpinfo();
-        die;
+        phpinfo(); // phpcs:ignore
+        exit;
     }
 
     public function simulateIniOverride(IniOverrideConfig $config): Response
@@ -53,7 +53,7 @@ class MonitoringController extends AbstractController
         $content = "CURRENT TIME\n\n";
         $content .= "default date function : \n" . date($format) . "\n";
         $content .= "Datetime format : \n" . $datetime->format($format) . "\n";
-        $content .= "date_format function : \n" . date_format($datetime, ($format)) . "\n";
+        $content .= "date_format function : \n" . date_format($datetime, $format) . "\n";
         $content .= "IntlDateFormatter format : \n" . $formatter->format($datetime) . "\n";
         $content .= "Timezone name : \n" . $datetime->getTimezone()->getName() . "\n";
 

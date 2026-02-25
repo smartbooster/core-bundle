@@ -192,7 +192,7 @@ text",
             'lower 0' => ['', -1],
             '0' => ['', 0],
             'lower to 26' => ['A', 1],
-            'last letter 26' => ['Z', 26 ],
+            'last letter 26' => ['Z', 26],
             'after the 26 letter' => ['AA', 27],
             'double alphabetical' => ['AZ', 52],
             'past double alphabetical' => ['BA', 53],
@@ -280,7 +280,6 @@ text",
             ],
         ];
     }
-
 
     #[DataProvider('formatSpaceBetweenProvider')]
     public function testFormatSpaceBetween(string $expected, ?string $first, ?string $last): void

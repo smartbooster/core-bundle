@@ -114,7 +114,7 @@ class EntityCleanupCommand extends Command
                 $propertiesToClean = $config['properties_to_clean'];
                 $removeEntity = empty($propertiesToClean);
                 foreach ($entities as $entity) {
-                    $this->processMonitor->log(sprintf("%d) #%d début nettoyage ...", $i, $entity->getId()));
+                    $this->processMonitor->log(sprintf("%d) #%d début nettoyage ...", $i, $entity->getId())); // qa: Faux positif @phpstan-ignore method.nonObject
                     if ($removeEntity) {
                         $this->entityManager->remove($entity);
                     } else {
@@ -155,9 +155,9 @@ class EntityCleanupCommand extends Command
             return Cron::class; // @phpstan-ignore-line
         } elseif ($class === 'api_call') {
             return ApiCall::class; // @phpstan-ignore-line
-        } else {
-            return $class;
         }
+
+        return $class;
     }
 
     public function setCommandConfigs(array $commandConfigs): void

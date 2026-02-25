@@ -24,7 +24,7 @@ class ArrayUtilsTest extends TestCase
         return [
             'clean textarea' => [
                 // expected
-                ["some","text"],
+                ["some", "text"],
                 // values
                 "some
 
@@ -32,7 +32,7 @@ class ArrayUtilsTest extends TestCase
             ],
             'no special char deleted' => [
                 // expected
-                ["some,","exemple;", "text*"],
+                ["some,", "exemple;", "text*"],
                 // values
                 "some,
                 exemple;
@@ -448,7 +448,7 @@ name', "value" => 2],
                     2 => "exemple",
                     4 => "text"
                 ],
-                ["", "some","exemple", "", "text", null, ""]
+                ["", "some", "exemple", "", "text", null, ""]
             ],
         ];
     }

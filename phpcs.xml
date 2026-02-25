@@ -9,6 +9,12 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
 
+    <!-- Security rule de phpcs-security-audit -->
+    <rule ref="Security">
+        <exclude name="Security.BadFunctions.CallbackFunctions"/>
+        <exclude name="Security.BadFunctions.FilesystemFunctions"/>
+    </rule>
+
     <rule ref="PSR12">
     </rule>
     <rule ref="Generic.Files.LineLength">

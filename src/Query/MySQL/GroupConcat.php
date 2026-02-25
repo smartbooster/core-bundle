@@ -72,13 +72,13 @@ class GroupConcat extends FunctionNode
 
         $fields = [];
         foreach ($this->pathExp as $pathExp) {
-            $fields[] = $pathExp->dispatch($sqlWalker);
+            $fields[] = $pathExp->dispatch($sqlWalker); // qa: Faux positif @phpstan-ignore method.nonObject
         }
 
         $result .= sprintf('%s', implode(', ', $fields));
 
         if ($this->orderBy) {
-            $result .= ' ' . $sqlWalker->walkOrderByClause($this->orderBy);
+            $result .= ' ' . $sqlWalker->walkOrderByClause($this->orderBy); // phpcs:ignore
         }
 
         if ($this->separator) {

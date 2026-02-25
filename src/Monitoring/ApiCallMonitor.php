@@ -57,8 +57,9 @@ class ApiCallMonitor
     {
         $route = $apiCall->getType();
         if (!in_array($route, $this->restartAllowedRoutes)) {
-            throw new AccessDeniedHttpException("The API route '$route' is not allowed to be restarted. " .
-                "Add it to the `smart_core.monitoring_api_restart_allowed_routes` config if you want to restart it.");
+            // phpcs:disable
+            throw new AccessDeniedHttpException("The API route '$route' is not allowed to be restarted. Add it to the `smart_core.monitoring_api_restart_allowed_routes` config if you want to restart it.");
+            // phpcs:enable
         }
 
         $options = ['headers' => $apiCall->getHeaders()];

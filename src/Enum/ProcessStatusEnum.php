@@ -72,6 +72,6 @@ enum ProcessStatusEnum: string
             $qb->setParameter($sortParamName, $case->value);
         }
         $sort .= ')';
-        $qb->orderBy($sort, $order);
+        $qb->orderBy($sort, $order);  // @phpcs:ignore
     }
 }

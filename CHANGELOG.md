@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.16.3 - (2026-02-26)
+# Fixed
+- QA changes to match standard-bundle related from version ^1.2 : .php-cs-fixer.dist + phpcs security + phpstan lvl10 
+
 ## v1.16.2 - (2025-09-25)
 ### Added
 - `ProcessStatusEnum::addQbOrderBy` Add method to add a qb order by on the enum

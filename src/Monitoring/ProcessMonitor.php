@@ -43,7 +43,7 @@ class ProcessMonitor
 
         $endedAt = new \DateTime();
         $process->setEndedAt($endedAt);
-        $process->setDuration((int) $endedAt->format('Uv') - (int) $process->getStartedAt()->format('Uv'));
+        $process->setDuration((int) $endedAt->format('Uv') - (int) $process->getStartedAt()?->format('Uv'));
         if ($isSuccess) {
             $process->setStatus(ProcessStatusEnum::SUCCESS);
         } else {
