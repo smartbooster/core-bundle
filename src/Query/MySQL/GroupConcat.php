@@ -4,12 +4,10 @@ namespace Smart\CoreBundle\Query\MySQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\OrderByClause;
-use Doctrine\ORM\Query\Lexer;
+use Doctrine\ORM\Query\Parser;
+use Doctrine\ORM\Query\SqlWalker;
+use Doctrine\ORM\Query\TokenType;
 
-/**
- * Allows you to add the MySQL group_concat function to DQL
- * Based on https://github.com/beberlei/DoctrineExtensions/blob/master/src/Query/Mysql/GroupConcat.php
- */
 class GroupConcat extends FunctionNode
 {
     /** @var bool */
@@ -24,61 +22,61 @@ class GroupConcat extends FunctionNode
     /** @var OrderByClause|null */
     public $orderBy = null;
 
-    public function parse(\Doctrine\ORM\Query\Parser $parser): void
+    public function parse(Parser $parser): void
     {
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+        $parser->match(TokenType::T_IDENTIFIER);
+        $parser->match(TokenType::T_OPEN_PARENTHESIS);
 
         $lexer = $parser->getLexer();
-        if ($lexer->isNextToken(Lexer::T_DISTINCT)) {
-            $parser->match(Lexer::T_DISTINCT);
+        if ($lexer->isNextToken(TokenType::T_DISTINCT)) {
+            $parser->match(TokenType::T_DISTINCT);
 
             $this->isDistinct = true;
         }
 
         // first Path Expression is mandatory
         $this->pathExp = [];
-        if ($lexer->isNextToken(Lexer::T_IDENTIFIER)) {
+        if ($lexer->isNextToken(TokenType::T_IDENTIFIER)) {
             $this->pathExp[] = $parser->StringExpression();
         } else {
             $this->pathExp[] = $parser->SingleValuedPathExpression();
         }
 
-        while ($lexer->isNextToken(Lexer::T_COMMA)) {
-            $parser->match(Lexer::T_COMMA);
+        while ($lexer->isNextToken(TokenType::T_COMMA)) {
+            $parser->match(TokenType::T_COMMA);
             $this->pathExp[] = $parser->StringPrimary();
         }
 
-        if ($lexer->isNextToken(Lexer::T_ORDER)) {
+        if ($lexer->isNextToken(TokenType::T_ORDER)) {
             $this->orderBy = $parser->OrderByClause();
         }
 
-        if ($lexer->isNextToken(Lexer::T_IDENTIFIER)) {
-            $lookaheadValue = is_array($lexer->lookahead) ? $lexer->lookahead['value'] : $lexer->lookahead->value; // @phpstan-ignore-line
-            if (strtolower($lookaheadValue) !== 'separator') {
+        if ($lexer->isNextToken(TokenType::T_IDENTIFIER)) {
+            if (strtolower($lexer->lookahead->value) !== 'separator') {
                 $parser->syntaxError('separator');
             }
-            $parser->match(Lexer::T_IDENTIFIER);
+
+            $parser->match(TokenType::T_IDENTIFIER);
 
             $this->separator = $parser->StringPrimary();
         }
 
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+        $parser->match(TokenType::T_CLOSE_PARENTHESIS);
     }
 
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker): string
+    public function getSql(SqlWalker $sqlWalker): string
     {
         $result = 'GROUP_CONCAT(' . ($this->isDistinct ? 'DISTINCT ' : '');
 
         $fields = [];
         foreach ($this->pathExp as $pathExp) {
-            $fields[] = $pathExp->dispatch($sqlWalker); // qa: Faux positif @phpstan-ignore method.nonObject
+            $fields[] = $pathExp->dispatch($sqlWalker); // @phpstan-ignore-line method.nonObject
         }
 
         $result .= sprintf('%s', implode(', ', $fields));
 
         if ($this->orderBy) {
-            $result .= ' ' . $sqlWalker->walkOrderByClause($this->orderBy); // phpcs:ignore
+            $result .= ' ' . $sqlWalker->walkOrderByClause($this->orderBy);  // phpcs:ignore PHPCS_SecurityAudit.Drupal7.DynQueries.D7DynQueriesDirectVar
         }
 
         if ($this->separator) {
