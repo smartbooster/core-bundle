@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.17.1 - (2026-04-16)
+### Fixed
+- `ProcessStatusEnum::addQbOrderBy` : Switch to inline param to prevent nb binding param due to the BaseEntityProvider resetDQLPart onorderBy 
+
 ## v1.17.0 - (2026-02-25)
 ### Added
 - Allow Symfony 7.4
