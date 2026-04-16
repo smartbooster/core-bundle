@@ -31,7 +31,8 @@
     "symfony/flex": "^2",
     "symfony/phpunit-bridge": "^5.4|^6.2|^7.0",
     "symfony/runtime": "^5.4|^6.2|^7.4",
-    "symfony/twig-bundle": "^5.4|^6.2|^7.4"
+    "symfony/twig-bundle": "^5.4|^6.2|^7.4",
+    "symfony/var-exporter": "^5.4|^6.2|^7.4"
   },
   "autoload": {
     "psr-4": {

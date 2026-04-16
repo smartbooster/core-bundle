@@ -4,6 +4,7 @@ CHANGELOG for 1.x
 ## v1.18.0 - (2026-05-15)
 ### Added
 - Allow orm 3
+- Add composer require dev `symfony/var-exporter` to fix orm v3 qualimetry
 
 ### Changed
 - orm minimal version to 2.14 for use of new constant in `GroupConcat`
