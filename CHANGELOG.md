@@ -1,8 +1,21 @@
 CHANGELOG for 1.x
 ===================
+
+## v1.18.0 - (2026-05-15)
+### Added
+- Allow orm 3
+- Add composer require dev `symfony/var-exporter` to fix orm v3 qualimetry
+- Add orm v2.19 and v3 matrix to github actions
+
+### Changed
+- orm minimal version to 2.19 for use of new constant in `GroupConcat`
+
+### Fixed
+- `GroupConcat` Change use of deprecated constant to use new
+
 ## v1.17.1 - (2026-04-16)
 ### Fixed
-- `ProcessStatusEnum::addQbOrderBy` : Switch to inline param to prevent nb binding param due to the BaseEntityProvider resetDQLPart onorderBy 
+- `ProcessStatusEnum::addQbOrderBy` : Switch to inline param to prevent nb binding param due to the BaseEntityProvider resetDQLPart onorderBy
 
 ## v1.17.0 - (2026-02-25)
 ### Added
