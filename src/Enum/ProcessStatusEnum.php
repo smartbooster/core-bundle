@@ -61,17 +61,17 @@ enum ProcessStatusEnum: string
 
     public static function addQbOrderBy(QueryBuilder $qb, string $field, string $order, string $alias = 'o', ?string $jsonProperty = null): void
     {
-        if ($jsonProperty !== null) {
+        if (null !== $jsonProperty) {
             $sort = "FIELD(JSON_UNQUOTE(JSON_EXTRACT($alias.$jsonProperty, '$.$field'))";
         } else {
             $sort = "FIELD(ANY_VALUE($alias.$field)";
         }
         foreach (self::cases() as $case) {
-            $sortParamName = ":{$field}_sort_" . $case->value;
-            $sort .= ', ' . $sortParamName;
-            $qb->setParameter($sortParamName, $case->value);
+            // MDT Pass params inline rather than via setParameter to avoid a binding error on the number of params during sorting
+            // Because during $countQb by the BaseEntityProvider there is a resetDQLPart on the orderBy which causes the mention error
+            $sort .= ", '{$case->value}'";
         }
         $sort .= ')';
-        $qb->orderBy($sort, $order);  // @phpcs:ignore
+        $qb->orderBy($sort, $order); // phpcs:ignore
     }
 }
