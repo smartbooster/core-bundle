@@ -5,9 +5,10 @@ CHANGELOG for 1.x
 ### Added
 - Allow orm 3
 - Add composer require dev `symfony/var-exporter` to fix orm v3 qualimetry
+- Add orm v2.19 and v3 matrix to github actions
 
 ### Changed
-- orm minimal version to 2.14 for use of new constant in `GroupConcat`
+- orm minimal version to 2.19 for use of new constant in `GroupConcat`
 
 ### Fixed
 - `GroupConcat` Change use of deprecated constant to use new

@@ -14,7 +14,7 @@
   "require": {
     "php": "^8.1",
     "doctrine/doctrine-fixtures-bundle": "^3.4",
-    "doctrine/orm": "^2.14|^3.0",
+    "doctrine/orm": "^2.19|^3.0",
     "egulias/email-validator": "^3.0|^4.0",
     "nelmio/security-bundle": "^2.8 || ^3.0",
     "sentry/sentry-symfony": "^4.9 || ^5.1",
@@ -27,7 +27,7 @@
     "theofidry/alice-data-fixtures": "^1.5"
   },
   "require-dev": {
-    "smartbooster/standard-bundle": "^1.0",
+    "smartbooster/standard-bundle": "dev-allow_doctrine_orm_v3",
     "symfony/flex": "^2",
     "symfony/phpunit-bridge": "^5.4|^6.2|^7.0",
     "symfony/runtime": "^5.4|^6.2|^7.4",
