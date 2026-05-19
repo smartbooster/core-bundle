@@ -7,6 +7,9 @@ CHANGELOG for 1.x
 ### Changed
 - Change composer logical OR syntax to `||` to follow composer doc
 
+### Fixed
+- Remove doctrine dbal option `use_savepoints` witch is deleted with option true by default
+
 ## v1.18.0 - (2026-05-15)
 ### Added
 - Allow orm 3
