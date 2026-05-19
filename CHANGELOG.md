@@ -1,5 +1,15 @@
 CHANGELOG for 1.x
 ===================
+## v1.18.1 - (2026-05-19)
+### Added
+- Allow `doctrine/doctrine-fixtures-bundle` v4
+
+### Changed
+- Change composer logical OR syntax to `||` to follow composer doc
+
+### Fixed
+- Remove doctrine dbal option `use_savepoints` witch is deleted with option true by default
+- Remove doctrine orm option `auto_generate_proxy_classes` witch is deleted with option true by default
 
 ## v1.18.0 - (2026-05-15)
 ### Added
