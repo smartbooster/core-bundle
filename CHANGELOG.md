@@ -9,6 +9,7 @@ CHANGELOG for 1.x
 
 ### Fixed
 - Remove doctrine dbal option `use_savepoints` witch is deleted with option true by default
+- Remove doctrine orm option `auto_generate_proxy_classes` witch is deleted with option true by default
 
 ## v1.18.0 - (2026-05-15)
 ### Added
