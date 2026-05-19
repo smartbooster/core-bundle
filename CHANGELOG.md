@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.18.1 - (2026-05-19)
+### Added
+- Allow `doctrine/doctrine-fixtures-bundle` v4
+
+### Changed
+- Change composer logical OR syntax to `||` to follow composer doc
 
 ## v1.18.0 - (2026-05-15)
 ### Added
