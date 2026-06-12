@@ -23,12 +23,6 @@ class MonitoringController extends AbstractController
         ]);
     }
 
-    public function phpinfo(): void // phpcs:ignore
-    {
-        phpinfo(); // phpcs:ignore
-        exit;
-    }
-
     public function simulateIniOverride(IniOverrideConfig $config): Response
     {
         $data = ['memory_limit_default' => $config->getCurrentMemoryLimit()];
