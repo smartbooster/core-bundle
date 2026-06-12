@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.17.2 - (2026-06-12)
+### Removed
+- Monitoring route `/phpinfo` removed because of security concern
+
 ## v1.17.1 - (2026-04-16)
 ### Fixed
 - `ProcessStatusEnum::addQbOrderBy` : Switch to inline param to prevent nb binding param due to the BaseEntityProvider resetDQLPart onorderBy 
