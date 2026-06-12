@@ -22,8 +22,10 @@ jobs:
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
-            -   name: Configure GitHub token for Composer
-                run: composer config -g github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
+            -   name: Configure GitHub token and Git ownership for Composer
+                run: |
+                    git config --global --add safe.directory '*'
+                    composer config -g github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
             # Dynamically update composer.json dependencies before running make install
             -   name: "Restrict Doctrine ORM version"
                 run: composer require "doctrine/orm:${{ matrix.orm }}" --no-update --no-interaction

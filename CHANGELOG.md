@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.18.2 - (2026-06-12)
+### Removed
+- Monitoring route `/phpinfo` removed because of security concern
+
 ## v1.18.1 - (2026-05-19)
 ### Added
 - Allow `doctrine/doctrine-fixtures-bundle` v4
