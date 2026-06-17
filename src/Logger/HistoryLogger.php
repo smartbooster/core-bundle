@@ -100,6 +100,15 @@ class HistoryLogger
      */
     public function log(HistorizableInterface $entity, ?string $code = null, array $data = []): void
     {
+        if ($code === self::ARCHIVED_CODE && $entity->resetOnArchive()) {
+            $entity->resetHistory();
+            if ($this->flushLog) {
+                $this->entityManager->flush();
+            }
+
+            return;
+        }
+
         $history = array_merge([self::DATE_PROPERTY => time()], $data);
         foreach (
             [

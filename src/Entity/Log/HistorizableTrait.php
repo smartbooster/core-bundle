@@ -47,4 +47,16 @@ trait HistorizableTrait
     {
         return [];
     }
+
+    public function resetHistory(): self
+    {
+        $this->setHistory(null);
+
+        return $this;
+    }
+
+    public function resetOnArchive(): bool
+    {
+        return true;
+    }
 }
