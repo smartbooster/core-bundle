@@ -28,4 +28,8 @@ interface HistorizableInterface
      *  ]
      */
     public function getHistoryDiffFieldsToSkip(): array;
+
+    public function resetHistory(): self;
+
+    public function resetOnArchive(): bool;
 }

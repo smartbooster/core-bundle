@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v1.19.0 - (2026-06-19)
+### Added
+- Automatic history reset on entity archive. If some archive behaviors in your project should not trigger this reset, override the `resetOnArchive` method on the relevant entity.
+
 ## v1.18.2 - (2026-06-12)
 ### Removed
 - Monitoring route `/phpinfo` removed because of security concern
